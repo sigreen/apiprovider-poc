@@ -17,8 +17,11 @@
 package org.jboss.fuse.examples.rest;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A {@link org.jboss.fuse.examples.rest.Organization} service which we rest enable from the {@link org.apache.camel.example.rest.UserRouteBuilder}.
@@ -27,11 +30,8 @@ public class OrganizationService {
 
     // use a tree map so they become sorted
     private final Map<String, Organization> organizations = new TreeMap<String, Organization>();
+    Logger LOGGER = LoggerFactory.getLogger(OrganizationService.class);
 
-    public OrganizationService() {
-    	organizations.put("1", new Organization(1, "Citibank"));
-    	organizations.put("2", new Organization(2, "JPMC"));
-    }
 
     /**
      * Gets a user by the given id
@@ -59,5 +59,19 @@ public class OrganizationService {
      */
     public void updateOrganization(Organization organization) {
     	organizations.put("" + organization.getOrg_id(), organization);
+    }
+    
+    /**
+     * Read the CSV file as a list
+     * @param csvData
+     */
+    public void doHandleCsvData(List<List<String>> csvData)
+    {
+    	for (List<String> line : csvData) {
+    		int org_id = Integer.parseInt(line.get(0));
+    		String org_name = line.get(1);
+    		Organization organization = new Organization(org_id, org_name);
+    		updateOrganization(organization);
+    	}
     }
 }

@@ -93,7 +93,7 @@
           <manifestLocation>target/META-INF</manifestLocation>
           <instructions>
             <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>org.apache.camel.example.rest*</Export-Package>
+            <Export-Package>org.jboss.fuse.examples.rest*</Export-Package>
             <Import-Package>
               *
             </Import-Package>
