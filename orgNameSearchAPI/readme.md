@@ -8,16 +8,14 @@ This example is implemented in XML DSL in the `src/main/resources/OSGI-INF/bluep
 JBoss Fuse
 -------------------------
 You will need to install this example first:
-  mvn install
+  
+> mvn install
 
-First you need to install the following features in Fuse with:
 
-  features:install camel-servlet
-  features:install camel-jackson
+Install into Fuse with:
 
-Then you can install the Camel example:
-
-  osgi:install -s mvn:org.jboss.fuse.examples/orgNameSearch/${project.version}
+> features:addurl mvn:org.jboss.fuse.examples/apiprovider-features/1.0.0-SNAPSHOT/xml/features
+> features:install apiprovider-orgNameSearchAPI
 
 And you can see the application running by tailing the logs
 
@@ -46,6 +44,25 @@ From the command shell you can use curl to access the service as shown below:
     curl -X GET -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/organization/findAll
     curl -X PUT -d "{ \"id\": 666, \"name\": \"ABC Bank\"}" -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/organization
 
+
+
+## Invoke via JMS
+From the Fuse console, select the AMQ tab, and for the following operations, can invoke via JMS with the following
+payload:
+
+![amq-console](../doc/imaages/amq-console.png)
+
+### Find All
+
+    { "queryType": "SearchAll", "orgId": "", "orgName": ""}
+
+### Find by ID
+
+    { "queryType": "ById", "orgId": "100", "orgName": ""}
+
+### Create new Org
+
+    { "queryType": "NewOrg", "orgId": "100", "orgName": "Foobar"}
 
 If you hit any problems please let us know on the Camel Forums
   http://camel.apache.org/discussion-forums.html
