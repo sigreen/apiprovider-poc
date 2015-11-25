@@ -103,7 +103,6 @@
     <route id="apiprovider.jms.rest.call">
       <from uri="direct:executeRestCall"/>
       <to uri="http4://localhost:8181/" />
-      <log message="response: ${body}"/>
     </route>
   </routeContext>
 
