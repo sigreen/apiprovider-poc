@@ -28,7 +28,7 @@
 	<artifactId>orgNameSearch</artifactId>
 	<name>API Provider :: orgNameSearch :: Implementation</name>
 	<description>A RESTful implementation for the orgNameSearch API</description>
-  	<packaging>bundle</packaging>
+  <packaging>bundle</packaging>
 
   <dependencies>
 

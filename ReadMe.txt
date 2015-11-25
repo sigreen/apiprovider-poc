@@ -1,14 +1,7 @@
 Example project with APIs for integrating with API management 
 ===========================
 
-To build this project use
+Dependencies for this project (should probably put together a features file)
 
-    mvn install
-
-To run this project with Maven use
-
-    mvn camel:run
-
-For more help see the Apache Camel documentation
-
-    http://camel.apache.org/
+* camel-servlet
+* camel-jackson

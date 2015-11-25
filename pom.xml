@@ -41,6 +41,7 @@
 
   <modules>
     <module>orgNameSearchAPI</module>
+    <module>apiprovider-features</module>
   </modules>
 
   <repositories>
