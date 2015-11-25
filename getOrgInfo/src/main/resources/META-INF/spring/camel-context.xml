@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) Red Hat, Inc.
+http://www.redhat.com
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:camel-cxf="http://camel.apache.org/schema/cxf"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+                           http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+                           http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+                           http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+
+  <osgix:cm-properties id="properties" persistent-id="org.jboss.fuse.examples.getOrgInfo">
+    <prop key="http.port">8181</prop>
+    <prop key="http.contextPath">/rest</prop>
+    
+    <prop key="ratingService.uri">http://ewtestforum14.webservices.standardandpoors.com/core_rating_poc</prop>
+    <prop key="financialStatementService.uri">http://ewtestforum14.webservices.standardandpoors.com/VFD_FS_POC</prop>
+  </osgix:cm-properties>
+  
+  <bean id="bridgePropertyPlaceholder" class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer">
+    <property name="properties" ref="properties"/>
+  </bean>
+  
+  <osgi:reference id="httpService" interface="org.osgi.service.http.HttpService"/>
+
+  <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"
+        init-method="register"
+        destroy-method="unregister">
+    <property name="alias" value="${http.contextPath}"/>
+    <property name="httpService" ref="httpService"/>
+    <property name="servlet" ref="camelServlet"/>
+  </bean>
+
+  <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
+
+  <camel-cxf:cxfEndpoint id="ratingServiceClient"
+                         address="${ratingService.uri}"
+                         serviceClass="com.standardandpoors.ws.RatingPortType"/>
+
+  <camel-cxf:cxfEndpoint id="financialStatementServiceClient"
+                         address="${financialStatementService.uri}"
+                         serviceClass="com.standardandpoors.integration.serviceschema.services.findata.v1.FinancialStatementPortType"/>
+
+  <bean id="orgInfoHelper" class="org.jboss.fuse.examples.orginfo.impl.OrgInfoHelper"/>
+
+  <bean id="ratingServiceHelper" class="org.jboss.fuse.examples.orginfo.impl.RatingServiceHelper"/>
+
+  <bean id="financialStatementServiceHelper" class="org.jboss.fuse.examples.orginfo.impl.FinancialStatementServiceHelper"/>
+  
+  <bean id="compositeServiceAggregationStrategy" class="org.jboss.fuse.examples.orginfo.impl.CompositeServiceAggregationStrategy"/>
+  
+  <camelContext id="orgInfoContext" xmlns="http://camel.apache.org/schema/spring">
+
+    <restConfiguration component="servlet" bindingMode="json">
+      <componentProperty key="contextPath" value="{{http.contextPath}}"/>
+      <componentProperty key="port" value="{{http.port}}"/>
+      <dataFormatProperty key="prettyPrint" value="true"/>
+    </restConfiguration>
+
+    <rest path="/OrgInfo" consumes="application/json" produces="application/json">
+      <get uri="/">
+        <to uri="direct:handleRootGet"/>
+      </get>
+    </rest>
+    
+    <route id="rootGetHandler">
+      <from uri="direct:handleRootGet"/>
+      <setHeader headerName="orgId">
+        <method ref="orgInfoHelper" method="normalizeOrgIds($simple{headers[orgId]})"/>
+      </setHeader>
+      <multicast parallelProcessing="true" streaming="true" strategyRef="compositeServiceAggregationStrategy">
+        <to uri="direct:adaptRatingService"/>
+        <to uri="direct:adaptFinancialStatementService"/>
+      </multicast>
+    </route>
+    
+    <route id="ratingServiceAdapter">
+      <from uri="direct:adaptRatingService"/>
+      <bean ref="ratingServiceHelper" method="createGetRatingsByEntityRequest($simple{headers[orgId]})"/>
+      <setHeader headerName="operationNamespace">
+        <constant>http://ws.standardandpoors.com</constant>
+      </setHeader>
+      <setHeader headerName="operationName">
+        <constant>getRatingsByEntity</constant>
+      </setHeader>
+      <to uri="cxf:bean:ratingServiceClient"/>
+      <setBody>
+        <simple>${body[0]}</simple>
+      </setBody>
+    </route>
+    
+    <route id="financialStatementServiceAdapter">
+      <from uri="direct:adaptFinancialStatementService"/>
+      <bean ref="financialStatementServiceHelper" method="createGetFinancialStatementsRequest($simple{headers[orgId]})"/>
+      <setHeader headerName="operationNamespace">
+        <constant>http://integration.standardandpoors.com/ServiceSchema/Services/findata/v1</constant>
+      </setHeader>
+      <setHeader headerName="operationName">
+        <constant>getFinancialStatements</constant>
+      </setHeader>
+      <to uri="cxf:bean:financialStatementServiceClient"/>
+      <setBody>
+        <simple>${body[0]}</simple>
+      </setBody>
+    </route>
+
+  </camelContext>
+
+</beans>

@@ -44,6 +44,7 @@
     <module>orgNameSearchAPI</module>
     <module>ratingAPI</module>
     <module>financialStatementAPI</module>
+    <module>getOrgInfo</module>
   </modules>
 
   <repositories>
@@ -86,6 +87,21 @@
         <version>${camel.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-spring</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-servlet</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jackson</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-jms</artifactId>
         <version>${spring.version}</version>
@@ -119,6 +135,11 @@
         <groupId>org.apache.cxf</groupId>
         <artifactId>cxf-rt-transports-http-jetty</artifactId>
         <version>${cxf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.13</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
