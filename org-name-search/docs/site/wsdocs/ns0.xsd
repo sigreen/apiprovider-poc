@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="organization" type="organization"/>
+  <xs:element name="organizationPages" type="organizationPages"/>
+  <xs:element name="organizations" type="organizations"/>
+  <xs:element name="pageResponse" type="pageResponse"/>
+  <xs:complexType name="organization">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" minOccurs="0"/>
+      <xs:element name="orgId" type="xs:int" minOccurs="1"/>
+      <xs:element name="orgName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="organizationPages">
+    <xs:complexContent>
+      <xs:extension base="pageResponse"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="organizations">
+    <xs:sequence>
+      <xs:element name="organizations" type="organization" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pageResponse" abstract="true">
+    <xs:sequence>
+      <xs:element name="content" type="xs:anyType" minOccurs="0"/>
+      <xs:element name="totalElements" type="xs:long" minOccurs="0"/>
+      <xs:element name="totalPages" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

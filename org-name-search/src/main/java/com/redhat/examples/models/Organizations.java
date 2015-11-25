@@ -8,12 +8,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.enunciate.ClientName;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organizations implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@ClientName("organizationList")
 	private List<Organization> organizations = new ArrayList<Organization>();
 
 	public Organizations() {

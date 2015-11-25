@@ -1,5 +1,9 @@
 package com.redhat.examples.rest;
 
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
+import org.codehaus.enunciate.contract.jaxrs.ResourceMethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +16,7 @@ import com.redhat.examples.models.OrganizationPages;
 import com.redhat.examples.models.Organizations;
 import com.redhat.examples.repository.OrganizationRepo;
 
+@Path("/organizations")
 @RestController
 @RequestMapping("/organizations")
 public class OrganizationResource {
@@ -23,6 +28,8 @@ public class OrganizationResource {
 
 	}
 
+	@Path("/")
+	@ResourceMethodSignature(output = Organizations.class)
 	@RequestMapping("/")
 	public Organizations get() {
 		final Organizations organizations = new Organizations();
@@ -32,6 +39,8 @@ public class OrganizationResource {
 		return organizations;
 	}
 
+	@Path("/{orgName}")
+	@ResourceMethodSignature(output = Organizations.class, pathParams = { @PathParam("orgName") })
 	@RequestMapping("/{orgName}")
 	public Organizations findByOrgName(@PathVariable("orgName") String orgName) {
 		final Organizations organizations = new Organizations();
@@ -39,6 +48,8 @@ public class OrganizationResource {
 		return organizations;
 	}
 
+	@Path("/page/{page}/size/{size}")
+	@ResourceMethodSignature(output = OrganizationPages.class, pathParams = { @PathParam("page"), @PathParam("size") })
 	@RequestMapping(path = "/page/{page}/size/{size}")
 	public OrganizationPages paginate(@PathVariable int page, @PathVariable int size) {
 		final OrganizationPages organizationResponse = new OrganizationPages();
