@@ -1,4 +1,4 @@
-Example project with APIs for integrating with API management 
+JBoss Fuse REST APIs integrating with API management 
 ===========================
 
 Build project with
