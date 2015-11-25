@@ -1,5 +1,6 @@
 package com.redhat.examples.rest;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -28,6 +29,7 @@ public class OrganizationResource {
 
 	}
 
+	@GET
 	@Path("/")
 	@ResourceMethodSignature(output = Organizations.class)
 	@RequestMapping("/")
@@ -39,6 +41,7 @@ public class OrganizationResource {
 		return organizations;
 	}
 
+	@GET
 	@Path("/{orgName}")
 	@ResourceMethodSignature(output = Organizations.class, pathParams = { @PathParam("orgName") })
 	@RequestMapping("/{orgName}")
@@ -48,6 +51,7 @@ public class OrganizationResource {
 		return organizations;
 	}
 
+	@GET
 	@Path("/page/{page}/size/{size}")
 	@ResourceMethodSignature(output = OrganizationPages.class, pathParams = { @PathParam("page"), @PathParam("size") })
 	@RequestMapping(path = "/page/{page}/size/{size}")

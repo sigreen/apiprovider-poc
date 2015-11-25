@@ -11,7 +11,7 @@
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>organization</title>
+  <title>OrganizationResource</title>
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
   <div class="container">
     <header>
       <div id="header" class="column first last span-20">
-        <div id="site-name" class="column span-18 append-1 prepend-1 first last"><a href="index.html">organization</a></div>
+        <div id="site-name" class="column span-18 append-1 prepend-1 first last"><a href="index.html">OrganizationResource</a></div>
         <div id="primary" class="column span-18 append-1 prepend-1 first last">
           <ul class="navigation">
             <li id="nav-rest"><a href="rest.html">REST</a></li>
@@ -44,26 +44,17 @@
               <a href="index.html" class="home">Home</a> &gt;
             </li>
             <li>
-              <a href="model.html">Data Model</a> &gt;
+              <a href="rest.html">REST</a> &gt;
               <ul>
                 <li><a href="model.html">Data Model</a></li>
                 <li><a href="rest.html">REST</a></li>
                 <li><a href="downloads.html">Files and Libraries</a></li>
               </ul>
             </li>
-            <li>
-              <a href="ns0.html">ns0</a> &gt;
-              <ul>
-                <li><a href="ns0.html">ns0</a></li>
-              </ul>
-            </li>
             <li class="current">
-              <a href="ns0_organization.html">organization</a>
+              <a href="resource_OrganizationResource.html">OrganizationResource</a>
               <ul>
-                <li><a href="ns0_organization.html">organization</a></li>
-                <li><a href="ns0_organizationPages.html">organizationPages</a></li>
-                <li><a href="ns0_organizations.html">organizations</a></li>
-                <li><a href="ns0_pageResponse.html">pageResponse</a></li>
+                <li><a href="resource_OrganizationResource.html">OrganizationResource</a></li>
               </ul>
             </li>
           </ul>
@@ -71,84 +62,108 @@
       </div>
     </header>
     <div id="main" class="column first last span-20">
-      <h1>organization</h1>
+      <h1>OrganizationResource</h1>
+
+      <p></p>
+      <p>The following resources are applicable:</p>
+      <ul>
+        <li><a href="#path__organizations.html">/organizations</a></li>
+        <li><a href="#path__organizations_-orgName-.html">/organizations/{orgName}</a></li>
+        <li><a href="#path__organizations_page_-page-_size_-size-.html">/organizations/page/{page}/size/{size}</a></li>
+      </ul>
+      <a name="path__organizations.html"></a>
+      <h1>/organizations</h1>
+      <p class="note">Mount Point: <a href="./rest/organizations">/rest/organizations</a></p>
+      <a name="GET"></a>
+      <h2>GET</h2>
+      <h3>Response Body</h3>
       <table>
         <tr>
-          <td align="right">Namespace:</td>
-          <td>(default namespace)</td>
+          <td align="right">element:</td>
+          <td><a href="el_ns0_organizations.html">organizations</a></td>
         </tr>
         <tr>
-          <td align="right">XML Schema:</td>
-          <td><a href="ns0.xsd">ns0.xsd</a></td>
+          <td align="right">media types:</td>
+          <td>*/*<br/>application/xml</td>
         </tr>
       </table>
-
-      <h2>XML</h2>
-      <h3>Elements</h3>
+      <p>(no documentation provided)</p>
+      <a name="path__organizations_-orgName-.html"></a>
+      <h1>/organizations/{orgName}</h1>
+      <p class="note">Mount Point: <a href="./rest/organizations/{orgName}">/rest/organizations/{orgName}</a></p>
+      <a name="GET"></a>
+      <h2>GET</h2>
+      <h3>Parameters</h3>
       <table>
         <tr>
-          <th>name (type)</th>
-          <th>min/max<br/>occurs</th>
+          <th>name</th>
           <th>description</th>
-        </tr>
-        <tr>
-          <td>
-            id (long)
-          </td>
-          <td>0/1</td>
-          <td>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            orgId (int)
-          </td>
-          <td>1/1</td>
-          <td>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            orgName (string)
-          </td>
-          <td>0/1</td>
-          <td>
-          </td>
-        </tr>
-      </table>
-
-      <h2>JSON</h2>
-      <table>
-        <tr>
-          <th>property</th>
           <th>type</th>
-          <th>description</th>
-        </tr>
-        <tr>
-          <td>id</td>
-          <td>
-              id (long)
-          </td>
-          <td>
-          </td>
-        </tr>
-        <tr>
-          <td>orgId</td>
-          <td>
-              orgId (int)
-          </td>
-          <td>
-          </td>
+          <th>default</th>
         </tr>
         <tr>
           <td>orgName</td>
           <td>
-              orgName (string)
+            (no documentation provided)
           </td>
-          <td>
-          </td>
+          <td>path</td>
+          <td></td>
         </tr>
       </table>
+      <h3>Response Body</h3>
+      <table>
+        <tr>
+          <td align="right">element:</td>
+          <td><a href="el_ns0_organizations.html">organizations</a></td>
+        </tr>
+        <tr>
+          <td align="right">media types:</td>
+          <td>*/*<br/>application/xml</td>
+        </tr>
+      </table>
+      <p>(no documentation provided)</p>
+      <a name="path__organizations_page_-page-_size_-size-.html"></a>
+      <h1>/organizations/page/{page}/size/{size}</h1>
+      <p class="note">Mount Point: <a href="./rest/organizations/page/{page}/size/{size}">/rest/organizations/page/{page}/size/{size}</a></p>
+      <a name="GET"></a>
+      <h2>GET</h2>
+      <h3>Parameters</h3>
+      <table>
+        <tr>
+          <th>name</th>
+          <th>description</th>
+          <th>type</th>
+          <th>default</th>
+        </tr>
+        <tr>
+          <td>page</td>
+          <td>
+            (no documentation provided)
+          </td>
+          <td>path</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>size</td>
+          <td>
+            (no documentation provided)
+          </td>
+          <td>path</td>
+          <td></td>
+        </tr>
+      </table>
+      <h3>Response Body</h3>
+      <table>
+        <tr>
+          <td align="right">element:</td>
+          <td><a href="el_ns0_organizationPages.html">organizationPages</a></td>
+        </tr>
+        <tr>
+          <td align="right">media types:</td>
+          <td>*/*<br/>application/xml</td>
+        </tr>
+      </table>
+      <p>(no documentation provided)</p>
 
       <div class="clear" />
     </div>

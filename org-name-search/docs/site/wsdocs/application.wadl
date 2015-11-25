@@ -4,5 +4,35 @@
   <wadl:grammars>
     <wadl:include href="ns0.xsd"/>
   </wadl:grammars>
-  <wadl:resources base="http://localhost:8080/org-name-search"/>
+  <wadl:resources base="http://localhost:8080/org-name-search">
+    <wadl:resource path="/rest/organizations">
+      <wadl:method name="GET">
+        <wadl:response>
+          <wadl:representation mediaType="*/*" element="organizations"/>
+          <wadl:representation mediaType="application/xml" element="organizations"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/organizations/{orgName}">
+      <wadl:param name="orgName" style="template"/>
+      <wadl:method name="GET">
+        <wadl:request/>
+        <wadl:response>
+          <wadl:representation mediaType="*/*" element="organizations"/>
+          <wadl:representation mediaType="application/xml" element="organizations"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+    <wadl:resource path="/rest/organizations/page/{page}/size/{size}">
+      <wadl:param name="page" style="template"/>
+      <wadl:param name="size" style="template"/>
+      <wadl:method name="GET">
+        <wadl:request/>
+        <wadl:response>
+          <wadl:representation mediaType="*/*" element="organizationPages"/>
+          <wadl:representation mediaType="application/xml" element="organizationPages"/>
+        </wadl:response>
+      </wadl:method>
+    </wadl:resource>
+  </wadl:resources>
 </wadl:application>
