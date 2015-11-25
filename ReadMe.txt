@@ -1,4 +1,4 @@
-Camel Router Spring Project
+Example project with APIs for integrating with API management 
 ===========================
 
 To build this project use
