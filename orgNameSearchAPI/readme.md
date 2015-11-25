@@ -50,7 +50,7 @@ From the command shell you can use curl to access the service as shown below:
 From the Fuse console, select the AMQ tab, and for the following operations, can invoke via JMS with the following
 payload:
 
-![amq-console](../doc/imaages/amq-console.png)
+![amq-console](../doc/images/amq-console.png)
 
 ### Find All
 
