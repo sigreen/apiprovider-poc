@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Man Chan (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_15.xsd"/>
+	<xsd:complexType name="ServicerSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Ranking" type="sp:RatingSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Servicer Ranking</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:SvcrCountryofOperation"/>
+			<xsd:element minOccurs="0" ref="sp:SvcrOperationTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:AuditData"/>
+			<xsd:element minOccurs="0" ref="sp:ExcludeFromProductsInd"/>
+			<xsd:element minOccurs="0" ref="sp:ExcludeFromProdsReasonCode"/>
+			<!--To support Analyst for Servicer-->
+		    <xsd:element minOccurs="0" ref="sp:AnalyticalTeam"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

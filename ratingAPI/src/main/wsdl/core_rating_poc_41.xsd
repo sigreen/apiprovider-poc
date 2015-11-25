@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by The McGraw-Hill Companies (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_13.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_42.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_43.xsd"/>
+	
+	<xsd:complexType name="EvaluationSchemaType">		
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+					<xsd:element minOccurs="0" ref="sp:AnalyticSecurityId"/>
+					<xsd:element minOccurs="0" name="Organization" type="oa:IdentifierType"/>
+					<xsd:element minOccurs="0" name="Issue" type="oa:IdentifierType"/>
+					<xsd:element minOccurs="0" name="Instrument" type="oa:IdentifierType"/>
+					<xsd:element minOccurs="0" ref="sp:RatingTypeCode"/>
+					<xsd:element minOccurs="0" ref="sp:SFGroupingCode"/>
+					<xsd:element minOccurs="0" ref="sp:BusinessUnit"/>
+					<xsd:element minOccurs="0" name="PortfolioReviewAnalyst" type="sp:EmployeeSchemaType"/>
+					<xsd:element minOccurs="0" ref="sp:EvaluationTypeCode"/>
+					<xsd:element minOccurs="0" ref="sp:EvaluationDate"/>
+					<xsd:element minOccurs="0" ref="sp:PortfolioExceptionStatusInd"/>
+					<xsd:element minOccurs="0" ref="sp:ComponentIndepAnalyticSec"/>
+					<xsd:element minOccurs="0" ref="sp:AggregateReviewDate"/>
+					<xsd:element minOccurs="0" ref="sp:AggregateType"/>
+					<xsd:element minOccurs="0" ref="sp:AggregateId"/>
+					<xsd:element minOccurs="0" ref="sp:CommitteeRelationCode"/>
+					<xsd:element minOccurs="0" ref="sp:PreviousEvaluationId"/>
+					<xsd:element minOccurs="0" ref="sp:CurrentIndicator"/>
+					<xsd:element minOccurs="0" ref="sp:WorkObjectID"/>
+					<xsd:element minOccurs="0" ref="sp:Active"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="EvaluationStatistics" type="sp:EvaluationStatisticsSchemaType"/>
+					<xsd:element minOccurs="0" ref="sp:ReasonForNoCommittee"/>
+					<xsd:element minOccurs="0" ref="sp:EvaluationTempId"/>
+					<xsd:element minOccurs="0" name="SignOffDetails" type="sp:EvaluationSignOffSchemaType"/>
+					<!-- Added for Portfolio review Release Enhancement -->
+					<xsd:element minOccurs="0" ref="sp:PortfolioReviewResultInd"/>
+					<!-- Added for B-159343 - Portfolio Review Enhancement -->
+					<xsd:element minOccurs="0" ref="sp:TypeOfReview"/>
+				</xsd:sequence>	
+	</xsd:complexType>
+	
+	
+</xsd:schema>

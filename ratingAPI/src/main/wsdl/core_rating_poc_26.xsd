@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Man Chan (McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_10.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<!---->
+	<xsd:complexType name="ParticipationSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="sp:ParticipationRoleCode"/>
+			<xsd:element minOccurs="0" ref="sp:Confidential"/>
+			<xsd:element minOccurs="0" ref="sp:EnhancesLiabilities"/>
+			<xsd:element minOccurs="0" ref="sp:EnhancesAssets"/>
+			<xsd:element minOccurs="0" ref="sp:Evergreen"/>
+			<xsd:element minOccurs="0" ref="sp:PrimarySecondaryInd"/>
+			<xsd:element minOccurs="0" ref="sp:CreditInd"/>
+			<xsd:element minOccurs="0" ref="sp:JointSeveralInd"/>
+			<xsd:element minOccurs="0" ref="sp:ForCredit"/>
+			<xsd:element minOccurs="0" ref="sp:ForLiquidity"/>
+			<xsd:element minOccurs="0" ref="sp:SupportDenominatorCode"/>
+			<xsd:element minOccurs="0" name="SupportDescription" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>Free-form description of the nature of this support.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:Comment">
+				<xsd:annotation>
+					<xsd:documentation>A comment describing the specific nature of the participation to a related entity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:EffectiveDate"/>
+			<xsd:element minOccurs="0" ref="sp:ExpirationDate"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="SupportAmount">
+				<xsd:annotation>
+					<xsd:documentation>The monetary values within the participation in a specific currency.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="InitialAmount" type="oa:AmountType">
+							<xsd:annotation>
+								<xsd:documentation>As of the sale date, the monetary value (e.g., 10,000,000, the amount of a reserve fund) that is providing support.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element minOccurs="0" name="AssetValueCoverageAmount" type="oa:AmountType">
+							<xsd:annotation>
+								<xsd:documentation>As of the sale date, the amount of collateral that is covered by this participation (e.g., all $400,000,000 of assets in all collateral groups of an issue)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element minOccurs="0" name="InitialPercentage" type="xsd:decimal">
+							<xsd:annotation>
+								<xsd:documentation>Generally, (initial_amt/asset_value_coverage_amt), but other denominators may be used.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element minOccurs="0" ref="sp:TargetAmount"/>
+						<xsd:element minOccurs="0" ref="sp:TargetPercentage"/>
+						<xsd:element minOccurs="0" ref="sp:FloorPercentage"/>
+						<xsd:element minOccurs="0" ref="sp:FloorAmount"/>
+						<xsd:element minOccurs="0" ref="oa:CurrencyExchangeRate"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- SF Refresh -->
+			<xsd:element minOccurs="0" ref="sp:UpdateDate"/>
+		</xsd:sequence>
+		<xsd:attribute name="op" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Participation flag, which indicates the Operation which need to catered by the Processing Application</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:normalizedString">
+					<xsd:enumeration value="CREATE"/>
+					<xsd:enumeration value="UPDATE"/>
+					<xsd:enumeration value="DELETE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

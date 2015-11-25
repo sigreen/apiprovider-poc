@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+
+	<xsd:include schemaLocation="core_rating_poc_10.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_32.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_9.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_24.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_23.xsd"/>
+	<xsd:complexType name="RatingsByEntitySchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Organization" type="sp:OrganizationSchemaType"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Program" type="sp:ProgramSchemaType"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Issue" type="sp:IssueSchemaType"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Fund" type="sp:FundSchemaType"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Servicer" type="sp:ServicerSchemaType"/>
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

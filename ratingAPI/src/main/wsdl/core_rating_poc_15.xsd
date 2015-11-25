@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Man Chan (McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: 
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!---->
+  <xsd:element name="AuditData" type="sp:AuditDataSchemaType">
+    <xsd:annotation>
+      <xsd:documentation>common data fields for auditing</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AuditDataSchemaType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="CreateTime" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="CreateUser" type="xsd:normalizedString"/>
+      <xsd:element minOccurs="0" name="UpdateTime" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="UpdateUser" type="xsd:normalizedString"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

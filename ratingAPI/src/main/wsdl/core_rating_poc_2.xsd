@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Man Chan (McGraw-Hill Companies) --><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_3.xsd"/>
+  <xsd:complexType name="SPBusinessObjectDocumentSchemaType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" ref="oa:ApplicationArea"/>
+      <xsd:element minOccurs="0" name="ResponseMessageArea" type="sp:ResponseMessageAreaSchemaType">
+        <xsd:annotation>
+          <xsd:documentation>Use by the service producer to inform service consumer  the status of processing the input BOD.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="releaseID" type="xsd:normalizedString">
+      <xsd:annotation>
+        <xsd:documentation>OAGIS Release this BOD Instances belongs or the OAGIS release that the derivative work is based on.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="versionID" type="xsd:normalizedString" use="optional">
+      <xsd:annotation>
+        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the version of the given BOD defintion.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute default="Production" name="systemEnvironmentCode" type="xsd:normalizedString" use="optional">
+      <xsd:annotation>
+        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether this BOD is being sent in a "Test" or a "Production" mode. If the BOD is being sent in a test mode, it's information should not affect the business operation. However, if the BOD is sent in "Production" mode it is assumed that all test has been complete and the contents of the BOD are to affect the operation of the receiving business application(s).</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute default="en-US" name="languageCode" type="xsd:normalizedString" use="optional">
+      <xsd:annotation>
+        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the language that the contents of the BOD is in unless otherwise stated.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="ResponseMessageAreaSchemaType">
+    <xsd:choice>
+      <xsd:element ref="oa:BODFailureMessage"/>
+      <xsd:element ref="oa:BODSuccessMessage"/>
+    </xsd:choice>
+  </xsd:complexType>
+</xsd:schema>

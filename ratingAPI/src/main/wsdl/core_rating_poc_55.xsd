@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Man Chan (McGraw-Hill Companies) --><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="core_rating_poc_2.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_3.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_5.xsd"/>
+	<xsd:complexType name="ShowOrgAndInstrRatingsByOrgIdsSchemaType">
+		<xsd:complexContent>
+			<xsd:extension base="sp:SPBusinessObjectDocumentSchemaType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="sp:ShowOrgAndInstrRatingsByOrgIdsDataAreaSchemaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ShowOrgAndInstrRatingsByOrgIdsDataAreaSchemaType">
+		<xsd:sequence minOccurs="0">
+			<xsd:element minOccurs="0" ref="oa:Show"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:OrgAndInstrRatings"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="ShowOrgAndInstrRatingsByOrgIds" type="sp:ShowOrgAndInstrRatingsByOrgIdsSchemaType"/>
+</xsd:schema>

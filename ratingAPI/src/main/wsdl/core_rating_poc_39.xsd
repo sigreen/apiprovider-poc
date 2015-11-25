@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Man Chan (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: 
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_34.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_35.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_25.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_36.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_40.xsd"/>
+	<!---->
+	<xsd:complexType name="CollateralGroupSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>A group of properties, assets, loans, or other securities that are offered to secure credit.  In the case of sybthetic CDO's the "collateral" is not really used as collateral, but as a reference security upon which the contract between protection buyer and premium collector is based.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:choice minOccurs="0">
+				<xsd:element minOccurs="0" ref="sp:GeneralAssetTypeCode"/>
+				<xsd:element minOccurs="0" ref="sp:AssetCategoryCode"/>
+				<xsd:element minOccurs="0" ref="sp:SubAssetTypeCode"/>
+			</xsd:choice>
+			<xsd:element minOccurs="0" ref="sp:PrimaryAsset"/>
+			<xsd:element minOccurs="0" ref="sp:CollateralGroupNumber">
+				<xsd:annotation>
+					<xsd:documentation>A user-defined number for a collateral group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CollateralGroupName">
+				<xsd:annotation>
+					<xsd:documentation>A user defined word or words used to designate a collateral group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:DomicileOfAssets"/>
+			<xsd:group minOccurs="0" ref="sp:CollateralGroupSupportGroup"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="RelatedCollateralGroup" type="sp:RelatedCollateralGroupSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>list of collateral groups related to the current collateral group</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:CollateralGroupAsset"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:FutureFlowAttributeCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CollateralGroup" type="sp:CollateralGroupSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>A group of properties, assets, loans, or other securities that are offered to secure credit.  In the case of sybthetic CDO's the "collateral" is not really used as collateral, but as a reference security upon which the contract between protection buyer and premium collector is based.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="RelatedCollateralGroupSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>The relationship of a single collateral group to another collateral group, as qualified by collateral relationship type.  The one known example is that of one collateral group sharing collateral with another, e.g., a pool of first mortgages sharing specific real estate with a pool of home equity loans, i.e., both loans use the same real estate (the house) as underlying collateral.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:CollateralGroup"/>
+			<xsd:element minOccurs="0" ref="sp:CollateralGroupRelationshipCode"/>
+			<xsd:element minOccurs="0" ref="sp:EffectiveDate"/>
+			<xsd:element minOccurs="0" ref="sp:ExpirationDate"/>
+		</xsd:sequence>
+		<xsd:attribute name="collateralGroupID" type="xsd:normalizedString" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>collateral group id, the schema shows a list of other collateral groups related to this collateral group id</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="RelatedCollateralGroup" type="sp:RelatedCollateralGroupSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>The relationship of a single collateral group to another collateral group, as qualified by collateral relationship type.  The one known example is that of one collateral group sharing collateral with another, e.g., a pool of first mortgages sharing specific real estate with a pool of home equity loans, i.e., both loans use the same real estate (the house) as underlying collateral.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:group name="CollateralGroupSupportGroup">
+		<xsd:annotation>
+			<xsd:documentation>list of organizations, instruments or internal supports participated in supporting this collateral group </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:OrganizationParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:InstrumentParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:InternalSupportParticipation"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="CollateralGroupAssetType">
+		<xsd:sequence>
+			<xsd:element ref="sp:CollateralAsset"/>
+			<xsd:element minOccurs="0" name="FaceAmountPurchased" type="oa:AmountType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CollateralGroupAsset" type="sp:CollateralGroupAssetType">
+		<xsd:annotation>
+			<xsd:documentation>Captures the portion of an Asset that is used in a particular Collateral Group for support.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Man Chan (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_10.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_33.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_21.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_34.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_25.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_35.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_36.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_15.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_38.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_22.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_45.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_50.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_53.xsd"/>
+	<!---->
+	<xsd:complexType name="IssueSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="sp:Name"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:NameAlias"/>
+			<xsd:element minOccurs="0" ref="sp:DepartmentCode"/>
+			<xsd:element minOccurs="0" ref="sp:GroupCode"/>
+			<xsd:element minOccurs="0" ref="sp:DebtTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:ProgramTypeCode"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:ClassificationCode">
+				<xsd:annotation>
+					<xsd:documentation>Classifications for this Issue.  These should be distinguished by the schemeAgencyId attribute.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ProjectName" type="oa:NameType">
+				<xsd:annotation>
+					<xsd:documentation>Required for MUNIs - The name of the project that this is financing</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:Redemption"/>
+			<xsd:element minOccurs="0" ref="sp:ProgramID"/>
+			<xsd:element minOccurs="0" name="StructuredCategoryCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>Structured Category User ID of person
+					who last updated; initially same as create ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OwnerDepartment" type="oa:NameType">
+				<xsd:annotation>
+					<xsd:documentation>Department  id of  approving manager -
+					required for release - value depends on Manager ID being entered</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:UnlimitedAmount"/>
+			<xsd:element minOccurs="0" ref="sp:Issue_Market"/>
+			<xsd:element minOccurs="0" ref="sp:HybridEquityTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:BalanceAmountDate"/>
+			<xsd:choice minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>If ProgramType is CDPRG, this is not required.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:element ref="sp:IssueTypeCode"/>
+				<xsd:element ref="sp:CommercialPaperTypeCode"/>
+			</xsd:choice>
+			<xsd:group minOccurs="0" ref="sp:IssueIndicatorGroup"/>
+			<xsd:element minOccurs="0" ref="sp:DealNumber"/>
+			<xsd:element minOccurs="0" ref="sp:SaleDate"/>
+			<xsd:element minOccurs="0" ref="sp:AnticipatedClosingDate"/>
+			<xsd:element minOccurs="0" ref="sp:FinancialsDate"/>
+			<xsd:element minOccurs="0" ref="oa:CurrencyCode"/>
+			<xsd:element minOccurs="0" name="AssetBaseCurrencyCode" type="oa:CurrencyCodeType">
+				<xsd:annotation>
+					<xsd:documentation>This is the currency on which the assets of an issue are based</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Series" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>1986A, 1974, 1983A, A, B</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OtherLabel" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>An alternative to series, to provide further qualifying information about the issue.  If series is populated, then this element may not be populated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:RatingRequestDate"/>
+			<xsd:choice minOccurs="0">
+				<xsd:element minOccurs="0" ref="sp:GeneralAssetTypeCode"/>
+				<xsd:element minOccurs="0" ref="sp:AssetCategoryCode"/>
+				<xsd:element minOccurs="0" ref="sp:SubAssetTypeCode"/>
+			</xsd:choice>
+			<xsd:element minOccurs="0" ref="sp:GeneralIssueTypeCode"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:DomicileOfAssets"/>
+			<xsd:element minOccurs="0" ref="sp:AnalyticalTeam"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Instrument" type="sp:InstrumentSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>list of instruments belonged to this issue</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:group minOccurs="0" ref="sp:IssueOfficeGroup"/>
+			<xsd:group minOccurs="0" ref="sp:IssueParticipationSupportGroup">
+				<xsd:annotation>
+					<xsd:documentation>issuing parties and support participations</xsd:documentation>
+				</xsd:annotation>
+			</xsd:group>
+			<xsd:element minOccurs="0" name="Summary" type="sp:IssueSummarySchemaType">
+				<xsd:annotation>
+					<xsd:documentation>summary info about this issue</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Resolution" type="sp:ResolutionSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Resolution Summary</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="RatingContact" type="sp:RPMContactSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>these are the contacts associated with the issue.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Comments"/>
+			<xsd:element minOccurs="0" ref="sp:AuditData"/>
+			<xsd:element minOccurs="0" ref="sp:CurrentAmount"/>
+			<xsd:element minOccurs="0" ref="sp:CapitalChargeAmount"/>
+			<xsd:element minOccurs="0" ref="sp:RetailNoteInd"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Classification"/>
+			<xsd:element minOccurs="0" ref="sp:SurveillanceGroupCode"/>
+			<xsd:element minOccurs="0" ref="sp:UnsolicitedRating"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="SupportContract" type="sp:SupportContractSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Contract details of the counter part participant(s)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:MunicipalCategoryCode"/>
+			<xsd:element minOccurs="0" ref="sp:MunicipalSecurityCode"/>
+			<xsd:element minOccurs="0" name="RegulatoryIndicator" type="sp:RegulatoryIndicatorSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>RegulatoryIndicator List</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="IssueSurveillanceTier" type="sp:IssueSurveillanceTierSchemaType">							
+				<xsd:annotation>
+					<xsd:documentation>Issue Surveillance Tier Details</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:RatingLevel"/>	
+			<xsd:element minOccurs="0" ref="sp:IsEnhanced"/>
+			<!-- CRA3 Re-securitization Enhancement-->
+			<xsd:element minOccurs="0" ref="sp:CRA3Resec"/>
+			<!-- Added for ESMA color coding Enhancement -->
+			<xsd:element minOccurs="0" ref="sp:IsMixOfSolicitedAndUnsolicited"/>
+			<!-- ESMA color coding Enhancement ends here -->
+			<!-- SERG - 797 - To include Insured Participant Rolecode starts -->
+			<xsd:element minOccurs="0" ref="sp:HasRoleInsuranceProvider"/>
+			<!-- SERG - 797 - To include Insured Participant Rolecode ends -->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="IssueIndicatorGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:Closed"/>
+			<xsd:element minOccurs="0" ref="sp:PutBond"/>
+			<xsd:element minOccurs="0" ref="sp:Surveillance"/>
+			<xsd:element minOccurs="0" ref="sp:FinalOfferingChecked"/>
+			<xsd:element minOccurs="0" ref="sp:Confidential">
+				<xsd:annotation>
+					<xsd:documentation>indicating whether all ratings of this issue should be held confidential</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CPBackedByLoan"/>
+			<xsd:element minOccurs="0" ref="sp:BackupPolicyText"/>
+			<xsd:element minOccurs="0" ref="sp:FullyEnhanced"/>
+			<xsd:element minOccurs="0" ref="sp:MidTermNoteDesignation"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="IssueParticipationSupportGroup">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:OrganizationParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:InstrumentParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:InternalSupportParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:CollateralGroupSupport"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="IssueOfficeGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="RatingOfficeLocationCode" type="sp:OfficeLocationCodeType">
+				<xsd:annotation>
+					<xsd:documentation>SandP office responsible for ratings this issue</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SurveillenceOfficeLocationCode" type="sp:OfficeLocationCodeType">
+				<xsd:annotation>
+					<xsd:documentation>Sandp office responsible for surveillancing this issue</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DataOfficeLocationCode" type="sp:OfficeLocationCodeType">
+				<xsd:annotation>
+					<xsd:documentation>Sandp office responsible for verifying data for this issue</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="IssueSummarySchemaType">
+		<xsd:annotation>
+			<xsd:documentation>issue summary info, if summary property is not present, then it means that property has mixed values.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:CouponRateTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:CouponRate"/>
+			<xsd:element minOccurs="0" ref="sp:Taxable"/>
+			<xsd:element minOccurs="0" ref="sp:SaleDate"/>
+			<xsd:element minOccurs="0" ref="sp:SaleAmount"/>
+			<xsd:element minOccurs="0" ref="sp:PlacementTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:MaturityDate"/>
+			<xsd:element minOccurs="0" ref="sp:DateFormatInd"/>
+			<xsd:element minOccurs="0" name="Rating" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>rating score / split rating score</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CreditWatch"/>
+			<xsd:element minOccurs="0" ref="sp:Pending"/>
+			<xsd:element minOccurs="0" ref="sp:EffectiveDate"/>
+			<xsd:element minOccurs="0" ref="sp:ReleaseDate"/>
+			<xsd:element minOccurs="0" ref="sp:BalanceAmount"/>
+			<xsd:element minOccurs="0" ref="sp:ConfidentialRating"/>
+			<xsd:element minOccurs="0" ref="sp:CallDate"/>
+			<xsd:element minOccurs="0" ref="sp:FrequencyTypeCode"/>
+			<xsd:element minOccurs="0" name="InterestDate1" type="oa:DateTimeType">
+				<xsd:annotation>
+					<xsd:documentation>This is the date the bond pays interest.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="InterestDate2" type="oa:DateTimeType"/>
+			<xsd:element minOccurs="0" name="InterestDate3" type="oa:DateTimeType"/>
+			<xsd:element minOccurs="0" name="InterestDate4" type="oa:DateTimeType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

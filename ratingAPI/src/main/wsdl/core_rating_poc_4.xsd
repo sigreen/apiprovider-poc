@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Man Chan (McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Components\Common\Fields.xsd
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9" xmlns="http://www.openapplications.org/oagis/9" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="CurrencyCodeType">
+    <xsd:simpleContent>
+      <xsd:extension base="CodeType"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="TextType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:element name="CurrencyCode" type="CurrencyCodeType"/>
+  <xsd:element name="Amount" type="AmountType"/>
+  <xsd:element name="Percentage" type="xsd:decimal"/>
+  <xsd:element name="CountryCode" type="CountryCodeType"/>
+  <xsd:element name="Name" type="NameType">
+    <xsd:annotation>
+      <xsd:documentation>Identifies the Name of the object in which associated.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CodeType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="name" type="xsd:string" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NameType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="AmountType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:decimal">
+        <xsd:attribute name="currencyID" type="xsd:string" use="required"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="IdentifierType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="schemeAgencyID" type="xsd:normalizedString" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CountryCodeType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="name" type="xsd:string" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="StateCodeType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="name" type="xsd:string" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="MonthDateType">
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+  <xsd:element name="ID" type="IdentifierType">
+    <xsd:annotation>
+      <xsd:documentation>Is the Identifiers of the given instance of an entity within the scope of the integration. The providedBy attribute identifies the party that provided or knows this party by the given identifier.
+</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="NoteType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="DescriptionType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string"/>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="DateTimeType">
+    <xsd:union memberTypes="xsd:dateTime xsd:date"/>
+  </xsd:simpleType>
+</xsd:schema>

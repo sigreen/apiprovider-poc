@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<!--edited with XMLSpy v2012 rel. 2 (http://www.altova.com) by swetha (MCGRAW-HILL COMPANIES)--><xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema/v3/financial" xmlns:fin="http://integration.standardandpoors.com/ServiceSchema/v3/financial" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="FinancialStatement" type="fin:FinancialStatementType">
+      <xs:annotation>
+         <xs:documentation>Financial Statement</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="FinancialStatementType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:Property"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:DP"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:DataPoint"/>
+      </xs:sequence>
+      <xs:attribute name="dataSource" type="xs:string" use="required">
+         <xs:annotation>
+            <xs:documentation>source for providing the financial statement, eg. FIDO, KLCA etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="orgIdType" type="xs:string" use="required">
+         <xs:annotation>
+            <xs:documentation>org identifier type, eg. FIDO, AG, SP etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="orgId" type="xs:string" use="required">
+         <xs:annotation>
+            <xs:documentation>org identifier</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="periodEndDate" type="xs:date">
+         <xs:annotation>
+            <xs:documentation>statement end date</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="periodType" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>period type, eg. Annual, Quarterly etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="periodName" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>period name, A, Q1, Q2 etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="accountingBasis" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>accounting basis, eg. CONS, SA etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="accountingStandard" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>accounting standard, eg. GAAP, STAT etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="currency" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>3 character ISO currency code which the finanical statement is being reported</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="version" type="xs:long">
+         <xs:annotation>
+            <xs:documentation>data set version id if source data provides versioning</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="statementType" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>statement type, eg. original, re-statement etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="dataStage" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>data stage, eg. WIP, FINAL etc.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="conf" type="xs:boolean">
+         <xs:annotation>
+            <xs:documentation>data set confidentiality</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="updtTmstp" type="xs:dateTime"/>
+   </xs:complexType>
+   <xs:element name="getFinancialStatements">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+         <xs:attribute name="requestor" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getFinancialStatementsResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="FinancialStatementUpdateEventType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:FinancialStatement">
+            <xs:annotation>
+               <xs:documentation>refresh financial data for the given statements</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="FinancialStatementUpdateEvent" type="fin:FinancialStatementUpdateEventType"/>
+   <xs:element name="getFinancialStatementsAsync">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="fin:BatchProcessingProfile"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getFinancialStatementsAsyncResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="Status" type="xs:string"/>
+            <xs:element minOccurs="0" name="Message" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="BatchProcessingProfileType">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="DataPoints">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:DP"/>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:DataPoint"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element minOccurs="0" name="DataSource" type="xs:string"/>
+         <xs:element minOccurs="0" name="OrgId">
+            <xs:complexType>
+               <xs:simpleContent>
+                  <xs:extension base="xs:string">
+                     <xs:attribute name="type" type="xs:string"/>
+                  </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+         </xs:element>
+         <xs:element minOccurs="0" name="PeriodEndDate">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="Start" type="xs:date"/>
+                  <xs:element minOccurs="0" name="End" type="xs:date"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element minOccurs="0" name="LastUpdateDate">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element minOccurs="0" name="Start" type="xs:dateTime"/>
+                  <xs:element minOccurs="0" name="End" type="xs:dateTime"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:FinancialStatement"/>
+      </xs:sequence>
+      <xs:attribute name="destinationSeqNo" type="xs:string" use="required"/>
+      <xs:attribute name="filename" type="xs:string" use="required"/>
+      <xs:attribute name="maxSize" type="xs:string" use="optional"/>
+      <xs:attribute name="requestor" type="xs:string"/>
+   </xs:complexType>
+   <xs:element name="DP">
+      <xs:annotation>
+         <xs:documentation>data point within a finanical statement</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="mne" type="xs:string" use="required">
+                  <xs:annotation>
+                     <xs:documentation>mnemonic</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="lob" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>segmentation: line of business</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="geo" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>segmentation: geographic unit</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="seq" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>segmentation: sequence no</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="dataType" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>if data is not numeric type, indicate what type of data it is. eg. text or date</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="unitType" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>if unitType is not money, indicate what type of unit it is. eg. weight,volume etc</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="conf" type="xs:boolean">
+                  <xs:annotation>
+                     <xs:documentation>indicates if this data point is confidential</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="quality" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>quality of  the datapoint</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="ref" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>source reference, eg. location of data point</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="currency" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>Currency of the datapoint</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="comment" type="xs:string">
+                  <xs:annotation>
+                     <xs:documentation>Comment of the datapoint</xs:documentation>
+                  </xs:annotation>
+               </xs:attribute>
+               <xs:attribute name="updtTmstp" type="xs:dateTime"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="DataPoint" type="fin:DataPointType">
+      <xs:annotation>
+         <xs:documentation>New Data Point</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="DataPointType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:Property"/>
+      </xs:sequence>
+      <xs:attribute name="mne" type="xs:string" use="required">
+         <xs:annotation>
+            <xs:documentation>mnemonic</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="getDataElements">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="1" ref="fin:DE"/>
+         </xs:sequence>
+         <xs:attribute name="maxItem" type="xs:integer" use="optional"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getDataElementsResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:DE"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="DE" type="fin:DEType">
+      <xs:annotation>
+         <xs:documentation>data element</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="DEType">
+      <xs:sequence>
+         <xs:element minOccurs="0" name="Name" type="xs:string"/>
+         <xs:element minOccurs="0" name="Description" type="xs:string"/>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:Property"/>
+      </xs:sequence>
+      <xs:attribute name="mne" type="xs:string"/>
+      <xs:attribute name="dataSource" type="xs:string"/>
+      <xs:attribute name="dataType" type="xs:string"/>
+      <xs:attribute name="unitType" type="xs:string"/>
+   </xs:complexType>
+   <xs:element name="BatchFinancialStatements">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="fin:BatchProcessingProfile"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BatchProcessingProfile" type="fin:BatchProcessingProfileType"/>
+   <xs:element name="Property">
+      <xs:complexType>
+         <xs:simpleContent>
+            <xs:extension base="xs:string">
+               <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+         </xs:simpleContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getFinancialPeriods">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+         <xs:attribute name="requestor" type="xs:string"/>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getFinancialPeriodsResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getIncrementalUpdates">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element ref="fin:IncrementalUpdate"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getIncrementalUpdatesResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:complexType name="IncrementalUpdateType">
+      <xs:sequence>
+         <xs:element name="StartTime" type="xs:dateTime">
+            <xs:annotation>
+               <xs:documentation>from timestamp</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="EndTime" type="xs:dateTime">
+            <xs:annotation>
+               <xs:documentation>to timestamp</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="Sector" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>sector, eg. Bank</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element minOccurs="0" name="Subsector" type="xs:string">
+            <xs:annotation>
+               <xs:documentation>subsector, eg. Bank</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="dataSource" type="xs:string" use="required">
+         <xs:annotation>
+            <xs:documentation>data source for getting incremental updates</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="orgIdType" type="xs:string">
+         <xs:annotation>
+            <xs:documentation>preferred org id type in the response</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:element name="IncrementalUpdate" type="fin:IncrementalUpdateType"/>
+   <xs:element name="MnemonicComments" type="fin:MnemonicCommentsType"/>
+   <xs:complexType name="MnemonicCommentsType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:MnemonicComment"/>
+      </xs:sequence>
+      <xs:attribute name="dataSource" type="xs:string" use="required"/>
+      <xs:attribute name="orgIdType" type="xs:string"/>
+      <xs:attribute name="orgId" type="xs:string"/>
+      <xs:attribute name="type" type="xs:string"/>
+   </xs:complexType>
+   <xs:element name="getMnemonicComments">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="fin:MnemonicComments"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getMnemonicCommentsResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fin:MnemonicComments"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="MnemonicComment" type="fin:MnemonicCommentType"/>
+   <xs:complexType name="MnemonicCommentType">
+      <xs:sequence>
+         <xs:element maxOccurs="unbounded" minOccurs="0" name="Comment" type="fin:CommentType"/>
+      </xs:sequence>
+      <xs:attribute name="mne" type="xs:string"/>
+   </xs:complexType>
+   <xs:complexType name="CommentType">
+      <xs:simpleContent>
+         <xs:extension base="xs:string">
+            <xs:attribute name="type" type="xs:string"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:element name="Comment" type="fin:CommentType"/>
+   <xs:element name="Status">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element minOccurs="0" name="Message" type="xs:string"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getDataPointAuditTrail">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="getDataPointAuditTrailResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="fin:FinancialStatement"/>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

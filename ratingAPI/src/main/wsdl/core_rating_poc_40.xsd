@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Man Chan (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: 
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_33.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<!---->
+	<xsd:complexType name="CollateralAssetSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>Captures the details of an asset used in a Collateral Group.  These include loan name if a loan.  Property name, type, location, debt_service_coverage_ration and stabalized_value for property.  Primarily used to show the assets used in a CMBS Deal.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="sp:LoanPieceCode"/>
+			<xsd:element minOccurs="0" name="Instrument" type="sp:InstrumentSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>The tranche of a deal that is purchased as an asset for another deal.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:PropertyTypeCode">
+				<xsd:annotation>
+					<xsd:documentation>A user defined word or words used to designate a collateral group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropertyName" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>The name of a piece of property.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PropertyAddress" type="oa:AddressType">
+				<xsd:annotation>
+					<xsd:documentation>The address of a piece of property.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="LoanName" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>The name of a loan.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Synthetic" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>true indicates that the asset is involved in a synthetic deal</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PariPassu" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>true indicates that all loan pieces have a equal ranking or seniority.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CouponRate"/>
+			<xsd:element minOccurs="0" ref="sp:OriginalTermOfPayments"/>
+			<xsd:element minOccurs="0" ref="sp:AmortizingTermOfPayments"/>
+			<xsd:element minOccurs="0" ref="sp:InitialPrincipleBalanceAmount"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Evaluation" type="sp:RatingSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CollateralAsset" type="sp:CollateralAssetSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>A group of properties, assets, loans, or other securities that are offered to secure credit.  In the case of sybthetic CDO's the "collateral" is not really used as collateral, but as a reference security upon which the contract between protection buyer and premium collector is based.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

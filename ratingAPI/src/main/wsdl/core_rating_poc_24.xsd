@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Man Chan (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_20.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_25.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_15.xsd"/>
+	<xsd:complexType name="FundSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="oa:Name"/>
+			<xsd:element minOccurs="0" ref="sp:FundTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:FundClassCode"/>
+			<xsd:element minOccurs="0" ref="oa:CurrencyCode"/>
+			<xsd:element minOccurs="0" ref="sp:Closed"/>
+			<xsd:element minOccurs="0" ref="sp:CurrentMarketInd"/>
+			<xsd:element minOccurs="0" ref="sp:RetailInvestor"/>
+			<xsd:element minOccurs="0" ref="sp:InstitInvestor"/>
+			<xsd:element minOccurs="0" ref="sp:CountryCode"/>
+			<xsd:element minOccurs="0" ref="sp:GroupCode"/>
+			<xsd:element minOccurs="0" ref="sp:DepartmentCode"/>
+			<xsd:element minOccurs="0" ref="sp:CreditWatch"/>
+			<xsd:element minOccurs="0" ref="sp:ClassDescription"/>
+			<xsd:element minOccurs="0" ref="sp:FundCompositionCode"/>
+			<xsd:element minOccurs="0" ref="sp:RatingRequestDate">
+				<xsd:annotation>
+					<xsd:documentation>Current Rating Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:Issue_Market">
+				<xsd:annotation>
+					<xsd:documentation>CURR_MARKET_RATING_CODE</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CommentInd"/>
+			<xsd:element minOccurs="0" ref="sp:Suspect"/>
+			<xsd:element minOccurs="0" ref="sp:CUSIP"/>
+			<xsd:element minOccurs="0" ref="sp:Completed"/>
+			<xsd:element minOccurs="0" ref="sp:Taxable"/>
+			<xsd:element minOccurs="0" ref="sp:AdvisorInvestor"/>
+			<xsd:element minOccurs="0" ref="sp:GovInvestPool"/>
+			<xsd:element minOccurs="0" ref="sp:AnalyticalTeam"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:OrganizationParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Funds Rating</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Comments"/>
+			<xsd:element minOccurs="0" ref="sp:AuditData"/>
+			<xsd:element minOccurs="0" ref="sp:UnsolicitedRating"/>
+			<xsd:element minOccurs="0" name="RegulatoryIndicator" type="sp:RegulatoryIndicatorSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>RegulatoryIndicator List</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:Surveillance"/>
+			<!-- Added for Funds Ratings MAP ReviewDate Enhancement -->
+			<xsd:element minOccurs="0" ref="sp:EventDrivenReview"/>
+			<xsd:element minOccurs="0" ref="sp:FullReview"/>
+			<xsd:element minOccurs="0" ref="sp:LastReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:NextReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:InterimReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:EventDrivenReviewDate"/>
+			<!--  Funds Ratings MAP ReviewDate Enhancement  ends here -->
+			<!-- Added for SERG Request No: 732 Linked Maturities Enhancement-->
+			<xsd:element minOccurs="0" name="LinkedEntities" type="sp:LinkedEntitiesSchemaType"/>		
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

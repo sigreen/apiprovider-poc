@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Christian Natali (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: 
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_13.xsd"/>
+	<xsd:complexType name="RPMContactSchemaType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="ID" type="oa:IdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>This is the CONTACT ROLE CAPACITY id</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Contact" type="sp:EmployeeSchemaType"/>
+			<xsd:group minOccurs="0" ref="sp:RPMContactOrganizationGroup"/>
+			<xsd:group minOccurs="0" ref="sp:RPMContactIssueGroup"/>
+			<xsd:element minOccurs="0" name="JobTitle" type="oa:TextType">
+				<xsd:annotation>
+					<xsd:documentation>The Job Title for this Contact  within an Organization</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DepartmentName" type="oa:NameType">
+				<xsd:annotation>
+					<xsd:documentation>Name of the Department that this contact belongs to within an Organization</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:Comment"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="RPMContactOrganizationGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="PrimaryOrganizationName" type="oa:NameType">
+				<xsd:annotation>
+					<xsd:documentation>This element should be populated with the name of the primary organization associated with this Contact.  It was insufficiently designed and thought through...and added to support CE.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="OrganizationId" type="oa:IdentifierType"/>
+			<xsd:choice minOccurs="0">
+				<xsd:element ref="sp:GeneralAssetTypeCode"/>
+				<xsd:element ref="sp:AssetCategoryCode"/>
+				<xsd:element ref="sp:SubAssetTypeCode"/>
+			</xsd:choice>
+			<xsd:element minOccurs="0" ref="sp:ParticipationRoleCode"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="RPMContactIssueGroup">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="IssueId" type="oa:IdentifierType"/>
+			<xsd:element minOccurs="0" name="ContactRoleCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>how a contact is involved with an issue being rated, e.g., Lead, Administrative Assistant, etc.  For Stage 1 RPM, only the role of "Standard" will be used.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+</xsd:schema>

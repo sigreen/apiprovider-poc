@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Bura (MCGRAW-HILL COMPANIES) --><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:element name="Classification" type="sp:ClassificationSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>
+				the Attribute to be filter for a given Attribute Code
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ClassificationSchemaType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:ClassificationTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:ClassificationDescription"/>
+			<xsd:element minOccurs="0" ref="sp:Commentary"/>
+		</xsd:sequence>
+		<xsd:attribute name="op" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Participation flag, which indicates the Operation which need to catered by the Processing Application</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:normalizedString">
+					<xsd:enumeration value="CREATE"/>
+					<xsd:enumeration value="UPDATE"/>
+					<xsd:enumeration value="DELETE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+  <xsd:element name="RegulatoryQualifierDetails" type="sp:RegulatoryQualifierDetailsSchemaType">
+    <xsd:annotation>
+      <xsd:documentation>Regulatory Qualifier Details</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="RegulatoryQualifierDetailsSchemaType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:RegulatoryQualifierDetail"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
