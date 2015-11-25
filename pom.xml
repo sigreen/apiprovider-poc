@@ -35,6 +35,7 @@
     
     <camel.version>2.15.1.redhat-620133</camel.version>
     <activemq.version>5.11.0.redhat-620133</activemq.version>
+    <fabric.version>1.2.0.redhat-133</fabric.version>
     <derby.version>10.10.1.1</derby.version>
     <dbcp.version>1.4</dbcp.version>
   </properties>
@@ -84,11 +85,6 @@
         <version>${camel.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-jms</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.apache.activemq</groupId>
         <artifactId>activemq-camel</artifactId>
         <version>${activemq.version}</version>
@@ -102,6 +98,16 @@
         <groupId>org.apache.activemq</groupId>
         <artifactId>activemq-pool</artifactId>
         <version>${activemq.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-servlet</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-http4</artifactId>
+        <version>${camel.version}</version>
       </dependency>
       <dependency>
         <groupId>javax.jms</groupId>

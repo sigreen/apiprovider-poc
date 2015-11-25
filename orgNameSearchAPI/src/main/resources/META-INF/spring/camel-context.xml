@@ -40,6 +40,11 @@
   <bean id="organizationService" class="org.jboss.fuse.examples.rest.OrganizationService"/>
 
   <camelContext xmlns="http://camel.apache.org/schema/spring">
+    <routeContextRef ref="jmsUseCaseRoutes" />
+    <dataFormats>
+      <json id="queryRequest" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.jms.OrganizationQueryRequest"/>
+      <json id="organization" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.rest.Organization"/>
+    </dataFormats>
 
     <!-- configure rest to use the camel-servlet component, and use json binding mode -->
     <!-- and tell to output json in pretty print mode -->

@@ -22,8 +22,10 @@
 
 
   <feature name='apiprovider-orgNameSearchAPI' version='${project.version}'>
+    <feature version="${fabric.version}">activemq-camel</feature>
     <feature version="${camel.version}">camel-servlet</feature>
     <feature version="${camel.version}">camel-jackson</feature>
+    <feature version="${camel.version}">camel-http4</feature>
     <bundle>mvn:${project.groupId}/orgNameSearch/${project.version}</bundle>
   </feature>
 
