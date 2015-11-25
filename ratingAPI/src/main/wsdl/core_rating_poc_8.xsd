@@ -1,0 +1,2831 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Munjal Kansara (The McGraw-Hill Companies) --><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_4.xsd"/>
+	<xsd:element name="CreditWatch" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>NEG, POS, DEV, NM</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EffectiveDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date and time the associated entity is made effective.  eg. if being used in the rating entity, this is the Rating Date in CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ExpirationDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date and time the associated entity/relationship will be expired.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReleaseDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date when the rating is published.  eg Data Admin Date in CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SignOffDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date when the rating is approved by the manager.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CreditOutlook" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>DEVELOPING, NEGATIVE, NM, POSITIVE, STABLE, NR
+</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DebtTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>type of debt.  eg. SRSEC, SRUNSEC, SUBOR, PREFDSTK, PRFRCSTK, EQPTRSTCRT</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>STDLONG, STDSHORT, FCLONG, FCSHORT, SHADOW</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CurrentRating" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this rating current?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ConfidentialRating" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this rating confidential?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingQualifier" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>pi, p, c, f, m</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingScore">
+		<xsd:annotation>
+			<xsd:documentation>AAA, AA, AA-, BBB</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="rank" type="xsd:decimal" use="optional"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RatingActionCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Affirmed, Rating/CW/Outlook changed</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CommitteeTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>the purpose for a rating committee meeting.  eg. New Rating, Asset, Deal, Surveillance</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CommitteeRoleCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>the role an individual may participate in a committee meeting.  Examples include Chair, Voting Member, and Observer.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ClassificationCode" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>A Classification code for an entity.  The schemeAgencyId can be used to distinguish the Domain of this Classification code (for example, if there are more than 1 ClassificationCode elements)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ApplicationAttribute" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Application specific attributes associated with an entity.  Use the schemeAgencyId to distinguish Domain of the attribute.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NameAlias">
+		<xsd:annotation>
+			<xsd:documentation>Other names associated with this entity</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:NameType">
+					<xsd:attribute name="type" type="xsd:string" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>eg. Short Name</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProgramTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>This code is used to represent what type of program is being used; e.g. CP, CDPRG, etc... if it is not a program then its value will be ISSUE.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IssueTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>BANKNOTE, BONDS, PASSTHRU, NOTES</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CommercialPaperTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>3(A)2, ASIAN, EURO, BRAZIL, TAIWAN, ARGENTINE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DepartmentCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>COREs rating department code. eg. Structured Finance Ratings, Insurance Ratings, Corporate Ratings, Financial Institutions Ratings</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GroupCode">
+		<xsd:annotation>
+			<xsd:documentation>CORE's group code. eg. SERVICE SECTOR, CONSUMER SECTOR, 
+CORPORATE FINANCE , HIGH TECHNOLOGY
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="departmentCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CORE's department code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Closed" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this issue/instrument open or closed?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PutBond" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if the issue is a put bond.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Surveillance" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this issue undergoes constant surveillance?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FinalOfferingChecked" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Has the Data Administrator validated the issue using the prospectus?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OfficeLocationCode" type="sp:OfficeLocationCodeType">
+		<xsd:annotation>
+			<xsd:documentation>SandP's office location</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CloseReasonCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>This is a reason for closing the maturity or class</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SubAssetTypeCode">
+		<xsd:annotation>
+			<xsd:documentation>detailed classification of assets underlying an Issue, e.g., Autos, Manufactured Housing, Student Loans, Recreational Vehicles, and Marine</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="assetCategory" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>asset category code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="generalAssetType" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>general asset type code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AssetCategoryCode">
+		<xsd:annotation>
+			<xsd:documentation>intermediate categorization of assets underlying an issue, e.g., "Amortizing Consumer Assets" and "Revolving Consumer Assets"</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="generalAssetType" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>general asset type code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GeneralAssetTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>high level categorization of a structured finance issue, e.g., ABS, RMBS, CDO</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Name" type="oa:NameType">
+		<xsd:annotation>
+			<xsd:documentation>Official name or legal name of the entity.  If the entity has other names associated with it, those names should be stored in NameAlias.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Class" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>a group of securities with similar features.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MaturityDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date on which the principal amount of a note, draft, acceptance bond or other debt instrument becomes due and is repaid to the investor and interest payments stop. It is also the termination or due date on which an installment loan must be paid in full. Not required if evergreen indicator is TRUE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PlacementTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation> the nature of the market in which an instrument will be issued.  Values include "Public", "144A Registered", and "144A Non-Registered"</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CouponRateTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether an instrument pays a fixed rate of interest or whether the rate floats. Fixed (F), Variable (V) or Zero Coupon (Z)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CouponRate" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The interest rate stated on a bond when it's issued</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SaleAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The amount of the instrument at sale time</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SaleDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date that the seller of an issue delivers the issue and the buyer pays for it.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CallDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date on which a bond can be redeemed before maturity. If the issuer feels there is a benefit to refinancing the issue, the bond may be redeemed on the call date at par or at a small premium to par.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Secured" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is the instrument secured by collateral to reduce the risk associated with lending?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SeniorityTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>priority of repayment in case of loss.  Examples include Senior, Subordinated</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SecondaryMarket" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if a maturity has been issued to the secondary market.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Called" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if the bond has been called.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Identifier" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Any other known identifiers associated with this entity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CUSIP" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>An identification number assigned to all stocks and registered bonds. The Committee on Uniform Securities Identification Procedures (CUSIP) oversees the entire CUSIP system.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CINS" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>An acronym standing for the "CUSIP International Numbering System," which provides identification of international securities.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ISIN" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>A code that uniquely identifies a specific securities issue. The organization that allocates ISINs in any particular country is the National Numbering Agency (NNA).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TierLevel" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>a code used to group organizations based on certain criteria.  eg. tier 1 (Corporate issuers with &gt; $1 billion of outstanding debt, financial institutions with &gt; $10 billion debt, all Canadian banks, insurance holding companies, all sovereigns)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FiscalYearEnd" type="oa:MonthDateType">
+		<xsd:annotation>
+			<xsd:documentation>The completion of a one-year, or 12-month, accounting period.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NAIC" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Number issued by National Association of Insurance Commissioner (NAIC) for this Organization - Insurance only</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NextReviewDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date of the next comprehensive review of an entity and its rating. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LastReviewDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date of the last comprehensive review of an entity and its rating. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InterimReviewDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The last interim review date of an entity and its rating. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EventDrivenReviewDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date of event driven review, which can be due to internal event causing review or external party requesting review</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CountryOfRegistration" type="oa:CountryCodeType">
+		<xsd:annotation>
+			<xsd:documentation>country where the company is registered</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StateOfRegistration" type="oa:StateCodeType">
+		<xsd:annotation>
+			<xsd:documentation>State code (NJ, NY), required if country of registration is USA</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegionCdoe" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Asia Pacific, Latin America etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TickerSymbol" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>An arrangement of characters (usually letters) representing a particular security listed on an exchange or otherwise traded publicly. Stock symbols are the most recognized type of ticker symbol.  Other ticker symbols include Bloomberg Ticker, Compustat ticker etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IssuerTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>if an organization can act as an Issuer, what type of Issuer it is, e.g., Standard, Conduit, etc. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FormOfEntityCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>organization's method of legal formation, e.g., Trust, Corporation, LLP, LLC, Partnership, etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NACIS" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>North American Industry Classification System (NAICS) code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SIC" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>U.S. Standard Industrial Classification (SIC) System code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Active" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>is the entity active within SandP systems?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GICSSectorCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>GICS sector code, eg. 10 (Energy)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GICSIndustryGroupCode">
+		<xsd:annotation>
+			<xsd:documentation>GICS Industry Group code. eg. 1010 (Energy)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="gicsSectorCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GICS Sector Code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GICSIndustryCode">
+		<xsd:annotation>
+			<xsd:documentation>GICS Industry code. eg. 101010 (Energy Equipment and Services)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="gicsIndustryGroupCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GICS Industry Group Code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="gicsSectorCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GICS Sector Code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GICSSubIndustryCode">
+		<xsd:annotation>
+			<xsd:documentation>GICS Sub-Industry code.  eg. 10101010 (Oil and Gas Drilling) 10101020 (Oil and Gas Equipment and Services)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="gicsIndustryCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GICS Industry Code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="gicsIndustryGroupCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GICS Industry Group Code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="gicsSectorCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GICS Sector Code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ParticipationRoleCode">
+		<xsd:annotation>
+			<xsd:documentation>organizations, instruments or internal support may participate with Issues, Instruments, or Collateral Groups.  Organization roles include Issuer, Guarantor, Bond Insurer, Bond Counsel, and LOC Provider etc.  Instrument roles include Subordinated Class and Guarantee Bond etc. Internal Support roles include overcollateralization, excess spread, and reserve fund.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="participationTypeCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>type of participation, organization, instrument or internal support</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Confidential" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>is this confidential?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LiabilityTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>The type of liability entered into as per the following definitions:
+
+(1) Joint and Several: Where two or more parties enter into an obligation such as a guarantee together, joint and several liability means that the lender or creditor can recover the whole indebtedness from any one of them. They are then left to sort out their respective contributions between themselves. 
+
+(2) Several: When members of a group agree to certain obligations individually, but do not share responsibility for the obligations of other members of the group.
+
+(3) Joint: Pertaining to multiple parties on the same side of an agreement</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EnhancesLiabilities" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indication if support enhances Liabilities (instruments)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EnhancesAssets" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indication if support enhances Assets (collateral groups)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ForCredit" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indication if support is for enhancing credit</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ForLiquidity" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indication if support is for enhancing liquidity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SupportDenominatorCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>the type of value to be used as a denominator in an equation that calculates a type percentage covered.  Known examples are "Invested Amount", "Outstanding Collateral Amount"</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SwapTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Traditionally, the exchange of one security for another to change the maturity (bonds), quality of issues (stocks or bonds), or because investment objectives have changed. Recently, swaps have grown to include currency swaps and interest rate swaps.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Comment" type="oa:NoteType"/>
+	<xsd:complexType name="OfficeLocationCodeType">
+		<xsd:simpleContent>
+			<xsd:extension base="oa:CodeType">
+				<xsd:attribute name="countryCode" type="xsd:normalizedString" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>Country Code</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="stateCode" type="xsd:normalizedString" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>State Code</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="OrganizationTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>CORE organization type, eg. HOMEFURN  (Home Furnishings), HOMEBUILD (Homebuilders), HOTELGAMCO (Gaming Cos)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SectorCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>RatingsDirect Sector code. eg GLOBISS (Global Issuer), STRUC (Structured Finance), PUBFIN (US Public Finance)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SubSectorCode">
+		<xsd:annotation>
+			<xsd:documentation>RatingsDirect sub-sector code.  CORP (Corporations), FI (Financial Institutions), INS (Insurance), ABS (Asset Backed Securities)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="sectorCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>RD sector code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IndustryCode">
+		<xsd:annotation>
+			<xsd:documentation>RatingsDirect Industry code. 1 (Aerospace and Defense), 2 (Automotive), FINANCEGCO (Financial Guaranty), ASSTMNGR (Asset Manager), BANK (Bank) etc.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="subSectorCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>RD sub-sector code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="sectorCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>RD sector code</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RatingRequestDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>The date upon which the lead analyst begins work on rating the entity.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InstrumentTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>the type of financial instruments that are issued as a result of a deal to create an Issue. eg. Term, Medium Term Note (MTN), and Commercial Paper (CP).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CertificateGroupName" type="oa:NameType">
+		<xsd:annotation>
+			<xsd:documentation>Code/Word or Codes/words describing and distinguishing a certificate group from others.  For structured residential mortgage backed securities, and possibly other types, each instrument of an issue may be assigned to a certificate group.  There may be more than one certificate group per issue.  Certificate groups will generally initially have an autonomous subordination structure.  However embedded deal triggers may cause a crossover of subordination from one certificate group to another when the most junior tranches of one certificate group have been depleted.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingGroupName" type="oa:NameType">
+		<xsd:annotation>
+			<xsd:documentation>Code/Word or Codes/words describing and distinguishing a rating group from others.  A rating group is assigned to each instrument in an issue, and subordination may then be calculated as per the rating groups and if applicable, the Certificate Groups.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CashFlowTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>type of cash flow.  Known values are "Principle and Interest", "Principle", and "Interest"</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NotionalAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>in an interest rate swap, the predetermined dollar amount on which the exchanged interest payments are based.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RemitStartDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>The first date on which a payment (P, I, or P and I, depending on the instrument) is due.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ExpectedMaturityDate" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>The expected maturity is the date as of which the securities are “expected” to be repaid in full based on a specified assumption regarding the rate at which the underlying assets will be prepaid, but there is usually no guarantee that repayment will not occur either before or after that date.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FrequencyTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>frequency for a payment or some other regular event.  Examples include daily, weekly, bi-monthly, monthly, quarterly, semi-annually, annually.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AverageBondLife" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>A measure of the duration of an investment, based on the average length of time required to get back the principal amount invested; calculated by multiplying each repayment of principal by the time elapsed between making the investment and receiving the principal repayment, summing the results, and dividing by the total amount invested</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PaidOffDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date the instrument's outstanding principal balance goes to zero.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CollateralGroupNumber" type="xsd:integer">
+		<xsd:annotation>
+			<xsd:documentation>A user-defined number for a collateral group.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CollateralGroupName" type="oa:NameType">
+		<xsd:annotation>
+			<xsd:documentation>A user defined word or words used to designate a collateral group.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StateCode">
+		<xsd:annotation>
+			<xsd:documentation>States or Provinces</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:StateCodeType">
+					<xsd:attribute name="countryCode" type="xsd:normalizedString">
+						<xsd:annotation>
+							<xsd:documentation>country where this state/province located</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CollateralGroupRelationshipCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Code used to uniquely identify a collateral group relationship type. eg. Shares collateral with</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IndexTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>For a variable rate instrument, the specific index type upon which the coupon is calculated.  Examples include "1 Year LIBOR", "Prime", "11th District COFI", and '1 Year CMT"</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MarginRate" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>A rate, when added to the current rate of the index indicated by the index_type_code, gives the total rate of interest of the instrument.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LifetimeCapitalizationRate" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The highest value the interest rate of this instrument may be for the life of the instrument.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LifetimeFloorRate" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The lowest value the interest rate of this instrument may be for the life of the instrument.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CommercialPaperEvergreen" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Does this CP have an expiration date (N- default) or is evergreen(Y) ? Extensions are handled by updating the maturity date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PolicyNumber" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>This is the policy number associated with commercial paper.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AuthorizedAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>This is the amount authorized for this Commercial Paper.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Taxable" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>is the return on this security subject to taxes at the local, state or federal level, or some combination thereof.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DatedDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date at which interest begins to accrue on a fixed-income security.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Refunded" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>has the associated entity refunded?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RefundDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>this is the date the associated entity has been refunded.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingAgencyCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Rating agency who determined the ratings. eg. SandP, Moody's and Fitch.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingDomainCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the domain to which a rating applies.  eg.  Local Currency, Foreign Currency.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReasonTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Reason for a rating.  Examples are new, review, affirmation, called, matured.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NationalScaleCode">
+		<xsd:annotation>
+			<xsd:documentation>Assessment scale relative within a specific sovereign rather than absolute globally.  Examples are Brazilian Rating Scale, Canadian National Scale, and Canadian CP Rating Scale.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="prefix" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>Two positions of text that will be displayed with any National Scale Rating.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="countryCode">
+						<xsd:annotation>
+							<xsd:documentation>country code to which this national scale applies</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RatingStatusCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>state of a released rating. eg. Preliminary and Final.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ShadowRating" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>indicating whether this rating applies to the enhanced debt (N) or to the underlying debt as if it were not enhanced (Y), in the case where the rated entity is enhanced externally</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PublishingAgencyCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the Rating agency who published the rating, but not necessarily the one who determined the rating.  As an example, Bloomberg sometimes publishes SandP's Public Finance Ratings BEFORE SandP does, tagging them as "Expected".  In this case, the publishing agency code will be Bloomberg the source rating agency will be Standard and Poor's and the expected flag will be set to "TRUE".</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystRoleCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>analyst role, eg. primary analyst, backup analyst etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EmailAddress">
+		<xsd:annotation>
+			<xsd:documentation>email address associated with the entity. eg. business email, personal email etc.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:normalizedString">
+					<xsd:attribute name="type" type="xsd:normalizedString">
+						<xsd:annotation>
+							<xsd:documentation>email address types. eg. business, personal etc.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Pending" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>is the associated entity in pending state?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AssessmentTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>code used to indicate type of rating assessment, such as SHADOW, SPUR etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DealNumber" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>this is the number related to a deal or issue</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CoverageTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>code used to denote a type of coverage</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BalanceAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>the balance still owed by the associated entity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BalanceDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>the date on which the balance amount is updated with the associated entity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FinancialsDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>the date financial performace paper will be published.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnticipatedClosingDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>collateral manager estimated date for the deal closing.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalysisTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Code used to uniquely identify the type of analysis performed.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WorkRoleCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Code used to uniquely identify a Work Role. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EvaluationRequestDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date upon which the client requested this evaluation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RecoveryRate" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The rate of recovery rate that will be applied on the asset in case of default.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="HyperTranching" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether the CMBS structured security is hyper tranched or not.  A 'Y' inidicates that this particular tranche is involved in other deals.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OriginalTermOfPayments" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The number of months expected to pay off principle and interest of the instrument.  Can be calculated from the (expected maturity date minus remit start date) divided by pay frequency.  For CE instruments only the number of payments is captured.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AmortizingTermOfPayments" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The number of months of the orginal_term_of_paymens that will be paying off the principle and not just interest.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InitialRatingSoldAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The amount of the Instrument's initial principal balance amount that is sold as of the initial rating.  The par amount of the instrument and is normally the same as the initial principal balance.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SurveillanceRequired" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>true indicates that this requires a followup serveillance evaluation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FeeAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>true indicates that this requires a followup serveillance evaluation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BillingDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date that the bill for the fee is to be sent.  Usually the first of the month.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CompleteReviewDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the last full evaluation date.  An evaluation may be reused, if the timespan from the last full evaluation date is within an acceptable range and no major changes have occurred.  If an old evaluation is not reused, then this will match the Rating.EffectiveDate</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LoanPieceCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Code used to uniquely identify a Loan Piece.  Please see Loan Piece entity definition for further details and examples.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PropertyTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Code used to uniquely identify a Property Type.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DebtServiceCoverageRatio" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The DSC is the ratio of cash flow available from the property relative to the annual interest and principal payments of the loan.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NetCashFlowAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The NCF is the net cash flow per year from the asset</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LoanToValueRatio" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The loan amount divided by the stabalized amount (stressed value).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CapitalizationPercentage" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>The face amount purchased divided by the stabalized value (stressed sale)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StabalizedValueAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The valuation assigned to real estate collateral estimating the value at a 'stressed' sale.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InitialPrincipleBalanceAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The initial amount borrowed by the issuer of debt from the instrument-holder.  Also known as initial face value.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NextSurveillanceFeeAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The fee charged for in advance for the next surveillance.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GeneralIssueTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>High level categorization of issue.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GVKey" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Compustat has defined a proprietary identifier, the GVKEY, for each company in the database. The GVKEY can be used to track a company over time, while the company name, CUSIP, or ticker may change over time.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Newly Added Elements for Program Schema for Volume Project 10-Feb-2007 -->
+	<xsd:element name="ProgramRelationID" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Program RelationShip ID for Issue fto Program Amounts</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Amount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The dollar amount for the country. Program Amount for the Issue Level Reference</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AmountText" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Text Amount for Program Level Reference</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IssueID" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Issue which the Program references for Relationship</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegistrationDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Date of the Registration of the Program for their Organization</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ClosedDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Closed Date of the Program for the Organization Rating</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Completed" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>This indicates whether the data manager has finished entering the data and would like DAD to sign off.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IsMultiDepts" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Used for determining if instruments (programs, instruments) present are from multiple departments or one department 
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UnlimitedAmount" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Unlimited Amount of the Program for the Issuing Organization</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Evergreen" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation> Does this have an expiration date (N- default) or is evergreen(Y) ? Extensions are handled by updating the maturity date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Suspect" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>This indicates if there is suspect data associated with the row. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ProgramID" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>SHELF_ID/ProgramID This is a unique identifier for the shelf which approved this issuing</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ProgramRelationshipTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Program Relation Type code with the issue.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Issue_Market" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>MARKET_TRADE_CODE or the Foreign Market Code of the Issue Occurence
+			This is the place of exchange</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Redemption" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Redemption Value of the Issue Occurence</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UnsolicitedRating" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Un Solicited Rating Value for the Program Related Issues</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Replenishment" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Replenishment for the program occurence within Organization</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Series" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Series Deinifiton ACH,PRG
+			Identifier of series</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Date of analyst's action</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PendingStatusInd" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>If Data Administration has not yet performed a quality check, the value will be P = Pending; if this has occurred successfully, Data Administration will change the status to R for Released. A delayed release will be H for Held. Default is Pending(P).</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DependentInd" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Dependent Ind = Y; free form explanation of what is affecting this </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PrimarySecondaryInd" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Is this primary or secondary coverage?  This only applies if there is coverage for a role and then it is required. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CreditInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this coverage Credit related? (Y/N) Default is N.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="JointSeveralInd" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether it is Joint and Several Indicator in the Org Participation Level</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystResponsible" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Analyst Reponsible</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystSurveilance" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether there is a Liquidity Enchanced for the Program Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DealNum" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether there is a Liquidity Enchanced for the Program Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PWCE" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether there is a Liquidity Enchanced for the Program Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SupportRoleCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>the role an individual may participate in a committee meeting.  Examples include Chair, Voting Member, and Observer.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InitialSupportAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The amount of the Instrument's initial principal balance amount that is sold as of the initial rating.  The par amount of the instrument and is normally the same as the initial principal balance.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystPhoneNumber" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Analyst Phone Number</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystRoleName" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Analyst Role Name</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegistrationAmount" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Program Registration Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SurveillanceAnalystPhoneNumber" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>SurveillanceAnalystPhoneNumber</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SortOrder" type="xsd:integer">
+		<xsd:annotation>
+			<xsd:documentation>Sort Order Instrument Level</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FloorPercentage" type="xsd:integer">
+		<xsd:annotation>
+			<xsd:documentation>Floor Percent</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FloorAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Floor Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TargetAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>TargetAmount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TargetPercentage" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>TargetPercentage</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CurrentAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Current Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ProgramStatus" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Program Status</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CPBackedByLoan" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is the CP backed by a loan (Y/N) ?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BackupPolicyText" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>BackupPolicyText String</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FullyEnhanced" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this issue fully enhanced?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MidTermNoteDesignation" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this issue associated with MidTermNoteDesignation?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PrimaryAsset" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Primary Asset</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DateFormatInd" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Date Format Indicator(D,M,Y,N)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Release 2 of section for Volume -->
+	<xsd:element name="BalanceAmountDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>BalanceAmountDate</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="HybridEquityTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>HybridEquityTypeCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Resolution -->
+	<xsd:element name="ResolutionDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>ResolutionDate</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ResolutionName" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>ResolutionName</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ResolutionDepartmentCode" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>ResolutionDepartmentCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ResolutionGroupCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>ResolutionGroupCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SvcrCountryofOperation" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Servicer related to which Country of Operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SvcrOperationTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Servicer related to which Operation type some case defines with the business nature</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SvcrCapabilityTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>SvcrCapabilityTypeCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- funds Schema Addition -->
+	<xsd:element name="FundTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>FundTypeCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FundClassCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>FundClassCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CurrencyCode" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>CurrencyCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CountryCode" type="oa:CountryCodeType">
+		<xsd:annotation>
+			<xsd:documentation>country where the company is registered</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CurrentMarketInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>country where the company is registered</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RetailInvestor" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>RetailInvestor</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InstitInvestor" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>InstitInvestor</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ClassDescription" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>ClassDescription</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FundCompositionCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>FundCompositionCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CommentInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>CommentInd</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AdvisorInvestor" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>AdvisorInvestor</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GovInvestPool" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>GovInvestPool</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CapitalChargeAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>The amount of the instrument, issue at creation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EventDrivenReview" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Event Driven Review Indicator for Org Level Indication, Not a Writable Datapoint, so will not retrievable during Get Operations</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FullReview" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Full Review Indicator for Org Level Indication, Not a Writable Datapoint, so will not retrievable during Get Operations
+	</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GovernmentRelatedEntity" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>GovernmentRelatedEntity For the DefaultGuarantor Organizations</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RetailNoteInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>is the retail Note Indicator for issue</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UsedPublicDataOnly" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Was only public data used to do the rating or estimatel?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PubliclyTraded" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>is this asset publicly tradedl?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CDOEvalAssocBegDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date that this CDO was linked to the Evaluation.  This is allows CE the ability to allocate billing effectively.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CDOEvalAssocEndDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date that this CDO was no longer linked to the Evaluation.  This is allows CE the ability to allocate billing effectively.</xsd:documentation>
+		</xsd:annotation>
+	 </xsd:element>
+	<xsd:element name="RatingGroupCount" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Count the number of issues within this rating group</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingDescriptionOne" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>For better Pega performance, we use this element to show: Debt type Desc \ Rating Type Desc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingDescriptionTwo" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>For better Pega performance, we use this element to show: RatingCode \ Qualifier Code \ CW OR OL\ Split Rating Code \ Split Qualifier. This element value needs to be in brackets if the rating is confidential.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ManagementMeetingDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date  associated entity is ManagementMeetingDate .  eg. if being used in the Organization entity, this is the ManagementMeetingDate Date in CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NextManagementMeetingDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date  associated entity is NextManagementMeetingDate .  eg. if being used in the Organization entity, this is the NextManagementMeetingDate Date in CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ClassificationTypeCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>
+				For storing the issue and program attributes
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Commentary" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>
+				For storing the commentary of the issue and program
+				attributes
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="LinkedEntityIDType">
+		<xsd:annotation>
+			<xsd:documentation>Represents relationship of given entity with any other entity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="oa:IdentifierType">
+				<xsd:attribute name="type" type="xsd:normalizedString" use="required">
+					<xsd:annotation>
+						<xsd:documentation>This attribute describe the "element name" of other related entity. e.g. Organization, Issue, Analyst</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="LinkedEntityID" type="sp:LinkedEntityIDType">
+		<xsd:annotation>
+			<xsd:documentation>Represent Relationship of enclosing entity with other entity.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ExcludeFromProductsInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>This flag is used to specify whether this operation is excluded from products or not</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ExcludeFromProdsReasonCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The reason to exclude from products</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SurveillanceGroupCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>SurveillanceGroupCode is used for identifying Analyst group in core which is used for sending Dependent Rating Notification… Added as part of CR 141 - CDR 9129</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegulatoryQualifier" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>SF</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalystTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>analyst type, eg. BICRA, etc.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BicraIndicator" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the Organization is of type BICRA</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BicraTier" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>a code used to group organizations based on BICRA Tier  eg. tier values can be 1,2 or 3 </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MediaArticleDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Publish Date Of Media Article</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MediaArticleReleaseDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Release date of the Media Article</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReleaseInd" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Corresponds to Release Indicator</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StatusInd" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Status Ind corresponding to Active relationship with entity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+			
+	<xsd:element name="MediaArticlePDF" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>PDF containing media article content</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PcrFileID" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Unique indentifier of PCR file</xsd:documentation>
+		</xsd:annotation>
+    </xsd:element>
+	<xsd:element name="PcrID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The unique identifier of PCR persisted entity</xsd:documentation>
+		</xsd:annotation>
+      </xsd:element>
+    <xsd:element name="PcrRevID" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>The unique identifier PCR REV</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PcrTitle" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>Title of the PCR files</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>	        
+    <xsd:element name="PcrPublishedDate" type="oa:DateTimeType">
+	  <xsd:annotation>
+		<xsd:documentation>Published date of the PCR file</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PcrFile" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>File that needs to be persisted</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PcrFileDataType" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>Data type of PCR file eg:XML/PDF</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="RPMJobID" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>This identifier corresponds to RPM Job ID</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PrimaryOrgID" type="xsd:normalizedString">
+	  <xsd:annotation>
+		<xsd:documentation>This is the primary org id of the PCR file</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="OtherOrgIDs" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>These org id's are the other owner of the PCR file</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="IssueIDs" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>This issue id is the owner of the PCR file</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="LinxOID" type="xsd:normalizedString">
+	  <xsd:annotation>
+		<xsd:documentation>Unique Indentifier for the Linx system</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="LinxRevID" type="xsd:normalizedString">
+	  <xsd:annotation>
+		<xsd:documentation>Unique Indentifier for the Linx system</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+	<xsd:element name="ArticleType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Article Type Eg:NEWS</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ContentStatus" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Status of the Content</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WorkObjectID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This identifier corresponds to RPM Job ID</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegionCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Region Code -Asia Pacific, Latin America etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegulatoryQualifierDetail" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Regulatory Qualifier detail</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Added for SupportContract Fields for SFCP changes  **START** -->
+	<xsd:element name="ContractID" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>This is the contract ID .</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ContractTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Type of Contract -DCPWGTR </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SubContractTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Type of Sub-Contract -CALOPTON,CURRSWAP etc.., </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LinkCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Type of Link -SOFTLINK,HARDLINK etc.., </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MonthYearCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Month Year pair ex:APR-09 </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OtherData" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Other Data of the contract </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Notes" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Notes of the contract </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EndDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date and time the associated contract will be expired.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CurrentIndicator" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the Support Contract is active or not</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="isRemedyApplied" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the Support Contract is applied as remedy</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ShortTermValue" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>AAA, AA, AA-, BBB</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LongTermValue" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>AAA, AA, AA-, BBB</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Primary" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>STDLONG, STDSHORT, FCLONG, FCSHORT, SHADOW</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LevelCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>FIRSTLVL,SECNDLVL</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for SupportContract Fields for SFCP changes  **END** -->
+	<xsd:element name="ConfidentialCategoryCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>ConfidentialCategoryCode - Private,CIR,CPR etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MunicipalCategoryCode" type="oa:CodeType">
+	<xsd:annotation>
+			<xsd:documentation>MunicipalCategoryCode - TAXSECURED,REVTRANSP,APPROP,REVENUE etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MunicipalSecurityCode" type="oa:CodeType">
+	<xsd:annotation>
+			<xsd:documentation>MunicipalSecurityCode - MISCTAX,GO,UNLTDSTDFE,LCLLTDTAX etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AnalyticSecurityId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>USPF specific identifier</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EvaluationTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>EvaluationTypeCode- eval_type_code1</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EvaluationDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Date and time the analyst‘s recommendation was approved </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PortfolioExceptionStatusInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates existence of  an exception condition  after  Portfolio Review has been completed</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ComponentIndepAnalyticSec" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>ComponentIndepAnalyticSec</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AggregateReviewDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>AggregateReviewDate</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AggregateType" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>AggregateType</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AggregateId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>AggregateId</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CommitteeRelationCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Explains about committee relationships</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PreviousEvaluationId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Previous EvaluationId</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StatisticsCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Evaluation Statistics Type</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StatisticValue" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>Evaluation Statistics Value</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="StartDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Date and Time on which the EvaluationStatistics started</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SFGroupingCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>SFGroupingCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BusinessUnit" type="xsd:normalizedString">
+		<xsd:annotation>
+			<xsd:documentation>BusinessUnit</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ReasonForNoCommittee" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Reason NOT to send to Committee</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EvaluationTempId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>EvaluationTemporaryId</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RegulatoryIndicatorFlag" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>request the availability of regulatory Indicator at entity level</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IndicatorValue" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>RegulatoryIndicator Value</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    
+	<!-- Get PreRatings Info -->
+	<xsd:element name="PWJobID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This identifier corresponds to Pre Rating Process RPM Job ID</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WJobID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This identifier corresponds to RPM Job ID</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Status" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The status of the deal like new,Engaged,In-Analysis,etc </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AssetTypeGroup" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The Asset type group for a deal like Europe CDO,Europe ABS,etc</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AssetType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Depicts the Asset type of a deal like  CDO,ABS,etc </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DealName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Name of the deal </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CreditAssessmentInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indication if the deal is CA or WLED</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TransactionSize" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Size of the Transaction</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TransactionCurrency" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Depending on the size of the transaction,transaction currency is calculated</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TranactionStartDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the starting time of the transaction</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TransactionCloseDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Indication the end date of the transaction</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+		<xsd:element name="TransactionType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Transaction Type</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CreditAnalysisDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the end of credit committee date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LegalStructureAnalysisDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the end of structure committee date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CashAnalysisDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the end of Legal Review  date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FinalCommitteeDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the end of Final Committee  date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MileStoneComments" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Comments</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ConfidentialInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>is this confidential?</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ActiveInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IssuerName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Issuer Type</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="JobType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Job Type</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- End of Deal in Info table -->
+	<!-- Start Billing Info table -->
+	<xsd:element name="PreRatingId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FeeJobId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OrganizationId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Billing Organization Id</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OrganizationName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Billing Organization Name</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FirstName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LastName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Title" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>title</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Address" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Address</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Suite" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Suite</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="City" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>City</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PostCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Postal code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Phone" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Contact Number</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Fax" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Fax</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Email" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Email Id for any email notifications</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RatingFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="EngagementFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Fee for engagement process</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TravelExpensesFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>expense amount  covered under travel</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LegalFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the fee amount for completion of legal process</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OtherFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation/>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BreakageFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the breakage fee</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TimeChargeFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the fee amount for time spent </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- End of Billing Info Table -->
+	
+	<xsd:element name="RoleCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the role code for pre rating process</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Description" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the description for the Role</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UserId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the role code indicator</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BillingContactName" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>This field depicts the concatenation of first name and last name </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+		<!-- Oct 18 -2011 CR: Add Surveillance fee and surveillance currency to the webservice-->
+	<xsd:element name="SurveillanceFee" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Surveillance Fee</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="SurveillanceCurrency" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Surveillance Currency</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+<!--End of Oct 18 CR-->	
+      <!-- End of Get PreRatings Info -->
+	<xsd:element name="EIN" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>EIN Value</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OrgRelationship" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>OrgRelationship to the parent organization</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+	<!-- ClassificationTypeCode for MMT -->
+    <xsd:element name="ClassificationDescription" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>
+				For storing the issue and program description
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- merge -->
+	<xsd:element name="MeetingLocation" type="xsd:string">
+	  <xsd:annotation>
+		<xsd:documentation>MeetingLocation</xsd:documentation>
+	  </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ManagementDateHistoryId" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Management Meeting date history id </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MeetingTypeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Meeting type code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OrgID" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Other org ids added for MMT</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- merge -->
+    <xsd:element name="AnalystInteractionDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date when the rating is published.  eg Data Admin Date in CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="ExcludePGMandInstrument" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>restrict the response to display programs and Instruments under Rating Group element</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RACReason" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>RAC reason </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	 <!-- Surveillance Tier Schema Addition -->
+    <xsd:element name="SurveillanceTierCode" type="xsd:string">
+    	<xsd:annotation>
+    		<xsd:documentation>
+    			Displays the Surveillance Tier Code 
+    		</xsd:documentation>
+    	</xsd:annotation>
+    </xsd:element>
+    <xsd:element name="AssignmentDate" type="oa:DateTimeType">
+    	<xsd:annotation>
+    		<xsd:documentation>
+    			The date published based on current indicator
+    		</xsd:documentation>
+    	</xsd:annotation>
+    </xsd:element>
+	<xsd:element name="RatingLevel">
+		<xsd:annotation>
+			<xsd:documentation>ratingCode gt 'CCC' Level = "High";ratingCode lteq 'CCC' Level= "Low"</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:normalizedString">
+					<xsd:attribute name="ratingCode" type="xsd:normalizedString" use="optional"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DrivingParticipant" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Driving participant Indicator</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<!-- Addd for GetOrganizationsInHierarchy service -->
+	<xsd:element name="NonRatedEntitiesFlag" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>flag which determines the non rated orgs to be retrieved or not, a non rated org means all it's ratings and uderlying instruments and programs ratings should have no ratings or NR</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Addd for GetRatingEntitiesByWorkObjectID service enhancement-->
+	<xsd:element name="WithdrawnRating" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>flag which determins withdrawn ratings like:NR/NA/NLS to be returned or not</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="HasCommittee" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>flag which indicates committee</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+      <xsd:element name="CommitteeConclusion" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the  conclusions made during committee meeting</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="JobDescriptor" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Job Descriptor</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="JobReleaseType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Job Release Type</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CancelReason" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Cancel Reason</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	   
+	<xsd:element name="MaturityID" type="oa:IdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>MaturityID This is a unique identifier for the Maturity</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="MaturityCurrency" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Maturity Currency</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="CoreGroup" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Core Group ID and Core Description</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FutureFlowAttributeCode" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>Future Flow Attribute Core </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IsEnhanced" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>flag which describes if the RatingGroup contains enhanced instrument</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CreateDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The date when the rating is Created.  eg Create Date in CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- GRP for North America & Europe -->
+    <xsd:element name="BillingRegion" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>BillingRegion</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NewRatingServiceCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>New Rating Service Code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SurveillanceServiceCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Surveillance ServiceCode</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="BillingComments" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Billing Comments</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ContractLife" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Contract Life</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="WeightedAverageLife" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Weighted Average Life</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FeeType" type="oa:CodeType">
+		<xsd:annotation>
+			<xsd:documentation>FeeType</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FeePercentage" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Split Percent</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+    <!-- End of GRP for North America & Europe -->
+    <xsd:element name="SovIndicator" type="xsd:boolean"/>
+    <xsd:element name="Is17g7Applicable" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is 17g-7 Applicable</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+		<!-- CRA3 Re-securitization-->
+	<xsd:element name="CRA3Resec" type="xsd:string"/>
+	<xsd:element name="SignedEngagementDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Signed Engagement Date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Flag for PCR Media release -->
+	<xsd:element name="SourceInd" type="xsd:string"/>
+	<!-- Rating Display - Deal Analyser -->
+	<xsd:element name="FormattedRating" type="xsd:string"/>
+	<xsd:element name="PrecedenceNumber" type="xsd:integer"/>
+	<xsd:element name="FormattedCWOUTLOOK" type="xsd:string"/>
+	<!-- SF Refresh -->
+	<xsd:element name="UpdateDate" type="oa:DateTimeType"/>
+	<!-- B-81907 GetRatingEntitiesByWorkObjectId Service- To display  ActualReleaseDate -->
+	<xsd:element name="ActualReleaseDate" type="oa:DateTimeType"/>
+	<!-- Added for GetUCOStatus Service -->
+	
+	<xsd:element name="ConsumerID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The Cosumer ID is passed as an identifier for each UCOAssignment in the GetUCOStatus Service</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CBIndicator" type="xsd:string">
+	<xsd:annotation>
+			<xsd:documentation>The CBIndicator is passed along with the Organization along in the GetUCOStatus Service</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="UCOStatus" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The UCO status is returned from CORE for the given organization </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for NPCC-RatingRelease Enhacement -->
+	<xsd:element name="NPCCIndicator" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicator for NonParticpant Color Code </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for Portfolio Evaluation release service -->
+	<xsd:element name="PortfolioReviewResultInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicator for Portfolio Review Result </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	 <!-- Added for B-1226177 GRP Enhancement story  -->
+	<xsd:element name="RESType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Rating Evaluation Service</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="OfficeProvidingRating" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Office Providing Rating</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="VatID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Vat Id</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RESId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Rating Evaluation Service Id</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Adding for B-1226177 ends here  -->
+	<!--  Added for MPNEnhancemnet - WFM Ratings -->
+	<xsd:element name="GrossDebtAmount" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>This is the amount of gross debt</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GrossDebtDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>This is the date of the gross debt</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PriorGrossDebtAmount" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>This is the amount of prior gross debt</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="InsuredInd" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Is this published name insured? (Y/N)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PerCapitaDebt" type="xsd:integer">
+		<xsd:annotation>
+			<xsd:documentation>Per Capital Amount for Debt</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CoverageRate" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>This is the coverage amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="TotalMarketPct" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Total market Pct</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="DebtServiceAmt" type="xsd:integer">
+		<xsd:annotation>
+			<xsd:documentation>Debt Service Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="IssuerInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Major Issuer Indicator</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="VariableText" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Variable Text</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="RevenueVolatilityRatio" type="xsd:decimal">
+		<xsd:annotation>
+			<xsd:documentation>Revenue Volatility Ratio</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MasterMpnInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the master for all MPNs with the same parity not including participants other than issuer and obligor</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MasterDebtAmt" type="xsd:long">
+		<xsd:annotation>
+			<xsd:documentation>Master Debt Amount</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SummaryRatingCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Summary Rating Code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="SummaryRatingDate" type="oa:DateTimeType">
+		<xsd:annotation>
+			<xsd:documentation>Summary Rating Date</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for ESMA color coding Enhacement -->
+	<xsd:element name="IsMixOfSolicitedAndUnsolicited" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicator whether an ORG underlying instruments and programs have a mixture of solicited and unsolicited ratings</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--  Added for GetRatingEntitiesByWorkObjectId Dodd Frank USPCR Work -->
+	<xsd:element name="PriorRatingCode" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Prior Rating Code</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PriorOutlook" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Prior Outlook</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PriorCreditWatch" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Prior Credit Watch</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+	<!-- Added for Tripple Component Enhancement - Start -->
+	<xsd:element name="RatingSeries" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Rating Series</xsd:documentation>
+		</xsd:annotation>		
+	</xsd:element>
+	<xsd:element name="CompositeActionWord">
+		<xsd:annotation>
+			<xsd:documentation>Composite Action Word</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CompositeActionWord Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CompositeRating">
+		<xsd:annotation>
+			<xsd:documentation>Composite Rating</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CompositeRating Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CompositeRatingDate">
+		<xsd:annotation>
+			<xsd:documentation>Composite Rating Date</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:DateTimeNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CompositeRatingDate Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PriorCompositeRating">
+		<xsd:annotation>
+			<xsd:documentation>Prior Composite Rating</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorCompositeRating Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PriorCompositeRatingDate">
+		<xsd:annotation>
+			<xsd:documentation>Prior Composite Rating Date</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:DateTimeNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorCompoisteRatingDate Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CWOLActionWord">
+		<xsd:annotation>
+			<xsd:documentation>CreditWatch Outlook Action Word</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CWOLActionWord Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- Added for Tripple Component Enhancement - End -->
+	<!-- Added for RDSM Preview Enhancement - Start -->
+	<xsd:element name="RatingActionType">
+		<xsd:annotation>
+			<xsd:documentation>Rating Action Type values are New, Revised, Affirmed</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>RatingActionType Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RatingActionWord">
+		<xsd:annotation>
+			<xsd:documentation>Rating Action Word values are Downgrade, Upgrade, New Rating, Not Rated, Affirmed</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>RatingActionWord Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CurrCWOLActionWord">
+		<xsd:annotation>
+			<xsd:documentation>Current Creditwatch Outlook Action Word</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CurrCWOLActionWord Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>		
+	<xsd:element name="PriorCreditWatchOutlook">
+		<xsd:annotation>
+			<xsd:documentation>Prior Creditwatch Outlook</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorCreditWatchOutlook Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>		
+	<xsd:element name="CurrCreditWatchOutlook">
+		<xsd:annotation>
+			<xsd:documentation>Current Creditwatch Outlook</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CurrCreditWatchOutlook Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PriorCreditWatchDate">
+		<xsd:annotation>
+			<xsd:documentation>Prior Creditwatch Date</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:DateTimeNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorCreditWatchDate Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>	
+	<xsd:element name="PriorOutlookDate">
+		<xsd:annotation>
+			<xsd:documentation>Prior Outlook Date</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:DateTimeNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorOutlookDate Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>		
+	</xsd:element>		
+	<xsd:element name="PriorCWOLDate">
+		<xsd:annotation>
+			<xsd:documentation>Prior Creditwatch Outlook Date</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:DateTimeNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorCWOLDate Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>		
+	<xsd:element name="PriorRatingSymbol">
+		<xsd:annotation>
+			<xsd:documentation>Prior Rating Symbol</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PriorRatingSymbol Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CurrRatingSymbol">
+		<xsd:annotation>
+			<xsd:documentation>Current Rating Symbol</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CurrRatingSymbol Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>		
+	<xsd:element name="CurrCreditWatchInd">
+		<xsd:annotation>
+			<xsd:documentation>Current CreditWatch Indicator</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:BooleanNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CurrCreditWatchInd Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CurrOutlookInd">
+		<xsd:annotation>
+			<xsd:documentation>Current Outlook Indicator</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="sp:BooleanNillableType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>CurrOutlookInd Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>	
+	<xsd:element name="RatingAnalystRole">
+		<xsd:annotation>
+			<xsd:documentation>Rating Analysts Role Label</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>RatingAnalystRole Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GlobalORNationalScale">
+		<xsd:annotation>
+			<xsd:documentation>Global OR National Scale</xsd:documentation>			
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="status" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>GlobalORNationalScale Status</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="EmptyStringType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value=""/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DateTimeNillableType">
+		<xsd:union memberTypes="xsd:dateTime sp:EmptyStringType"/>
+	</xsd:simpleType>
+	<!-- Added for RDSM Preview Enhancement - End -->
+	<!-- Added for RPM-GRP Integration for Growth-Project-Enhancements 2015-->
+	<xsd:element name="OpportunityID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Opportunity ID</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FrequentIssuerFee" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Frequent Issuer Fee</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="PrimarySubProductType" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Primary SubProduct Type</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Adding for RPM-GRP Integration for Growth-Project-Enhancements 2015 ends here  -->
+	<!-- Added for RDSM Preview Enhancemnet - start -->
+	<xsd:simpleType name="BooleanNillableType">
+		<xsd:union memberTypes="xsd:boolean sp:EmptyStringType"/>
+	</xsd:simpleType>
+	<!-- Added for RDSM Preview Enhancemnet - end -->
+	<!--  Added for SingleLineDisplay Enhancement - Start-->
+	<xsd:element name="LongShortInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicator for Long term and short term ratings</xsd:documentation>
+		</xsd:annotation>		
+	</xsd:element>
+	<!--  Added for SingleLineDisplay Enhancement - End -->
+	<!-- Adding Optional Opportunity ID for RPM-GRP Integration for Growth-Project-Enhancements 2015 -->
+	<xsd:element name="OpportunityIDOpt" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Optional Opportunity ID</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Adding Optional Opportunity ID for RPM-GRP Integration for Growth-Project-Enhancements 2015 ends here  -->
+	<!--  Added for SingleLineDisplay Enhancement - Start-->
+	<xsd:element name="IntExtInd" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether SLD is for internal or external purpose</xsd:documentation>
+		</xsd:annotation>		
+	</xsd:element>
+	<!--  Added for SingleLineDisplay Enhancement - End -->
+	<!-- SERG - 797 - To include Insured Participant Rolecode starts -->	
+	<xsd:element name="HasRoleInsuranceProvider" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Indicates whether Insured Participant is available or not</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- SERG - 797 - To include Insured Participant Rolecode ends -->
+	<!-- Added for B-128137 Segregate Covered Bond Issues and Program Enhancement Possible Values:Y/N/A -->
+       <xsd:element name="IsCoveredBond" type="xsd:string">
+              <xsd:annotation>
+                     <xsd:documentation>Indicator to retrive  Covered Bond Issues and Program</xsd:documentation>
+              </xsd:annotation>
+       </xsd:element>
+    <!-- B-128137 Segregate Covered Bond Issues and Program Enhancement Ends here -->		
+    <!-- Added for B-218375 Issuance Threshold Enhancement - Start-->
+	<xsd:element name="EstimatedDebtCapacity" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Total amount of debt (in millions) that an Issuer can issue, without an Analyst considering whether to go to Committee for consideration of a new Estimated Debt Capacity figure</xsd:documentation>
+		</xsd:annotation>		
+	</xsd:element>
+	<xsd:element name="CurrentIssuanceAmount" type="oa:AmountType">
+		<xsd:annotation>
+			<xsd:documentation>Total amount of outstanding debt that has been rated for a given Issuer</xsd:documentation>
+		</xsd:annotation>		
+	</xsd:element>
+	<!--  Added for B-218375 Issuance Threshold Enhancement - End -->
+	<!--  Added for SERG-808 ERP/RRP Regulatory Project - Start -->
+	<xsd:element name="CycleId" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>Represents a count of what RPM calls cycles and is used when preliminary and final ratings are submitted to CORE</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for SERG-808 ERP/RRP Regulatory Project - End -->
+	<!-- Added for SERG#775/ALM 218370 SourceId Enhancement - Start -->
+	<xsd:element name="SourceID" type="oa:IdentifierType"/>
+	<!-- Added for SERG#775/ALM 218370 SourceId Enhancement - End -->	
+	<!-- Added for B-159343 - Portfolio Review Enhancement Start -->
+	<xsd:element name="TypeOfReview" type="xsd:string"/>
+	<!-- Added for B-159343 - Portfolio Review Enhancement End -->
+	<!-- Added for B-159910 GetCoreOrganizationHierarchy Enhancement - Start -->
+	<xsd:element name="TripleRating" type="xsd:string"/>
+	<!-- Added for B-159910 GetCoreOrganizationHierarchy Enhancement - End -->	
+	<!-- Added for B-160655 SSO ID Enhancement Start -->
+	<xsd:element name="SSOID" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>SSO ID Value</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for B-160655 SSO ID Enhancement End -->
+	<!-- Added for B-155718 ERP - Issuer Notification Date/time should flow into CORE Enhancement - Start -->	
+	<xsd:element name="WorkObjectIDData">
+	  <xsd:annotation>
+		<xsd:documentation>This identifier corresponds to RPM Job ID</xsd:documentation>
+	  </xsd:annotation>
+	  <xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="oa:CodeType">
+					<xsd:attribute name="ratingStatusCode" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>preliminary rating or final rating</xsd:documentation>
+						</xsd:annotation>			
+					</xsd:attribute>
+					<xsd:attribute name="issuerNotificationDate" type="oa:DateTimeType" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>Issuer Notification Date for Press Release</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="pressReleaseFlag" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>PressReleaseFlag</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="cycleID" type="xsd:normalizedString" use="optional">
+						<xsd:annotation>
+							<xsd:documentation>Represents a count of what RPM calls cycles and is used when preliminary and final ratings are submitted to CORE</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>					
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+    </xsd:element>   
+    <!-- Added for B-155718 ERP - Issuer Notification Date/time should flow into CORE Enhancement - End -->
+    <!-- Added for SERG 821 - WorkObjectId Enhancement for GetCoreProgram - Start -->	
+    <xsd:element name="IsWorkObjectID" type="xsd:boolean">
+		<xsd:annotation>
+			<xsd:documentation>Flag which describes whether the work object should be displayed in the service response</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Added for SERG 821 - WorkObjectId Enhancement for GetCoreProgram - End -->
+</xsd:schema>

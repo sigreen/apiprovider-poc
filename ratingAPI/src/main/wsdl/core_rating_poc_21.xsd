@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Munjal Kansara (MCGRAW-HILL COMPANIES) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:complexType name="CommentSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID">
+				<xsd:annotation>
+					<xsd:documentation>A unique id used to denote a  particular comment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentType" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>table, process, business rule</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentStatus" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>Pending, approved., etc.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentSubject" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>The subject of the comment_text: table_name, process_name, business_rule_name</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentSubjectId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>identifyer of the subject, ie Primary key.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ConfidentialFlag" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>Y is a confidential comment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentText" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>The actual comment, note, observation, remark, interpretation, annotation, discourse, editorial, explaination, interjection, opinion, reflection, statement, wisecrack, obiter dictum, exegesis, animadvert or in a word, word.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentAuthor" type="oa:NameType">
+				<xsd:annotation>
+					<xsd:documentation>Source of the comment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Comments" type="sp:CommentSchemaType">
+		<xsd:annotation>
+			<xsd:documentation>Capture comments for any row of any table, process or business rule</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

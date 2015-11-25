@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Man Chan (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: 
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_10.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_34.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_25.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_35.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_36.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_37.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_38.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_41.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_15.xsd"/>
+	<!---->
+	<xsd:complexType name="InstrumentSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="sp:Name"/>
+			<xsd:element minOccurs="0" ref="sp:InstrumentTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:SeniorityTypeCode"/>
+			<xsd:element minOccurs="0" ref="oa:CurrencyCode"/>
+			<xsd:element minOccurs="0" ref="oa:CurrencyExchangeRate">
+				<xsd:annotation>
+					<xsd:documentation>This is the Exchange Rate between the currency of the class and the Base Currency for the issue at the time of closing</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:Class"/>
+			<xsd:element minOccurs="0" ref="sp:MaturityDate"/>
+			<xsd:element minOccurs="0" ref="sp:DateFormatInd"/>
+			<xsd:element minOccurs="0" ref="sp:ExpectedMaturityDate"/>
+			<xsd:element minOccurs="0" ref="sp:PlacementTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:CouponRateTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:CouponRate"/>
+			<xsd:element minOccurs="0" ref="sp:SaleAmount"/>
+			<xsd:element minOccurs="0" ref="sp:SaleDate"/>
+			<xsd:element minOccurs="0" ref="sp:BalanceAmount"/>
+			<xsd:element minOccurs="0" ref="sp:BalanceDate"/>
+			<xsd:element minOccurs="0" ref="sp:NotionalAmount"/>
+			<xsd:element minOccurs="0" ref="sp:CallDate"/>
+			<xsd:element minOccurs="0" ref="sp:DatedDate"/>
+			<xsd:element minOccurs="0" ref="sp:PaidOffDate"/>
+			<xsd:element minOccurs="0" ref="sp:CertificateGroupName"/>
+			<xsd:element minOccurs="0" ref="sp:RatingGroupName"/>
+			<xsd:element minOccurs="0" ref="sp:CashFlowTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:RemitStartDate"/>
+			<xsd:element minOccurs="0" ref="sp:SortOrder"/>
+			<xsd:element minOccurs="0" name="PayFrequencyTypeCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>frequency for a payment or some other regular event.  Examples include daily, weekly, bi-monthly, monthly, quarterly, semi-annually, annually.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:AverageBondLife"/>
+			<xsd:element minOccurs="0" name="DaysPerMonth" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>The value to use as the number of days in a month for calculating amortization.  Examples include "30" and "Actual".  A value of "actual" specifies that the actual number of days in each month will be used for calculation purposes.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SubordinationComment" type="oa:NoteType">
+				<xsd:annotation>
+					<xsd:documentation>Free text of detailed description of the mechanisms of subordination regarding this instrument. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DaysPerYear" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>The value to use as the number of days in a year for calculating amortization.  Examples include "360", "365", and "Actual".  A value of "actual" specifies that the actual number of days in each year will be used.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:OriginalTermOfPayments"/>
+			<xsd:element minOccurs="0" ref="sp:AmortizingTermOfPayments"/>
+			<xsd:element minOccurs="0" ref="sp:InitialRatingSoldAmount"/>
+			<xsd:group minOccurs="0" ref="sp:InstrumentIndicatorGroup"/>
+			<xsd:group minOccurs="0" ref="sp:InstrumentIdentifierGroup"/>
+			<xsd:group minOccurs="0" ref="sp:AdjustableRateGroup"/>
+			<xsd:group minOccurs="0" ref="sp:CommercialPaperGroup"/>
+			<xsd:group minOccurs="0" ref="sp:MunicipalGroup"/>
+			<xsd:group minOccurs="0" ref="sp:InstrumentParticipationSupportGroup"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:DomicileOfAssets"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType"/>
+			<xsd:element minOccurs="0" ref="sp:CapitalChargeAmount"/>
+			<xsd:element minOccurs="0" ref="sp:UnsolicitedRating"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Evaluation" type="sp:EvaluationSchemaType"/>
+			<xsd:element minOccurs="0" ref="sp:AuditData"/>
+			<!-- Added for SERG Request No: 732 Linked Maturities Enhancement-->
+			<xsd:element minOccurs="0" name="LinkedEntities" type="sp:LinkedEntitiesSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="AdjustableRateGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:IndexTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:MarginRate"/>
+			<xsd:element minOccurs="0" ref="sp:LifetimeCapitalizationRate"/>
+			<xsd:element minOccurs="0" ref="sp:LifetimeFloorRate"/>
+			<xsd:element minOccurs="0" name="MaximumRateChangedPerPeriod" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>The maximum amount the interest rate of this instrument may change from one period to another.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MinimumRateChangedPerPeriod" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>The mimimum amount the underlying index needs to change during one period for there to be a change effected in the total interest rate of this instrument.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PayChangeFrequencyTypeCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>Frequency of change for the remittance amount of a floating instrument.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RateChangeFrequencyTypeCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>Frequency of change for the rate of a floating instrument.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="CommercialPaperGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:CommercialPaperEvergreen"/>
+			<xsd:element minOccurs="0" ref="sp:AuthorizedAmount"/>
+			<xsd:element minOccurs="0" ref="sp:PolicyNumber"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InstrumentIndicatorGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:Closed"/>
+			<xsd:element minOccurs="0" ref="sp:CloseReasonCode"/>
+			<xsd:element minOccurs="0" ref="sp:SecondaryMarket"/>
+			<xsd:element minOccurs="0" ref="sp:Secured"/>
+			<xsd:element minOccurs="0" ref="sp:Called"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="MunicipalGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:Taxable"/>
+			<xsd:element minOccurs="0" ref="sp:Refunded"/>
+			<xsd:element minOccurs="0" ref="sp:RefundDate"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InstrumentIdentifierGroup">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="IssueID" type="oa:IdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>This is a unique identifier for an issue which this instrument belonged to.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CUSIP"/>
+			<xsd:element minOccurs="0" ref="sp:CINS"/>
+			<xsd:element minOccurs="0" ref="sp:ISIN"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Identifier"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="InstrumentParticipationSupportGroup">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:OrganizationParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:InstrumentParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:InternalSupportParticipation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:CollateralGroupSupport"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:ProgramParticipation"/>
+		</xsd:sequence>
+	</xsd:group>
+	<!-- Added for SERG Request No: 732 Linked Maturities Enhancement-->
+	<xsd:complexType name="LinkedEntitiesSchemaType">
+		<xsd:sequence>						
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:LinkedEntityID"/>					
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

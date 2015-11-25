@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               jaxb:version="2.1">
+  <jaxb:globalBindings>
+    <xjc:serializable/>
+    <jaxb:javaType name="java.util.Calendar" xmlType="xsd:date" parseMethod="javax.xml.bind.DatatypeConverter.parseDateTime" printMethod="javax.xml.bind.DatatypeConverter.printDateTime" />
+  </jaxb:globalBindings>
+</jaxb:bindings>

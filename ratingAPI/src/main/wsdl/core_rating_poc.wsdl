@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://ws.standardandpoors.com" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://integration.standardandpoors.com/ServiceSchema" xmlns:ns0="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://www.openapplications.org/oagis/9" xmlns:ns2="http://schemas.xmlsoap.org/wsdl/jms/" xmlns:ns3="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:sp="http://schema.standardandpoors.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:y="http://ws.standardandpoors.com">
+  <types>
+    <xs:schema targetNamespace="http://schema.standardandpoors.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_0.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_54.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_56.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_57.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_61.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_64.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_68.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_70.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_74.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_76.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_78.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_80.xsd"/>
+
+			   <xs:import namespace="http://integration.standardandpoors.com/ServiceSchema" schemaLocation="core_rating_poc_82.xsd"/>
+
+			
+			   <xs:element name="Rating">
+
+				    <xs:complexType>
+
+					     <xs:sequence>
+
+						      <xs:element minOccurs="0" name="RatingStatus">
+
+							       <xs:complexType>
+
+								        <xs:attribute name="CurrentStatus" type="xs:string"/>
+
+								        <xs:attribute name="CurrentRating" type="xs:string"/>
+
+								        <xs:attribute name="ConfidentialRating" type="xs:string"/>
+
+							       </xs:complexType>
+
+						      </xs:element>
+
+						      <xs:element name="RatingCategory" type="xs:string"/>
+
+						      <xs:element name="RatingType" type="xs:string"/>
+
+						      <xs:element name="RatingSymbol" type="xs:string"/>
+
+						      <xs:element minOccurs="0" name="RatingQualifier" type="xs:string"/>
+
+						      <xs:element minOccurs="0" name="SplitRatingSymbol" type="xs:string"/>
+
+						      <xs:element minOccurs="0" name="SplitRatingQualifier" type="xs:string"/>
+
+						      <xs:element minOccurs="0" name="Outlook" type="xs:string"/>
+
+						      <xs:element minOccurs="0" name="CreditWatch" type="xs:string"/>
+
+						      <xs:element name="ReasonType" type="xs:string"/>
+
+						      <xs:element name="RatingDates">
+
+							       <xs:complexType>
+
+								        <xs:all>
+
+									         <xs:element minOccurs="0" name="RatingDate" type="xs:dateTime"/>
+
+									         <xs:element minOccurs="0" name="ManagerApprovalDate" type="xs:dateTime"/>
+
+									         <xs:element minOccurs="0" name="DataAdminDate" type="xs:dateTime"/>
+
+									         <xs:element name="AnalystActionDate" type="xs:dateTime"/>
+
+									         <xs:element minOccurs="0" name="HoldDate" type="xs:dateTime"/>
+
+								        </xs:all>
+
+							       </xs:complexType>
+
+						      </xs:element>
+
+						      <xs:element name="Participants">
+
+							       <xs:complexType>
+
+								        <xs:all>
+
+									         <xs:element name="Analyst" type="sp:UserType"/>
+
+									         <xs:element name="Manager" type="sp:UserType"/>
+
+									         <xs:element name="DataAdministrator" type="sp:UserType"/>
+
+								        </xs:all>
+
+							       </xs:complexType>
+
+						      </xs:element>
+
+					     </xs:sequence>
+
+					     <xs:attribute name="Id" type="xs:long" use="optional"/>
+
+				    </xs:complexType>
+
+			   </xs:element>
+
+			   <xs:complexType name="UserType">
+
+				    <xs:sequence minOccurs="0">
+
+					     <xs:element minOccurs="0" name="LastName" type="xs:string"/>
+
+					     <xs:element minOccurs="0" name="MiddleInitial" type="xs:string"/>
+
+					     <xs:element minOccurs="0" name="FirstName" type="xs:string"/>
+
+					     <xs:element minOccurs="0" name="Phone" type="xs:string"/>
+
+					     <xs:element minOccurs="0" name="Email" type="xs:string"/>
+
+					     <xs:element minOccurs="0" name="Department">
+
+						      <xs:complexType>
+
+							       <xs:attribute name="Id" type="xs:long" use="required"/>
+
+						      </xs:complexType>
+
+					     </xs:element>
+
+					     <xs:element minOccurs="0" name="Group">
+
+						      <xs:complexType>
+
+							       <xs:attribute name="Id" type="xs:long" use="required"/>
+
+						      </xs:complexType>
+
+					     </xs:element>
+
+					     <xs:element minOccurs="0" name="Role">
+
+						      <xs:complexType>
+
+							       <xs:sequence>
+
+								        <xs:element name="Description" type="xs:string"/>
+
+							       </xs:sequence>
+
+							       <xs:attribute name="Code" type="xs:string" use="required"/>
+
+						      </xs:complexType>
+
+					     </xs:element>
+
+				    </xs:sequence>
+
+				    <xs:attribute name="Id" type="xs:string" use="required"/>
+
+				    <xs:attribute name="Status" type="xs:string" use="optional"/>
+
+			   </xs:complexType>
+
+			   <xs:element name="assignRating">
+
+				    <xs:complexType>
+
+					     <xs:sequence>
+
+						      <xs:element name="EntityId" nillable="false" type="xs:long"/>
+
+						      <xs:element name="EntityType" nillable="false" type="xs:string"/>
+
+						      <xs:element ref="sp:Rating"/>
+
+					     </xs:sequence>
+
+				    </xs:complexType>
+
+			   </xs:element>
+
+			   <xs:element name="assignRatingResponse">
+
+				    <xs:complexType>
+
+					     <xs:sequence>
+
+						      <xs:element ref="sp:Rating"/>
+
+					     </xs:sequence>
+
+				    </xs:complexType>
+
+			   </xs:element>
+
+		  </xs:schema>
+  </types>
+  <message name="getRatingsByEntityRequest">
+    <part name="request" element="ns:GetRatingsByEntity">
+    </part>
+  </message>
+  <message name="getRatingsByEntityResponse">
+    <part name="response" element="ns:ShowRatingsByEntity">
+    </part>
+  </message>
+  <portType name="RatingPortType">
+    <operation name="getRatingsByEntity">
+      <input message="y:getRatingsByEntityRequest">
+    </input>
+      <output message="y:getRatingsByEntityResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="SOAPBinding" type="y:RatingPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getRatingsByEntity">
+      <soap:operation soapAction="getRatingsByEntity"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="Rating">
+    <port name="RatingPort" binding="y:SOAPBinding">
+      <soap:address location="http://idm.webservices.standardandpoors.com:80/core_rating_poc"/>
+    </port>
+  </service>
+</definitions>

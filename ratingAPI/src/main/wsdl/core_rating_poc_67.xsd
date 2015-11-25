@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:complexType name="UpdateRatingStatusSchemaType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="OrganizationRating" type="sp:OrganizationRating"/>
+			<xsd:element minOccurs="0" name="ProgramRating" type="sp:ProgramRating"/>
+			<xsd:element minOccurs="0" name="InstrumentRating" type="sp:InstrumentRating"/>
+			<xsd:element minOccurs="0" name="FundRating" type="sp:FundRating"/>
+			<xsd:element minOccurs="0" name="ServicerRanking" type="sp:ServicerRanking"/>
+			<xsd:element minOccurs="0" name="WorkObjectIDs" type="sp:WorkObjectIDs"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OrganizationRating">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProgramRating">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InstrumentRating">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FundRating">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ServicerRanking">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Ranking" type="sp:RatingSchemaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Modified for B-155718 ERP - Issuer Notification Date/time should flow into CORE Enhancement - Renamed WorkObjectID to WorkObjectIDData - Start -->
+	<xsd:complexType name="WorkObjectIDs">
+		<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:WorkObjectIDData"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+	<!-- Modified for B-155718 ERP - Issuer Notification Date/time should flow into CORE Enhancement - Renamed WorkObjectID to WorkObjectIDData - End -->
+</xsd:schema>

@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Munjal Kansara (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: 
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_12.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_14.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_15.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_9.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_16.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_17.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_10.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_18.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_19.xsd"/>
+	<!---->
+	<xsd:complexType name="RatingSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="sp:RatingAgencyCode"/>
+			<xsd:element minOccurs="0" ref="sp:PublishingAgencyCode"/>
+			<xsd:element minOccurs="0" ref="sp:DebtTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:RatingTypeCode"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Evergreen"/>
+			<xsd:element minOccurs="0" ref="sp:UnsolicitedRating"/>
+			<xsd:element minOccurs="0" ref="sp:SvcrCapabilityTypeCode"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="RatingCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>The actual rating</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:PendingStatusInd"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:DependentInd"/>
+			<xsd:element minOccurs="0" name="RatingSetCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>A group of rating values based on some commonality.  This code is currently used by RPM.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TenorTypeCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>Code represents general or specific timeframe, e.g., "Long Term", "Short Term", "Non-specific".  This code is currently used by RPM.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:NationalScaleCode"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:AssessmentTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:AnalysisTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:ShadowRating"/>
+			<xsd:element minOccurs="0" name="Rating" type="sp:QualifierScoreSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Rating or Credit Estimate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:CreditWatch"/>
+			<xsd:element minOccurs="0" ref="sp:CreditOutlook"/>
+			<xsd:element minOccurs="0" name="SplitRating" type="sp:QualifierScoreSchemaType"/>
+			<xsd:element minOccurs="0" ref="sp:DebtServiceCoverageRatio"/>
+			<xsd:element minOccurs="0" ref="sp:NetCashFlowAmount"/>
+			<xsd:element minOccurs="0" ref="sp:LoanToValueRatio"/>
+			<xsd:element minOccurs="0" ref="sp:CapitalizationPercentage"/>
+			<xsd:element minOccurs="0" ref="sp:StabalizedValueAmount"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="EvaluationScore" type="sp:EvaluationScoreSchemaType"/>
+			<xsd:group minOccurs="0" ref="sp:RatingDateGroup"/>
+			<xsd:group minOccurs="0" ref="sp:AnalystGroup"/>
+			<xsd:group minOccurs="0" ref="sp:AssetCharacteristicGroup"/>
+			<xsd:element minOccurs="0" ref="sp:CashFlowTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:RatingDomainCode"/>
+			<xsd:element minOccurs="0" ref="sp:CurrentRating"/>
+			<xsd:element minOccurs="0" ref="sp:Confidential"/>
+			<xsd:element minOccurs="0" ref="sp:ConfidentialCategoryCode"/>
+			<xsd:element minOccurs="0" ref="sp:Pending"/>
+			<xsd:element minOccurs="0" ref="sp:HyperTranching"/>
+			<xsd:element minOccurs="0" ref="sp:SurveillanceRequired"/>
+			<xsd:element minOccurs="0" name="NextReviewFrequencyTypeCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>This indicates when the next surveillance is to be performed: current frequencies are quartery, semi-annually and annually.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:FeeAmount"/>
+			<xsd:element minOccurs="0" ref="sp:NextSurveillanceFeeAmount"/>
+			<xsd:element minOccurs="0" ref="sp:RatingActionCode"/>
+			<xsd:element minOccurs="0" ref="sp:ReasonTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:Comment">
+				<xsd:annotation>
+					<xsd:documentation>Free form commentary related to this rating.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:RatingStatusCode"/>
+			<xsd:element minOccurs="0" name="Expected" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Indicates if this rating has really been published by the agency that has developed it, or is being published by a third party who labels it as "Expected".  For example, Bloomberg L.P. will publish an SandP Expected Rating in advance of the actual publication of the rating by SandP.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Committee" type="sp:CommitteeSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>A gathering of group of people officially delegated to analyze the credit-worthiness of an issue and to return an approval or denial of a rating.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RatingEntity" type="sp:RatingEntitySchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Which entity this rating is being assigned to, an organization, an instrument or a program?</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="CorrectedRatingID" type="oa:IdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>if this rating is a correction for a previous rating with incorrect rating data, this is the rating id for the incorrect rating.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Dependent" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Is this rating affected by other ratings?</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PriorRating" type="sp:RatingSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Requested by RD, need to display prior rating for the same rating type and debt type if present</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Contact" type="sp:RPMContactSchemaType"/>
+			<!-- Added as an Option Element for the volume Rating Release Servcies parallel to RPMContactSchema -->
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="RatingReleaseContact" type="sp:ContactSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>This contact schema is new for the Rating Release Services, which surpass the RPMContactSchema, which will be used for the forth coming new services </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="CommentToClientText" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Notes to the client during the evaluation  process.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ClientCommentText" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Free form commentary from the client related to this evaluation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RequestOrganization" type="sp:OrganizationSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>The organization that requested the evaluation.  Usually the collateral manager, but occasionally  the banker.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RequestOrganizationID" type="oa:IdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>This element should NOT BE USED.  It is left in this schema because the Pega RPM team is bound to a version of the schemas that had this element.  I don't know why it was released.  It might be that we need to use this in the case the the RequestOrganization element is a problem.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="RelatedIssue" type="sp:EvaluationRelatedIssueType">
+				<xsd:annotation>
+					<xsd:documentation>List of issues which can be affected by the credit evaluation</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:AuditData"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:ApplicationAttribute"/>
+			<xsd:element minOccurs="0" ref="sp:UsedPublicDataOnly"/>
+			<xsd:element minOccurs="0" ref="sp:RatingDescriptionOne"/>
+			<xsd:element minOccurs="0" ref="sp:RatingDescriptionTwo"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:LinkedEntityID"/>
+			<xsd:element minOccurs="0" ref="sp:RegulatoryQualifier"/>
+			<!-- For Regulatory Qualifier details from qualifier1 to qualifier32 -->
+			<xsd:element minOccurs="0" ref="sp:RegulatoryQualifierDetails"/>
+			<xsd:element minOccurs="0" ref="sp:IsEnhanced"/>
+			<!-- Rating Display - Deal Analyser -->		
+			<xsd:element minOccurs="0" ref="sp:PrecedenceNumber"/>
+			<xsd:element minOccurs="0" ref="sp:SortOrder"/>
+			<xsd:element minOccurs="0" name="RatingDisplay" type="sp:RatingDisplaySchemaType"/>
+			<!-- SF Refresh-->
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:WorkObjectID"/>
+			<!-- B-81907 GetRatingEntitiesByWorkObjectId Service To display  ActualReleaseDate -->
+			<xsd:element minOccurs="0" ref="sp:ActualReleaseDate"/>
+			<!-- Added for NPCC-RatingRelease Enhacement -->	
+			<xsd:element minOccurs="0" ref="sp:NPCCIndicator"/>
+			<!--  Added for GetRatingEntitiesByWorkObjectId Dodd Frank USPCR Work -->
+			<xsd:element minOccurs="0" ref="sp:PriorRatingCode"/>
+			<xsd:element minOccurs="0" ref="sp:PriorOutlook"/>
+			<xsd:element minOccurs="0" ref="sp:PriorCreditWatch"/>
+			<!-- Adding ends Here -->
+			<!--  Added for GetSingleLineDisplay Enhancement -->
+			<xsd:element minOccurs="0" ref="sp:RatingSeries"/>
+			<xsd:element minOccurs="0" ref="sp:LongShortInd"/>
+			<!--  End for GetSingleLineDisplay Enhancement -->
+			<!--  Added for Dodd Frank PVT Rating Enhancement -->
+			<xsd:element minOccurs="0" name="RatingHistory" type="sp:RatingHistorySchemaType"/>
+			<!--  End for Dodd Frank PVT Rating Enhancement -->
+			<!--  Added for GetSingleLineDisplay Enhancement -->
+			<xsd:element minOccurs="0" ref="sp:IntExtInd"/>
+			<!--  End for GetSingleLineDisplay Enhancement -->
+			<!-- Added for SERG#808 ERP/RRP Regulatory Project - Start -->
+			<xsd:element minOccurs="0" ref="sp:CycleId"/>			
+			<!-- Added for SERG#808 ERP/RRP Regulatory Project - End -->
+			<!-- Added for SERG#775/ALM 218370 SourceId Enhancement - Start -->
+			<xsd:element minOccurs="0" ref="sp:SourceID"/>
+			<!-- Added for SERG#775/ALM 218370 SourceId Enhancement - End -->
+			<!-- Added for B-159910 GetCoreOrganizationHierarchy Enhancement - Start -->
+			<xsd:element minOccurs="0" ref="sp:TripleRating"/>
+			<!-- Added for B-159910 GetCoreOrganizationHierarchy Enhancement - End -->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="RatingDateGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:EffectiveDate"/>
+			<xsd:element minOccurs="0" ref="sp:ReleaseDate"/>
+			<xsd:element minOccurs="0" ref="sp:SignOffDate"/>
+			<xsd:element minOccurs="0" ref="sp:EvaluationRequestDate"/>
+			<xsd:element minOccurs="0" ref="sp:BillingDate"/>
+			<xsd:element minOccurs="0" ref="sp:CompleteReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:AnalystDate"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="AnalystGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Analyst" type="sp:AnalystSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Primary Analyst Id</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Manager" type="sp:AnalystSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Sign-off Manager Id</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DataAdministrator" type="sp:EmployeeSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Employee who releases the rating</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:IndividualParticipant"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="QualifierScoreSchemaType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:RatingQualifier"/>
+			<xsd:element ref="sp:RatingScore"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RatingEntitySchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" ref="oa:ID">
+				<xsd:annotation>
+					<xsd:documentation>ID of the entity being rated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Type" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>type of the entity being rated, eg. organization, instrument, program etc.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EvaluationScoreSchemaType">
+		<xsd:sequence>
+			<xsd:element name="RatingSetCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>eg. CREDIT MODEL, CREDIT RISK TRACKER, RECOVERY RATE</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RatingValueCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>value for the associated rating set code</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PrimaryScore" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>true indicates the main estimate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="SplitAmount" type="oa:AmountType">
+				<xsd:annotation>
+					<xsd:documentation>the amount of the total asset receiving the given evaluation score for a virtual tranch</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:RecoveryRate"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EvaluationRelatedIssueType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UnderlyingDependency" type="xsd:boolean"/>
+			<xsd:element minOccurs="0" ref="sp:CDOEvalAssocBegDate"/>
+			<xsd:element minOccurs="0" ref="sp:CDOEvalAssocEndDate"/>
+			<xsd:element name="Issue" type="sp:IssueSchemaType"/>
+			<xsd:element name="IssueID" type="oa:IdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>This element was added back, very reluctantly, for backward compatibility with RPM Pega because they are bound to a release of these schemas that had this ID.  This element should NOT BE USED.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="AssetCharacteristicGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:SeniorityTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:PubliclyTraded"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="RatingDisplaySchemaType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:FormattedRating"/>
+			<xsd:element minOccurs="0" ref="sp:FormattedCWOUTLOOK"/>
+		</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_25.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_33.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_45.xsd"/>
+	<xsd:complexType name="ProgramSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" ref="sp:Name"/>
+			<xsd:element minOccurs="0" ref="sp:ProgramTypeCode"/>
+			<xsd:element minOccurs="0" name="CurrencyCode" type="oa:CurrencyCodeType"/>
+			<xsd:element minOccurs="0" ref="sp:BalanceAmount"/>
+			<xsd:element minOccurs="0" ref="sp:Series"/>
+			<xsd:element minOccurs="0" ref="sp:RegistrationDate"/>
+			<xsd:element minOccurs="0" ref="sp:RegistrationAmount"/>
+			<xsd:element minOccurs="0" ref="sp:ClosedDate"/>
+			<xsd:element minOccurs="0" ref="sp:PlacementTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:DepartmentCode"/>
+			<xsd:element minOccurs="0" ref="sp:GroupCode"/>
+			<xsd:element minOccurs="0" ref="sp:Completed"/>
+			<xsd:element minOccurs="0" ref="sp:ProgramStatus"/>
+			<xsd:element minOccurs="0" ref="sp:Taxable"/>
+			<xsd:element minOccurs="0" ref="sp:UnlimitedAmount"/>
+			<xsd:element minOccurs="0" ref="sp:Surveillance"/>
+			<xsd:element minOccurs="0" ref="sp:Evergreen"/>
+			<xsd:element minOccurs="0" ref="sp:Comment"/>
+			<xsd:element minOccurs="0" ref="sp:Suspect"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Issue_Market"/>
+			<xsd:element minOccurs="0" ref="sp:Replenishment"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ProgramRelation" type="sp:ProgramRelationshipSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Relationship reference for the program occurence within Organization</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ProgramCurrency" type="sp:ProgramCurrencySchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Holds Program Currency Type</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ProgramParticipation" type="sp:OrganizationParticipationSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>which holds the list of OrganizationParticipation for this Program</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ProgramRating" type="sp:RatingSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>which hold the Program rating for the Organization which holds for</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:AnalyticalTeam"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Classification"/>
+			<xsd:element minOccurs="0" ref="sp:SurveillanceGroupCode"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Comments"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:CollateralGroupSupport"/>
+			<xsd:element minOccurs="0" ref="sp:UnsolicitedRating"/>
+			<xsd:element minOccurs="0" ref="sp:IsEnhanced"/>
+			<!-- SERG - 797 - To include Insured Participant Rolecode starts -->
+			<xsd:element minOccurs="0" ref="sp:HasRoleInsuranceProvider"/>
+			<!-- SERG - 797 - To include Insured Participant Rolecode ends -->
+			<!-- Added for SERG Request No: 732 Linked Maturities Enhancement-->	
+			<xsd:element minOccurs="0" name="LinkedEntities" type="sp:LinkedEntitiesSchemaType"/>
+			<!-- Added for SERG 821 - WorkObjectId Enhancement for GetCoreProgram - Start -->	
+			<xsd:element minOccurs="0" ref="sp:IsWorkObjectID"/>
+			<xsd:element minOccurs="0" ref="sp:WorkObjectID"/>
+			<!-- Added for SERG 821 - WorkObjectId Enhancement for GetCoreProgram - End -->
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProgramRelationshipSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:ProgramID"/>
+			<xsd:element minOccurs="0" ref="sp:ProgramRelationshipTypeCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProgramCurrencySchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="oa:ID"/>
+			<xsd:element minOccurs="0" name="CurrencyCode" type="oa:CurrencyCodeType">
+				<xsd:annotation>
+					<xsd:documentation>Holds the Current Code the Program</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

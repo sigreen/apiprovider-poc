@@ -36,6 +36,7 @@
     <camel.version>2.15.1.redhat-620133</camel.version>
     <activemq.version>5.11.0.redhat-620133</activemq.version>
     <fabric.version>1.2.0.redhat-133</fabric.version>
+    <cxf.version>3.0.4.redhat-620133</cxf.version>
     <derby.version>10.10.1.1</derby.version>
     <dbcp.version>1.4</dbcp.version>
   </properties>
@@ -44,6 +45,9 @@
     <module>orgNameSearchAPI</module>
     <module>apiprovider-features</module>
     <module>org-name-search</module>
+    <module>ratingAPI</module>
+    <module>financialStatementAPI</module>
+    <module>getOrgInfo</module>
   </modules>
 
   <repositories>
@@ -86,6 +90,21 @@
         <version>${camel.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-spring</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-servlet</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jackson</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.activemq</groupId>
         <artifactId>activemq-camel</artifactId>
         <version>${activemq.version}</version>
@@ -102,11 +121,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-servlet</artifactId>
-        <version>${camel.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-http4</artifactId>
         <version>${camel.version}</version>
       </dependency>
@@ -114,6 +128,21 @@
         <groupId>javax.jms</groupId>
         <artifactId>jms-api</artifactId>
         <version>1.1-rev-1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-cxf</artifactId>
+        <version>${camel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-rt-transports-http-jetty</artifactId>
+        <version>${cxf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.13</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -145,6 +174,11 @@
           <groupId>org.apache.camel</groupId>
           <artifactId>camel-maven-plugin</artifactId>
           <version>${camel.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-codegen-plugin</artifactId>
+          <version>${cxf.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

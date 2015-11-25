@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:complexType name="DepartmentListSchemaType">
+		<xsd:sequence>
+		   <xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:DepartmentCode"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

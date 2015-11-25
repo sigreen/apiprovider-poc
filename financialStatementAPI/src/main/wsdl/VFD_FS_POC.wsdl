@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://integration.standardandpoors.com/ServiceSchema/Services/findata/v1" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns="http://integration.standardandpoors.com/ServiceSchema/v3/financial" xmlns:ns0="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://schemas.xmlsoap.org/wsdl/jms/" xmlns:ns2="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:y="http://integration.standardandpoors.com/ServiceSchema/Services/findata/v1">
+  <types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://integration.standardandpoors.com/ServiceSchema/v3/financial" schemaLocation="VFD_FS_POC_0.xsd"/>
+		</xsd:schema>
+  </types>
+  <message name="getFinancialPeriodsResponse">
+    <part name="getFinancialPeriodsResponse" element="ns:getFinancialPeriodsResponse">
+    </part>
+  </message>
+  <message name="getFinancialStatementsAsync">
+    <part name="getFinancialStatementsAsync" element="ns:getFinancialStatementsAsync">
+    </part>
+  </message>
+  <message name="getMnemonicComments">
+    <part name="getMnemonicComments" element="ns:getMnemonicComments">
+    </part>
+  </message>
+  <message name="getIncrementalUpdatesResponse">
+    <part name="getIncrementalUpdatesResponse" element="ns:getIncrementalUpdatesResponse">
+    </part>
+  </message>
+  <message name="getMnemonicCommentsResponse">
+    <part name="getMnemonicCommentsResponse" element="ns:getMnemonicCommentsResponse">
+    </part>
+  </message>
+  <message name="getFinancialStatementsResponse">
+    <part name="getFinancialStatementsResponse" element="ns:getFinancialStatementsResponse">
+    </part>
+  </message>
+  <message name="getFinancialStatementsAsyncResponse">
+    <part name="getFinancialStatementsAsyncResponse" element="ns:getFinancialStatementsAsyncResponse">
+    </part>
+  </message>
+  <message name="getDataElementsResponse">
+    <part name="getDataElementsResponse" element="ns:getDataElementsResponse">
+    </part>
+  </message>
+  <message name="getFinancialPeriods">
+    <part name="getFinancialPeriods" element="ns:getFinancialPeriods">
+    </part>
+  </message>
+  <message name="getDataPointAuditTrailResponse">
+    <part name="getDataPointAuditTrailResponse" element="ns:getDataPointAuditTrailResponse">
+    </part>
+  </message>
+  <message name="getFinancialStatements">
+    <part name="getFinancialStatements" element="ns:getFinancialStatements">
+    </part>
+  </message>
+  <message name="getDataElements">
+    <part name="getDataElements" element="ns:getDataElements">
+    </part>
+  </message>
+  <message name="getIncrementalUpdates">
+    <part name="getIncrementalUpdates" element="ns:getIncrementalUpdates">
+    </part>
+  </message>
+  <message name="getDataPointAuditTrail">
+    <part name="getDataPointAuditTrail" element="ns:getDataPointAuditTrail">
+    </part>
+  </message>
+  <portType name="FinancialStatementPortType">
+    <operation name="getFinancialStatements">
+      <input message="y:getFinancialStatements">
+    </input>
+      <output message="y:getFinancialStatementsResponse">
+    </output>
+    </operation>
+    <operation name="getFinancialStatementsAsync">
+      <input message="y:getFinancialStatementsAsync">
+    </input>
+      <output message="y:getFinancialStatementsAsyncResponse">
+    </output>
+    </operation>
+    <operation name="getFinancialPeriods">
+      <input message="y:getFinancialPeriods">
+    </input>
+      <output message="y:getFinancialPeriodsResponse">
+    </output>
+    </operation>
+    <operation name="getIncrementalUpdates">
+      <input message="y:getIncrementalUpdates">
+    </input>
+      <output message="y:getIncrementalUpdatesResponse">
+    </output>
+    </operation>
+    <operation name="getMnemonicComments">
+      <input message="y:getMnemonicComments">
+    </input>
+      <output message="y:getMnemonicCommentsResponse">
+    </output>
+    </operation>
+    <operation name="getDataElements">
+      <input message="y:getDataElements">
+    </input>
+      <output message="y:getDataElementsResponse">
+    </output>
+    </operation>
+    <operation name="getDataPointAuditTrail">
+      <input message="y:getDataPointAuditTrail">
+    </input>
+      <output message="y:getDataPointAuditTrailResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="FinancialStatementBinding" type="y:FinancialStatementPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getFinancialStatements">
+      <soap:operation soapAction="getFinancialStatements" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getFinancialStatementsAsync">
+      <soap:operation soapAction="getFinancialStatementsAsync" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getFinancialPeriods">
+      <soap:operation soapAction="getFinancialPeriods" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getIncrementalUpdates">
+      <soap:operation soapAction="getIncrementalUpdates" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getMnemonicComments">
+      <soap:operation soapAction="getMnemonicComments" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getDataElements">
+      <soap:operation soapAction="getDataElements" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getDataPointAuditTrail">
+      <soap:operation soapAction="getDataPointAuditTrail"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="FinancialStatement">
+    <port name="FinancialStatementPort" binding="y:FinancialStatementBinding">
+      <soap:address location="http://ewtestforum14.webservices.standardandpoors.com:80/VFD_FS_POC"/>
+    </port>
+  </service>
+</definitions>

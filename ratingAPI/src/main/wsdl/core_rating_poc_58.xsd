@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by The McGraw-Hill Companies (The McGraw-Hill Companies) --><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="core_rating_poc_2.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_59.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_3.xsd"/>
+	<xsd:complexType name="GetRatingEntitiesByWorkObjectIdSchemaType">
+		<xsd:complexContent>
+			<xsd:extension base="sp:SPBusinessObjectDocumentSchemaType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="sp:GetRatingEntitiesByWorkObjectIdDataAreaSchemaType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GetRatingEntitiesByWorkObjectIdDataAreaSchemaType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="oa:Get"/>
+			<xsd:element minOccurs="0" ref="sp:WorkObjectIDs"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="GetRatingEntitiesByWorkObjectId" type="sp:GetRatingEntitiesByWorkObjectIdSchemaType"/>
+</xsd:schema>

@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by The McGraw-Hill Companies (The McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+
+     XML Schema
+
+    Name:
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="core_rating_poc_7.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_8.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_20.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_16.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_21.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_22.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_23.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_24.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_28.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_29.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_30.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_31.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_46.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_47.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_49.xsd"/>
+	<!---->
+	<xsd:complexType name="OrganizationSchemaType">
+		<xsd:complexContent>
+			<xsd:extension base="oa:PartyBaseType">
+				<xsd:sequence>					
+					<xsd:element minOccurs="0" ref="sp:Active"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:NameAlias"/>
+					<xsd:element minOccurs="0" ref="sp:DepartmentCode"/>
+					<xsd:element minOccurs="0" ref="sp:GroupCode"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:RegionCdoe"/>
+					<xsd:element minOccurs="0" ref="sp:CountryOfRegistration"/>
+					<xsd:element minOccurs="0" ref="sp:StateOfRegistration"/>
+					<xsd:element minOccurs="0" ref="sp:IssuerTypeCode"/>
+					<xsd:element minOccurs="0" ref="sp:FormOfEntityCode"/>
+					<xsd:group minOccurs="0" ref="sp:OrganizationIdentifierGroup"/>
+					<xsd:group minOccurs="0" ref="sp:OrganizationPublishingGroup"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:ParticipationRoleCode"/>
+					<!-- MMT -->
+					<xsd:element minOccurs="0" ref="sp:OrgRelationship"/>
+					<xsd:element minOccurs="0" name="ImmediateParentOrganization" type="sp:RelatedOrganizationSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Immediate Parent organizations related to the current organization</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="RelatedOrganization" type="sp:RelatedOrganizationSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>list of organizations related to the current organization</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" ref="sp:AnalyticalTeam"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Rating" type="sp:RatingSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Org Level Ratings</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="RatingContact" type="sp:RPMContactSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>these are the RPM contacts associated with the organizations.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" name="DefaultGuarantorOrganization" type="sp:OrganizationSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Default Guarantor Organization to the current organization</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element default="true" minOccurs="0" name="filterMatch" type="xsd:boolean">
+						<xsd:annotation>
+							<xsd:documentation>This is not a persistent attribute, this is for filter requests where given organization needs to be returned due to structural requirement of GetOrganizationHierarchy but do not match filter criteria</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<!-- Adding Here for the RatingRelease Schema -->
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Program">
+						<xsd:annotation>
+							<xsd:documentation>Program schema which is added as part of the Rating Release, which will referred by each issue with programid as the Key</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Issue">
+						<xsd:annotation>
+							<xsd:documentation>This is the issue that contains a list of instruments we'll be releasing the ratings for.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Contact" type="sp:ContactSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>this is the new contact whic should be used for the future services.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Resolution" type="sp:ResolutionSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Resolution Summary</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:Comments">
+						<xsd:annotation>
+							<xsd:documentation>Comments Fields Summary</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Servicer" type="sp:ServicerSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Servicer Ranking Info , Capability/Operations Codes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Fund" type="sp:FundSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Fund Schema Type</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" ref="sp:EventDrivenReview"/>
+					<xsd:element minOccurs="0" ref="sp:FullReview"/>
+					<xsd:element minOccurs="0" ref="sp:UnsolicitedRating"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="DefaultGuarantorOrganizations" type="sp:DefaultGuarantorSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>This should be a collection of guarantor components </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" ref="sp:GovernmentRelatedEntity"/>
+					<xsd:element minOccurs="0" ref="sp:ManagementMeetingDate"/>
+					<xsd:element minOccurs="0" ref="sp:NextManagementMeetingDate"/>
+					<xsd:element minOccurs="0" ref="sp:BicraIndicator"/>
+					<xsd:element minOccurs="0" ref="sp:BicraTier"/>
+					<xsd:element minOccurs="0" name="RegulatoryIndicator" type="sp:RegulatoryIndicatorSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>RegulatoryIndicator List</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="GroupRating" type="sp:GroupRatingSchemaType">
+						<xsd:annotation>
+							<xsd:documentation>Ratings of a specific group ex:orgid,debt type code,rating type code forms a group</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" ref="sp:SovIndicator"/>
+					<!-- Adding ends Here -->
+					<!-- Added for NPCC-AffirmRating Enhancement -->	
+			        <xsd:element minOccurs="0" ref="sp:NPCCIndicator"/>
+			        <!-- NPCC Enhancement ends Here -->
+			         <!-- Adding for MPN Enhancement - WFM Ratings -->
+			        <xsd:element maxOccurs="unbounded" minOccurs="0" name="MunicipalPublishedName" type="sp:MunicipalPublishedName">
+						<xsd:annotation>
+							<xsd:documentation>Municipal Schema Type</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<!-- Added for ESMA color coding Enhancement -->
+					<xsd:element minOccurs="0" ref="sp:IsMixOfSolicitedAndUnsolicited"/>
+					<!-- ESMA color coding Enhancement ends here -->
+					<!-- Added for B-218375 Issuance Threshold Enhancement - Start-->
+					<xsd:element minOccurs="0" ref="sp:EstimatedDebtCapacity"/>
+					<xsd:element minOccurs="0" ref="sp:CurrentIssuanceAmount"/>
+					<!-- Added for B-218375 Issuance Threshold Enhancement - End-->
+					<!-- Added for B-159910 GetCoreOrganizationHierarchy Enhancement - Start -->
+					<xsd:element minOccurs="0" ref="sp:CreateDate"/>
+					<!-- Added for B-159910 GetCoreOrganizationHierarchy Enhancement - End -->
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:group name="OrganizationPublishingGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:FiscalYearEnd"/>
+			<xsd:element minOccurs="0" ref="sp:LastReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:NextReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:InterimReviewDate"/>
+			<xsd:element minOccurs="0" ref="sp:EventDrivenReviewDate"/>
+			<xsd:element minOccurs="0" name="PublishingIdentifier" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation> Possible  Publishing Identifier are Y, N, L where L represents Organization Linked to</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OrganizationLinkedTo" type="sp:OrganizationSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>If PublishingIdentifier is L then this value is present, which points to linked organization.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="OrganizationIdentifierGroup">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" ref="sp:GICSSubIndustryCode"/>
+			<xsd:element minOccurs="0" ref="sp:NACIS"/>
+			<xsd:element minOccurs="0" ref="sp:SIC"/>
+			<xsd:element minOccurs="0" ref="sp:NAIC"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:CINS"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:CUSIP"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:TickerSymbol"/>
+			<xsd:element minOccurs="0" ref="sp:GVKey"/>
+			<xsd:element minOccurs="0" ref="sp:TierLevel"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:OrganizationTypeCode"/>
+			<xsd:element minOccurs="0" ref="sp:IndustryCode"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="RelatedOrganizationSchemaType">
+		<xsd:sequence>
+			<xsd:element name="Organization" type="sp:OrganizationSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>organization related to the current organization</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RelationshipCode" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>organizational relationship type e.g. Rating Identity, Rating Family Member</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OwnerPercentage" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>In the case where ownership is the relationship type, a percentage may be specified (defaults to 100%).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="LegalRelationshipType" type="oa:CodeType">
+				<xsd:annotation>
+					<xsd:documentation>Organizational Relation ship type description in CORE and ORG_LEGAL_REL_TYPE in RPM e.g. Subsidiary, Affiliate, Core, Strategically Important, Other, Joint Venture, Acquisition etc..</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RegulatoryIndicatorSchemaType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="sp:IndicatorValue"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

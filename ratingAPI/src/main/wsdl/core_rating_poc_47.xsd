@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://integration.standardandpoors.com/ServiceSchema" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:sp="http://integration.standardandpoors.com/ServiceSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="core_rating_poc_11.xsd"/>
+	<xsd:include schemaLocation="core_rating_poc_48.xsd"/>
+	<xsd:complexType name="GroupRatingSchemaType">
+		<xsd:sequence>
+			<!-- Updated for SLD Ratings Enhancement - Start -->
+			<xsd:element minOccurs="0" name="FromRating" type="sp:RatingSchemaType"/>
+			<xsd:element minOccurs="0" name="ToRating" type="sp:RatingSchemaType"/>
+			<!-- Updated for SLD Ratings Enhancement - End -->
+			<xsd:element minOccurs="0" name="ExcludeMaturities" type="sp:ExcludeMaturitySchemaType">
+			    <xsd:annotation>
+					<xsd:documentation>Maturities to exclude</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExcludePrograms" type="sp:ExcludeProgramSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Programs to exclude</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Added for filtering based on Department Id -->
+			<xsd:element minOccurs="0" name="DepartmentList" type="sp:DepartmentListSchemaType">
+				<xsd:annotation>
+					<xsd:documentation>Filter based on department Ids</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="sp:IsCoveredBond"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExcludeMaturitySchemaType">
+		<xsd:sequence>
+		   <xsd:element maxOccurs="unbounded" minOccurs="0" name="MaturityID" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExcludeProgramSchemaType">
+		<xsd:sequence>
+		   <xsd:element maxOccurs="unbounded" minOccurs="0" name="ProgramID" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

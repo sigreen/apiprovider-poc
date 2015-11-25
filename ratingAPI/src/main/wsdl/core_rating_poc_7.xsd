@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Man Chan (McGraw-Hill Companies) --><!--
+
+** OAGIS® Revision: 9.0 **
+** Date: 08 April 2005 **
+** Copyright 1998-2005, All Rights Reserved **
+
+This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+License information for this file is provided in the file **2005 OAGi License Agreement.txt** that is provided with this download package.
+
+For support, more information, or to report implementation bugs, please contact the Open Applications Group at xml@openapplications.org.
+    
+     XML Schema 
+     
+    Name: \OAGIS\9.0\Resources\Components\Common\Components.xsd
+--><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9" xmlns="http://www.openapplications.org/oagis/9" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="core_rating_poc_3.xsd"/>
+  <xsd:include schemaLocation="core_rating_poc_4.xsd"/>
+  <xsd:complexType name="CodesType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="Code" type="CodeType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BinaryObjectType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        <ccts:UniqueID>UDT000002</ccts:UniqueID>
+        <ccts:CategoryCode>UDT</ccts:CategoryCode>
+        <ccts:DictionaryEntryName>Binary Object. Type</ccts:DictionaryEntryName>
+        <ccts:VersionID>1.0</ccts:VersionID>
+        <ccts:Definition>A set of finite-length sequences of binary octets.</ccts:Definition>
+        <ccts:RepresentationTermName>Binary Object</ccts:RepresentationTermName>
+        <ccts:PrimitiveType>binary</ccts:PrimitiveType>
+        <xsd:BuiltinType>base64Binary</xsd:BuiltinType>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:base64Binary">
+        <xsd:attribute name="format" type="xsd:string" use="optional">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+              <ccts:UniqueID>UDT000002-SC2</ccts:UniqueID>
+              <ccts:CategoryCode>SC</ccts:CategoryCode>
+              <ccts:DictionaryEntryName>Binary Object. Format. Text</ccts:DictionaryEntryName>
+              <ccts:Definition>The format of the binary content.</ccts:Definition>
+              <ccts:ObjectClass>Binary Object</ccts:ObjectClass>
+              <ccts:PropertyTermName>Format</ccts:PropertyTermName>
+              <ccts:RepresentationTermName>Text</ccts:RepresentationTermName>
+              <ccts:PrimitiveType>string</ccts:PrimitiveType>
+              <xsd:BuiltinType>string</xsd:BuiltinType>
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="mimeCode" type="xsd:normalizedString" use="required">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+              <ccts:UniqueID>UDT000002-SC3</ccts:UniqueID>
+              <ccts:CategoryCode>SC</ccts:CategoryCode>
+              <ccts:DictionaryEntryName>Binary Object. Mime. Code</ccts:DictionaryEntryName>
+              <ccts:Definition>The mime type of the binary object.</ccts:Definition>
+              <ccts:ObjectClass>Binary Object</ccts:ObjectClass>
+              <ccts:PropertyTermName>Mime</ccts:PropertyTermName>
+              <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+              <ccts:PrimitiveType>string</ccts:PrimitiveType>
+              <xsd:BuiltinType>normalizedString</xsd:BuiltinType>
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="encodingCode" type="xsd:normalizedString" use="optional">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+              <ccts:UniqueID>UDT000002-SC4</ccts:UniqueID>
+              <ccts:CategoryCode>SC</ccts:CategoryCode>
+              <ccts:DictionaryEntryName>Binary Object. Encoding. Code</ccts:DictionaryEntryName>
+              <ccts:Definition>Specifies the decoding algorithm of the binary object.</ccts:Definition>
+              <ccts:ObjectClass>Binary Object</ccts:ObjectClass>
+              <ccts:PropertyTermName>Encoding</ccts:PropertyTermName>
+              <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+              <ccts:PrimitiveType>string</ccts:PrimitiveType>
+              <xsd:BuiltinType>normalizedString</xsd:BuiltinType>
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="characterSetCode" type="xsd:normalizedString" use="optional">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+              <ccts:UniqueID>UDT000002-SC5</ccts:UniqueID>
+              <ccts:CategoryCode>SC</ccts:CategoryCode>
+              <ccts:DictionaryEntryName>Binary Object. Character Set. Code</ccts:DictionaryEntryName>
+              <ccts:Definition>The character set of the binary object if the mime type is text.</ccts:Definition>
+              <ccts:ObjectClass>Binary Object</ccts:ObjectClass>
+              <ccts:PropertyTermName>Character Set</ccts:PropertyTermName>
+              <ccts:RepresentationTermName>Code</ccts:RepresentationTermName>
+              <ccts:PrimitiveType>string</ccts:PrimitiveType>
+              <xsd:BuiltinType>normalizedString</xsd:BuiltinType>
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="uri" type="xsd:string" use="optional">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+              <ccts:UniqueID>UDT000002-SC6</ccts:UniqueID>
+              <ccts:CategoryCode>SC</ccts:CategoryCode>
+              <ccts:DictionaryEntryName>Binary Object. Uniform Resource. Identifier</ccts:DictionaryEntryName>
+              <ccts:Definition>The Uniform Resource Identifier that identifies where the binary object is located.</ccts:Definition>
+              <ccts:ObjectClass>Binary Object</ccts:ObjectClass>
+              <ccts:PropertyTermName>Uniform Resource Identifier</ccts:PropertyTermName>
+              <ccts:RepresentationTermName>Identifier</ccts:RepresentationTermName>
+              <ccts:PrimitiveType>string</ccts:PrimitiveType>
+              <xsd:BuiltinType>anyURI</xsd:BuiltinType>
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="filename" type="xsd:string" use="optional">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+              <ccts:UniqueID>UDT000002-SC7</ccts:UniqueID>
+              <ccts:CategoryCode>SC</ccts:CategoryCode>
+              <ccts:DictionaryEntryName>Binary Object. Filename.Text</ccts:DictionaryEntryName>
+              <ccts:Definition>The filename of the binary object.</ccts:Definition>
+              <ccts:ObjectClass>Binary Object</ccts:ObjectClass>
+              <ccts:PropertyTermName>Filename</ccts:PropertyTermName>
+              <ccts:RepresentationTermName>Text</ccts:RepresentationTermName>
+              <ccts:PrimitiveType>string</ccts:PrimitiveType>
+              <xsd:BuiltinType>string</xsd:BuiltinType>
+            </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="NameValuePairType">
+    <xsd:annotation>
+      <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the tag and information of the new information to be passed.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="name" type="xsd:normalizedString" use="required">
+          <xsd:annotation>
+            <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the name of the tag for the information being passed.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="type" type="xsd:normalizedString" use="optional">
+          <xsd:annotation>
+            <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the type of the information being passed in the NameValue.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="unitCode" type="xsd:normalizedString" use="optional"/>
+        <xsd:attribute name="unitCodeListVersionID" type="xsd:normalizedString" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="CurrencyExchangeABIEType">
+    <xsd:annotation>
+      <xsd:documentation>CurrencyExchangeABIEType is logically derived from UN/CEFACT TBG17 ABIE CurrencyExchangeType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.
+
+</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="SourceCurrencyCode" type="CurrencyCodeType"/>
+      <xsd:element minOccurs="0" name="SourceUnitBaseNumeric" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="TargetCurrencyCode" type="CurrencyCodeType"/>
+      <xsd:element minOccurs="0" name="TargetUnitBaseNumeric" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="RateNumeric" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="SetDateTime" type="xsd:dateTime"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TimePeriodABIEType">
+    <xsd:annotation>
+      <xsd:documentation source="http://www.openapplications.org/oagis/9">TimePeriodABIEType is logically derived from UN/CEFACT TBG17 ABIE PeriodType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="StartDateTime" type="xsd:dateTime"/>
+      <xsd:choice>
+        <xsd:element minOccurs="0" name="Duration" type="xsd:duration"/>
+        <xsd:element minOccurs="0" name="EndDateTime" type="xsd:dateTime"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TimePeriodType">
+    <xsd:annotation>
+      <xsd:documentation>Provides the structure to indicate a Date/Time period where the Time is provided with in the Start and Duration or EndDateTime.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="TimePeriodABIEType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="CurrencyExchangeBaseType">
+    <xsd:annotation>
+      <xsd:documentation>Base type for all currency conversions.  Is the conversion from one one currency to another currency Identifing the conversion factor and the source in which it was obtained, the date in which the conversion factor was set, and the effective period in which it is to be used.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="CurrencyExchangeABIEType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="SourceID" type="IdentifierType"/>
+          <xsd:element minOccurs="0" name="EffectiveTimePeriod" type="TimePeriodType"/>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:documentation>Used to distiguish the rate, based on the nature of the business process of the transaction. (e.g. Daily, End of Period, Corporate.)</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="CurrencyExchangeRate" type="CurrencyExchangeRateType">
+    <xsd:annotation>
+      <xsd:documentation>Identifies the exchange rate between two currencies. For the transaction in which this is associated.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CurrencyExchangeRateType">
+    <xsd:annotation>
+      <xsd:documentation>Identifies the exchange rate between two currencies</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="CurrencyExchangeBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="PartyIDs" type="PartyIDsType">
+    <xsd:annotation>
+      <xsd:documentation>Contains the set of possible identifiers for an associated Party.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:group name="PartyIDsGroup">
+    <xsd:annotation>
+      <xsd:documentation>Contain the ids for a given party. These ids may be assigned by multiple organizations.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ID"/>
+    </xsd:sequence>
+  </xsd:group>
+  <xsd:complexType name="CommunicationABIEType">
+    <xsd:annotation>
+      <xsd:documentation>CommunicationABIEType is logically derived from UN/CEFACT TBG17 ABIE CommunicationType as defined in the Reusable Aggregate Business Information Entity (RUABIE) XML Schema file.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ChannelCode" type="CodeType"/>
+      <xsd:element minOccurs="0" name="UseCode" type="CodeType"/>
+      <xsd:choice>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="CountryDialing" type="TextType"/>
+          <xsd:element minOccurs="0" name="AreaDialing" type="TextType"/>
+          <xsd:element minOccurs="0" name="DialNumber" type="TextType"/>
+          <xsd:element minOccurs="0" name="Extension" type="TextType"/>
+        </xsd:sequence>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CommunicationType">
+    <xsd:complexContent>
+      <xsd:extension base="CommunicationABIEType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Communication" type="CommunicationType"/>
+  <xsd:complexType name="PreferredNameType">
+    <xsd:simpleContent>
+      <xsd:extension base="NameType">
+        <xsd:attribute name="preferred" type="xsd:boolean" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:group name="PersonNameGroup">
+    <xsd:choice>
+      <xsd:element minOccurs="0" ref="Name"/>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="Title" type="TextType"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="SalutationPreferredName" type="PreferredNameType"/>
+        <xsd:element minOccurs="0" name="GivenName" type="NameType"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="MiddleName" type="NameType"/>
+        <xsd:element minOccurs="0" name="FamilyName" type="NameType"/>
+      </xsd:sequence>
+    </xsd:choice>
+  </xsd:group>
+  <xsd:complexType name="AddressBaseType">
+    <xsd:annotation>
+      <xsd:documentation>Address BaseType provides the information about the address or semantic address of an associated entity.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ID"/>
+      <xsd:choice>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="LineOne" type="TextType"/>
+          <xsd:element minOccurs="0" name="LineTwo" type="TextType"/>
+          <xsd:element minOccurs="0" name="LineThree" type="TextType"/>
+          <xsd:element minOccurs="0" name="LineFour" type="TextType"/>
+          <xsd:element minOccurs="0" name="LineFive" type="TextType"/>
+        </xsd:sequence>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="BuildingNumber" type="TextType"/>
+          <xsd:element minOccurs="0" name="BuildingName" type="NameType"/>
+          <xsd:element minOccurs="0" name="StreetName" type="NameType"/>
+          <xsd:element minOccurs="0" name="Unit" type="TextType"/>
+          <xsd:element minOccurs="0" name="Floor" type="TextType"/>
+          <xsd:element minOccurs="0" name="PostOfficeBox" type="TextType"/>
+        </xsd:sequence>
+      </xsd:choice>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="CitySubDivisionName" type="NameType"/>
+      <xsd:element minOccurs="0" name="CityName" type="NameType"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="CountrySubDivisionCode" type="NameType"/>
+      <xsd:element minOccurs="0" name="CountryCode" type="CountryCodeType"/>
+      <xsd:element minOccurs="0" name="PostalCode" type="CodeType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AddressType">
+    <xsd:complexContent>
+      <xsd:extension base="AddressBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="EmployeeType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="ID"/>
+      <xsd:group ref="PersonNameGroup"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Address" type="AddressType"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="Communication" type="CommunicationType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PartyBaseType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" ref="PartyIDs"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" ref="Name"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PartyIDsType">
+    <xsd:group ref="PartyIDsGroup"/>
+  </xsd:complexType>
+</xsd:schema>
