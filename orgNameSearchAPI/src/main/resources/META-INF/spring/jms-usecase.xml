@@ -16,11 +16,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
        xsi:schemaLocation="
           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://www.springframework.org/schema/osgi  http://www.springframework.org/schema/osgi/spring-osgi.xsd">
-
+          http://www.springframework.org/schema/osgi  http://www.springframework.org/schema/osgi/spring-osgi.xsd
+  		  http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
 
   <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
     <property name="brokerURL" value="tcp://127.0.0.1:61616"/>
@@ -59,7 +60,7 @@
       <from uri="direct:searchById" />
       <removeHeaders pattern="*"/>
       <setHeader headerName="CamelHttpPath">
-        <simple>/orgNameSearch/rest/organization/${body.orgId}</simple>
+        <simple>/orgNameSearch/rest/jms/organization/${body.orgId}</simple>
       </setHeader>
       <setHeader headerName="CamelHttpMethod">
         <constant>GET</constant>
@@ -75,7 +76,7 @@
       <from uri="direct:searchAll"/>
       <removeHeaders pattern="*"/>
       <setHeader headerName="CamelHttpPath">
-        <constant>/orgNameSearch/rest/organization/findAll</constant>
+        <constant>/orgNameSearch/rest/jms/organization/findAll</constant>
       </setHeader>
       <setHeader headerName="CamelHttpMethod">
         <constant>GET</constant>
@@ -91,7 +92,7 @@
       <from uri="direct:createNewOrg"/>
       <bean beanType="org.jboss.fuse.examples.jms.SimpleMapper"/>
       <setHeader headerName="CamelHttpPath">
-        <constant>/orgNameSearch/rest/organization</constant>
+        <constant>/orgNameSearch/rest/jms/organization</constant>
       </setHeader>
       <setHeader headerName="CamelHttpMethod">
         <constant>PUT</constant>
@@ -102,7 +103,10 @@
     
     <route id="apiprovider.jms.rest.call">
       <from uri="direct:executeRestCall"/>
-      <to uri="http4://localhost:8181/" />
+      <setHeader headerName="user_key">
+        <constant>3c3bda09a5a8816a7e3104a871c4df6</constant>
+      </setHeader>
+      <to uri="http4://localhost:80/" />
     </route>
   </routeContext>
 
