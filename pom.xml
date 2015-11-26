@@ -44,7 +44,6 @@
   <modules>
     <module>orgNameSearchAPI</module>
     <module>apiprovider-features</module>
-    <module>org-name-search</module>
     <module>ratingAPI</module>
     <module>financialStatementAPI</module>
     <module>getOrgInfo</module>
