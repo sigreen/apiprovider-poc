@@ -16,15 +16,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
        xsi:schemaLocation="
           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
           http://www.springframework.org/schema/osgi
-  		  http://www.springframework.org/schema/osgi/spring-osgi.xsd">
-
-
+  		  http://www.springframework.org/schema/osgi/spring-osgi.xsd
+  		  http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+  		  
   <!-- to setup camel servlet with OSGi HttpService -->
   <osgi:reference id="httpService" interface="org.osgi.service.http.HttpService"/>
+  
+  <osgix:cm-properties id="properties" persistent-id="org.jboss.fuse.examples.orgNameSearch">
+    <prop key="http.port">8181</prop>
+    <prop key="http.contextPath">/orgNameSearch/rest</prop>
+  </osgix:cm-properties>
 
   <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"
         init-method="register"
@@ -53,10 +59,12 @@
          knows the url to the REST services.
          Notice: This is optional, but needed if the RestRegistry should enlist accurate information.
          You can access the RestRegistry from JMX at runtime -->
-    <restConfiguration component="servlet" bindingMode="json" contextPath="/orgNameSearch/rest"
-                       port="8181">
-      <dataFormatProperty key="prettyPrint" value="true"/>
-    </restConfiguration>
+   
+        <restConfiguration component="servlet" bindingMode="json">
+      		<componentProperty key="contextPath" value="${http.contextPath}"/>
+      		<componentProperty key="port" value="${http.port}"/>
+      		<dataFormatProperty key="prettyPrint" value="true"/>
+    	</restConfiguration>
 
     <!-- defines the rest services using the context-path /organization -->
     <rest path="/organization" consumes="application/json" produces="application/json">
@@ -79,7 +87,29 @@
         <description>Find all organizations</description>
         <to uri="bean:organizationService?method=listOrganizations"/>
       </get>
+    </rest>
+    
+    <!-- defines the JMS rest services using the context-path /jms/organization -->
+    <rest path="/jms/organization" consumes="application/json" produces="application/json">
+      <description>Organization JMS rest service</description>
 
+      <!-- this is a rest GET to view an organization by the given id -->
+      <get uri="/{id}" outType="org.jboss.fuse.examples.rest.Organization">
+        <description>Find organization by ord_id</description>
+        <to uri="bean:organizationService?method=getOrganization(${header.id})"/>
+      </get>
+
+      <!-- this is a rest PUT to create/update an Organization -->
+      <put type="org.jboss.fuse.examples.rest.Organization">
+        <description>Updates or create an organization</description>
+        <to uri="bean:organizationService?method=updateOrganization"/>
+      </put>
+
+      <!-- this is a rest GET to find all organizations -->
+      <get uri="/findAll" outType="org.jboss.fuse.examples.rest.Organization[]">
+        <description>Find all organizations</description>
+        <to uri="bean:organizationService?method=listOrganizations"/>
+      </get>
     </rest>
     
     <route id="populateDB" startupOrder="1">
