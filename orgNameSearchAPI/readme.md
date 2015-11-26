@@ -42,8 +42,13 @@ From the command shell you can use curl to access the service as shown below:
 
     curl -X GET -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/organization/123
     curl -X GET -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/organization/findAll
-    curl -X PUT -d "{ \"id\": 666, \"name\": \"ABC Bank\"}" -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/organization
+    curl -X PUT -d "{ \"org_id\": 666, \"org_name\": \"ABC Bank\"}" -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/organization
+    
+The above commands are duplicated for the JMS flow but with a modified context path (e.g. /rest/jms/ instead of /rest/):
 
+    curl -X GET -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/jms/organization/123
+    curl -X GET -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/jms/organization/findAll
+    curl -X PUT -d "{ \"org_id\": 666, \"org_name\": \"ABC Bank\"}" -H "Accept: application/json" http://localhost:8181/orgNameSearch/rest/jms/organization
 
 
 ## Invoke via JMS
@@ -63,6 +68,12 @@ payload:
 ### Create new Org
 
     { "queryType": "NewOrg", "orgId": "100", "orgName": "Foobar"}
+
+### Invoke via JUnit Test
+
+`cd orgNameSearchAPI/`
+
+`mvn test -Dtest=org.jboss.fuse.examples.jms.EndToEndIT#testCreateNewOrganization`
 
 If you hit any problems please let us know on the Camel Forums
   http://camel.apache.org/discussion-forums.html
