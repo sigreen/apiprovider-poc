@@ -39,13 +39,13 @@ Testing
 
 To view the info for the organization with the given `orgId`. _Note: You can view the info for more than one organization by repeating the `orgId` query parameter._
  ```
-GET /rest/OrgInfo?orgId={id}[&orgId={id}...]
+GET /apiprovider/rest/OrgInfo?orgId={id}[&orgId={id}...]
 ```
 
-From a web browser you can access the service using the following link: [http://localhost:8181/rest/OrgInfo?orgId=108569](http://localhost:8181/rest/OrgInfo?orgId=108569)
+From a web browser you can access the service using the following link: [http://localhost:8181/rest/OrgInfo?orgId=108569]http://localhost:8181/apiprovider/rest/OrgInfo?orgId=108569)
 
 From the command shell you can use curl to access the service as shown below:
 
 ```
-~$ curl -X GET -H "Accept: application/json" http://localhost:8181/rest/OrgInfo?orgId=108569
+~$ curl -X GET -H "Accept: application/json" http://localhost:8181/apiprovider/rest/OrgInfo?orgId=108569
 ```

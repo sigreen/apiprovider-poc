@@ -42,7 +42,8 @@
   </properties>
 
   <modules>
-    <module>orgNameSearchAPI</module>
+    <module>orgNameSearch</module>    
+    <module>orgShared</module>    
     <module>apiprovider-features</module>
     <module>ratingAPI</module>
     <module>financialStatementAPI</module>

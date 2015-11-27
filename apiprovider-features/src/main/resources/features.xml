@@ -26,6 +26,7 @@
     <feature version="${camel.version}">camel-servlet</feature>
     <feature version="${camel.version}">camel-jackson</feature>
     <feature version="${camel.version}">camel-http4</feature>
+    <bundle>mvn:${project.groupId}/orgShared/${project.version}</bundle>
     <bundle>mvn:${project.groupId}/orgNameSearch/${project.version}</bundle>
   </feature>
 
@@ -37,6 +38,7 @@
     <feature version="${camel.version}">camel-cxf</feature>
     <bundle>mvn:${project.groupId}/ratingAPI/${project.version}</bundle>
     <bundle>mvn:${project.groupId}/financialStatementAPI/${project.version}</bundle>
+    <bundle>mvn:${project.groupId}/orgShared/${project.version}</bundle>
     <bundle>mvn:${project.groupId}/getOrgInfo/${project.version}</bundle>
   </feature>
 

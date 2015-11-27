@@ -39,18 +39,6 @@ limitations under the License.
     <property name="properties" ref="properties"/>
   </bean>
   
-  <osgi:reference id="httpService" interface="org.osgi.service.http.HttpService"/>
-
-  <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"
-        init-method="register"
-        destroy-method="unregister">
-    <property name="alias" value="${http.contextPath}"/>
-    <property name="httpService" ref="httpService"/>
-    <property name="servlet" ref="camelServlet"/>
-  </bean>
-
-  <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
-
   <camel-cxf:cxfEndpoint id="ratingServiceClient"
                          address="${ratingService.uri}"
                          serviceClass="com.standardandpoors.ws.RatingPortType"/>

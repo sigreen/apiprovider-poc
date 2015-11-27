@@ -24,24 +24,17 @@
   		  http://www.springframework.org/schema/osgi/spring-osgi.xsd
   		  http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
   		  
-  <!-- to setup camel servlet with OSGi HttpService -->
-  <osgi:reference id="httpService" interface="org.osgi.service.http.HttpService"/>
+  <import resource="classpath*:/META-INF/spring/common.xml" /> 
   
   <osgix:cm-properties id="properties" persistent-id="org.jboss.fuse.examples.orgNameSearch">
     <prop key="http.port">8181</prop>
     <prop key="http.contextPath">/orgNameSearch/rest</prop>
   </osgix:cm-properties>
-
-  <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"
-        init-method="register"
-        destroy-method="unregister">
-    <property name="alias" value="/orgNameSearch/rest"/>
-    <property name="httpService" ref="httpService"/>
-    <property name="servlet" ref="camelServlet"/>
-  </bean>
-
-  <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
-
+  
+  <bean id="bridgePropertyPlaceholder" class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer">
+    <property name="properties" ref="properties"/>
+  </bean> 		  
+  		  
   <!-- a bean for organization services -->
   <bean id="organizationService" class="org.jboss.fuse.examples.rest.OrganizationService"/>
 
@@ -67,7 +60,7 @@
     	</restConfiguration>
 
     <!-- defines the rest services using the context-path /organization -->
-    <rest path="/organization" consumes="application/json" produces="application/json">
+    <rest path="/orgNameSearch" consumes="application/json" produces="application/json">
       <description>Organization rest service</description>
 
       <!-- this is a rest GET to view an organization by the given id -->
@@ -90,7 +83,7 @@
     </rest>
     
     <!-- defines the JMS rest services using the context-path /jms/organization -->
-    <rest path="/jms/organization" consumes="application/json" produces="application/json">
+    <rest path="/jms/orgNameSearch" consumes="application/json" produces="application/json">
       <description>Organization JMS rest service</description>
 
       <!-- this is a rest GET to view an organization by the given id -->
