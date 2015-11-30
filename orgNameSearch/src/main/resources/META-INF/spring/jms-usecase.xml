@@ -60,7 +60,7 @@
       <from uri="direct:searchById" />
       <removeHeaders pattern="*"/>
       <setHeader headerName="CamelHttpPath">
-        <simple>/orgNameSearch/rest/jms/organization/${body.orgId}</simple>
+        <simple>/apiprovider/rest/jms/orgNameSearch/${body.orgId}</simple>
       </setHeader>
       <setHeader headerName="CamelHttpMethod">
         <constant>GET</constant>
@@ -76,7 +76,7 @@
       <from uri="direct:searchAll"/>
       <removeHeaders pattern="*"/>
       <setHeader headerName="CamelHttpPath">
-        <constant>/orgNameSearch/rest/jms/organization/findAll</constant>
+        <constant>/apiprovider/rest/jms/orgNameSearch/findAll</constant>
       </setHeader>
       <setHeader headerName="CamelHttpMethod">
         <constant>GET</constant>
@@ -92,7 +92,7 @@
       <from uri="direct:createNewOrg"/>
       <bean beanType="org.jboss.fuse.examples.jms.SimpleMapper"/>
       <setHeader headerName="CamelHttpPath">
-        <constant>/orgNameSearch/rest/jms/organization</constant>
+        <constant>/apiprovider/rest/jms/orgNameSearch</constant>
       </setHeader>
       <setHeader headerName="CamelHttpMethod">
         <constant>PUT</constant>
