@@ -104,7 +104,7 @@
     <route id="apiprovider.jms.rest.call">
       <from uri="direct:executeRestCall"/>
       <setHeader headerName="user_key">
-        <constant>3c3bda09a5a8816a7e3104a871c4df6</constant>
+        <constant>3c3bda09a5a8816a7e3104a871c4df65</constant>
       </setHeader>
       <to uri="http4://localhost:80/" />
     </route>
