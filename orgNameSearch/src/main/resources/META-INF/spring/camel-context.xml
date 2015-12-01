@@ -89,7 +89,7 @@
       <!-- this is a rest GET to view an organization by the given id -->
       <get uri="/{id}" outType="org.jboss.fuse.examples.rest.Organization">
         <description>Find organization by ord_id</description>
-        <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>   
+		<to uri="direct:orgById"/>
       </get>
       
 	<!-- this is a rest GET to view paginated results using a partial organization name -->
@@ -107,7 +107,7 @@
       <!-- this is a rest GET to find all organizations -->
       <get uri="/findAll" outType="org.jboss.fuse.examples.rest.Organization[]">
         <description>Find all organizations</description>
-        <to uri="sql:select org_id, org_name from organization"/>   
+	  	<to uri="direct:findAll"/>
       </get>
     </rest>
     
@@ -118,7 +118,7 @@
       <!-- this is a rest GET to view an organization by the given id -->
       <get uri="/{id}" outType="org.jboss.fuse.examples.rest.Organization">
         <description>Find organization by ord_id</description>
-        <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>   
+		<to uri="direct:orgById"/>
       </get>
       
       	<!-- this is a rest GET to view paginated results using a partial organization name -->
@@ -136,7 +136,7 @@
       <!-- this is a rest GET to find all organizations -->
       <get uri="/findAll" outType="org.jboss.fuse.examples.rest.Organization[]">
         <description>Find all organizations</description>
-        <to uri="sql:select org_id, org_name from organization"/>   
+		<to uri="direct:findAll"/>
       </get>
     </rest>
     
@@ -171,6 +171,9 @@
 	        	</otherwise>
 	        </choice>
 	        <to uri="sql:select org_id, org_name from organization where org_id=:#org_id"/>
+		   	<setHeader headerName="node">
+		    	<constant>1</constant>
+		    </setHeader>   
 	</route>
 	
 	<route id="paginate">
@@ -179,7 +182,25 @@
 		  <simple>%${header.partialOrgName}%</simple>
 		</setHeader>
 		<to uri="sql:select org_id, org_name from organization where org_name like :#partialOrgNameWildcard offset :#pageNumber rows fetch first :#pageSize rows only" />
+        <setHeader headerName="node">
+        	<constant>1</constant>
+        </setHeader>   
 	</route>
-  </camelContext>
 
+	  <route id="orgById">
+	  		<from uri="direct:orgById"/>
+	        <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>
+	        <setHeader headerName="node">
+	        	<constant>1</constant>
+	        </setHeader>   
+	  </route>
+	  
+	  <route id="findAll">
+	  		<from uri="direct:findAll"/>
+        	<to uri="sql:select org_id, org_name from organization"/>   
+	        <setHeader headerName="node">
+	        	<constant>1</constant>
+	        </setHeader>   
+	  </route>
+  </camelContext>
 </beans>
