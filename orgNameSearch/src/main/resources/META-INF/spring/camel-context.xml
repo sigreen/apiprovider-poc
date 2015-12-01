@@ -120,6 +120,12 @@
         <description>Find organization by ord_id</description>
         <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>   
       </get>
+      
+      	<!-- this is a rest GET to view paginated results using a partial organization name -->
+		<get uri="/{partialOrgName}/{pageNumber}/{pageSize}" outType="org.jboss.fuse.examples.rest.Organization">
+			<description>Find organization by partial organization name and then return paginated results</description>
+			<to uri="direct:paginate" />
+		</get>
 
       <!-- this is a rest PUT to create/update an Organization -->
       <put type="org.jboss.fuse.examples.rest.Organization">
