@@ -26,6 +26,11 @@
     <feature version="${camel.version}">camel-servlet</feature>
     <feature version="${camel.version}">camel-jackson</feature>
     <feature version="${camel.version}">camel-http4</feature>
+    <feature version="${camel.version}">camel-spring</feature>
+    <feature version="${camel.version}">camel-sql</feature>
+    <bundle>mvn:org.apache.derby/derby/${derby-version}</bundle>
+    <bundle>mvn:commons-pool/commons-pool/${commons-pool-version}</bundle>
+    <bundle>mvn:commons-dbcp/commons-dbcp/${commons-dbcp-version}</bundle>
     <bundle>mvn:${project.groupId}/orgShared/${project.version}</bundle>
     <bundle>mvn:${project.groupId}/orgNameSearch/${project.version}</bundle>
   </feature>

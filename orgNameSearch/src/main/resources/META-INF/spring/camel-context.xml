@@ -33,11 +33,34 @@
   
   <bean id="bridgePropertyPlaceholder" class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer">
     <property name="properties" ref="properties"/>
-  </bean> 		  
+  </bean>
+  
+<!-- Swap-in Oracle instead of Derby during onsite workshop -->
+<!-- 	        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
+<!-- 	            <property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
+<!-- 	            <property name="url" value="jdbc:oracle:thin:@//{{sample1b.jdbc.hostname}}:{{sample1b.jdbc.port}}/{{sample1b.jdbc.sid}}"/> -->
+<!-- 	            <property name="username" value="{{sample1b.jdbc.username}}"/> -->
+<!-- 	            <property name="password" value="{{sample1b.jdbc.password}}"/> -->
+<!-- 	            <property name="maxIdle" value="3"/> -->
+<!-- 	            <property name="maxActive" value="6"/> -->
+<!-- 	        </bean> -->
+  
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+  		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+  		<property name="url" value="jdbc:derby:memory:orders;create=true"/>
+  		<property name="username" value=""/>
+  		<property name="password" value=""/>
+	</bean>
+  
+	<bean id="sql" class="org.apache.camel.component.sql.SqlComponent">
+ 		<property name="dataSource" ref="dataSource"/>	    		
+	</bean>
+	
+  <!-- bean which creates/destroys the database table for this example -->
+  <bean id="initDatabase" class="org.jboss.fuse.examples.jdbc.DatabaseBean" init-method="create" destroy-method="destroy">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
   		  
-  <!-- a bean for organization services -->
-  <bean id="organizationService" class="org.jboss.fuse.examples.rest.OrganizationService"/>
-
   <camelContext xmlns="http://camel.apache.org/schema/spring">
     <routeContextRef ref="jmsUseCaseRoutes" />
     <dataFormats>
@@ -66,19 +89,19 @@
       <!-- this is a rest GET to view an organization by the given id -->
       <get uri="/{id}" outType="org.jboss.fuse.examples.rest.Organization">
         <description>Find organization by ord_id</description>
-        <to uri="bean:organizationService?method=getOrganization(${header.id})"/>
+        <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>   
       </get>
 
       <!-- this is a rest PUT to create/update an Organization -->
       <put type="org.jboss.fuse.examples.rest.Organization">
         <description>Updates or create an organization</description>
-        <to uri="bean:organizationService?method=updateOrganization"/>
+		<to uri="direct:putOrganization"/>
       </put>
 
       <!-- this is a rest GET to find all organizations -->
       <get uri="/findAll" outType="org.jboss.fuse.examples.rest.Organization[]">
         <description>Find all organizations</description>
-        <to uri="bean:organizationService?method=listOrganizations"/>
+        <to uri="sql:select org_id, org_name from organization"/>   
       </get>
     </rest>
     
@@ -89,19 +112,19 @@
       <!-- this is a rest GET to view an organization by the given id -->
       <get uri="/{id}" outType="org.jboss.fuse.examples.rest.Organization">
         <description>Find organization by ord_id</description>
-        <to uri="bean:organizationService?method=getOrganization(${header.id})"/>
+        <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>   
       </get>
 
       <!-- this is a rest PUT to create/update an Organization -->
       <put type="org.jboss.fuse.examples.rest.Organization">
         <description>Updates or create an organization</description>
-        <to uri="bean:organizationService?method=updateOrganization"/>
+		<to uri="direct:putOrganization"/>
       </put>
 
       <!-- this is a rest GET to find all organizations -->
       <get uri="/findAll" outType="org.jboss.fuse.examples.rest.Organization[]">
         <description>Find all organizations</description>
-        <to uri="bean:organizationService?method=listOrganizations"/>
+        <to uri="sql:select org_id, org_name from organization"/>   
       </get>
     </rest>
     
@@ -110,10 +133,33 @@
       	<unmarshal>
       		<csv />
       	</unmarshal>
-        <to uri="bean:organizationService?method=doHandleCsvData" />
+        <split>
+        	<simple>${body}</simple>
+			<to uri="sql:insert into ORGANIZATION (org_id, org_name) values (#,#)" />
+		</split>
 		<log message="Updated organization database."/>
     </route>
-
+    
+	<route id="putOrganization">
+		<from uri="direct:putOrganization"/>
+            <setHeader headerName="org_id">
+                <simple>${body.org_id}</simple>
+            </setHeader>
+            <setHeader headerName="org_name">
+                <simple>${body.org_name}</simple>
+            </setHeader>
+	        <to uri="sql:select org_id, org_name from organization where org_id=:#org_id"/>   
+	        <choice>
+	        	<when>
+	        		<simple>${header.CamelSqlRowCount} > 0</simple>
+					<to uri="sql:update organization set org_name=:#org_name where org_id=:#org_id"/>
+	        	</when>
+	        	<otherwise>
+	        		<to uri="sql:insert INTO organization (org_id, org_name) VALUES (:#org_id,:#org_name )"/>
+	        	</otherwise>
+	        </choice>
+	        <to uri="sql:select org_id, org_name from organization where org_id=:#org_id"/>
+	</route>
   </camelContext>
 
 </beans>

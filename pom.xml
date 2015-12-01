@@ -37,8 +37,9 @@
     <activemq.version>5.11.0.redhat-620133</activemq.version>
     <fabric.version>1.2.0.redhat-133</fabric.version>
     <cxf.version>3.0.4.redhat-620133</cxf.version>
-    <derby.version>10.10.1.1</derby.version>
-    <dbcp.version>1.4</dbcp.version>
+    <derby-version>10.10.1.1</derby-version>
+    <commons-pool-version>1.6</commons-pool-version>
+    <commons-dbcp-version>1.4</commons-dbcp-version>   
   </properties>
 
   <modules>

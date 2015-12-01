@@ -13,7 +13,7 @@
 
   <name>API Provider :: Karaf Features </name>
   <description>Features file for installing into karaf-based distributions (like JBoss Fuse)</description>
-
+  
   <build>
     <defaultGoal>install</defaultGoal>
 

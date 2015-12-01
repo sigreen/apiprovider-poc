@@ -11,6 +11,11 @@ You will need to install this example first:
   
 > mvn install
 
+Install Derby database and JDBC connection pool in Fuse with:
+
+> osgi:install -s mvn:commons-pool/commons-pool/1.6
+> osgi:install -s mvn:commons-dbcp/commons-dbcp/1.4
+> osgi:install -s mvn:org.apache.derby/derby/10.10.1.1
 
 Install into Fuse with:
 

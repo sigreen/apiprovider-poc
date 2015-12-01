@@ -29,6 +29,12 @@
 	<name>API Provider :: orgNameSearch :: Implementation</name>
 	<description>A RESTful implementation for the orgNameSearch API</description>
   <packaging>bundle</packaging>
+  
+  <properties>
+      	<camel.osgi.export.pkg>org.jboss.fuse.examples.jdbc.*</camel.osgi.export.pkg>
+		<!-- dynamic import for the Derby JDBC driver -->
+		<camel.osgi.dynamic>*,org.apache.derby.jdbc.EmbeddedDriver</camel.osgi.dynamic>
+  </properties>
 
   <dependencies>
 
@@ -62,7 +68,6 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jackson</artifactId>
-      <version>${camel.version}</version>
     </dependency>
 
     <!-- logging -->
@@ -86,6 +91,24 @@
       <artifactId>logback-core</artifactId>
       <version>1.0.13</version>
     </dependency>
+    
+    <!-- JDBC -->
+   	<dependency>
+		<groupId>org.apache.camel</groupId>
+		<artifactId>camel-sql</artifactId>
+		<version>${camel.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.derby</groupId>
+		<artifactId>derby</artifactId>
+		<version>10.10.1.1</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-dbcp</groupId>
+		<artifactId>commons-dbcp</artifactId>
+		<version>1.4</version>
+	</dependency>
+
 
     <!-- testing -->
     <dependency>
@@ -111,6 +134,7 @@
             <Import-Package>
               *
             </Import-Package>
+            <DynamicImport-Package>${camel.osgi.dynamic}</DynamicImport-Package>
           </instructions>
         </configuration>
       </plugin>
