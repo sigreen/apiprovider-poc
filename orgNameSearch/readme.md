@@ -76,7 +76,7 @@ payload:
 
 ### Invoke via JUnit Test
 
-`cd orgNameSearchAPI/`
+`cd orgNameSearch/`
 
 `mvn test -Dtest=org.jboss.fuse.examples.jms.EndToEndIT#testCreateNewOrganization`
 
