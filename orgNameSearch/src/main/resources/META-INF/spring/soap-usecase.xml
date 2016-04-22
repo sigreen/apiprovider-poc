@@ -28,16 +28,10 @@
 	<cxf:cxfEndpoint id="routerEndpoint" address="http://localhost:9003/CamelContext/RouterPort"
             serviceClass="org.jboss.fuse.examples.soap.OrganizationService"/>
             
-	<bean id="organizationQueryProcessor" class="org.jboss.fuse.examples.soap.OrganizationQueryProcessor" />
-	
-
   <routeContext id="soapUseCaseRoutes" xmlns="http://camel.apache.org/schema/spring">
     <route id="apiprovider.soap.route">
 			<!-- route starts from the cxf webservice in POJO mode -->
 			<from uri="cxf:bean:routerEndpoint" />
-			
-			<process ref="organizationQueryProcessor"/>
-
 		      <choice>
 		        <when>
 		          <simple>${in.header.operationName} == 'queryOrganizationById'</simple>
