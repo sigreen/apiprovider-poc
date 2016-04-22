@@ -32,6 +32,7 @@
     <bundle>mvn:org.apache.derby/derby/${derby-version}</bundle>
     <bundle>mvn:commons-pool/commons-pool/${commons-pool-version}</bundle>
     <bundle>mvn:commons-dbcp/commons-dbcp/${commons-dbcp-version}</bundle>
+	<bundle>mvn:${project.groupId}/countryAPI/${project.version}</bundle>
     <bundle>mvn:${project.groupId}/orgShared/${project.version}</bundle>
     <bundle>mvn:${project.groupId}/orgNameSearch/${project.version}</bundle>
   </feature>
