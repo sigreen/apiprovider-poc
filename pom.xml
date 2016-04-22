@@ -33,10 +33,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     
-    <camel.version>2.15.1.redhat-620133</camel.version>
-    <activemq.version>5.11.0.redhat-620133</activemq.version>
-    <fabric.version>1.2.0.redhat-133</fabric.version>
-    <cxf.version>3.0.4.redhat-620133</cxf.version>
+    <camel.version>2.15.1.redhat-621084</camel.version>
+    <activemq.version>5.11.0.redhat-621084</activemq.version>
+    <fabric.version>1.2.0.redhat-621084</fabric.version>
+    <cxf.version>3.0.4.redhat-621084</cxf.version>
     <derby-version>10.10.1.1</derby-version>
     <commons-pool-version>1.6</commons-pool-version>
     <commons-dbcp-version>1.4</commons-dbcp-version>   

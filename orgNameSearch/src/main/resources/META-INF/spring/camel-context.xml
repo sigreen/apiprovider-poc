@@ -63,9 +63,12 @@
   		  
   <camelContext id="orgNameSearchContext" xmlns="http://camel.apache.org/schema/spring">
     <routeContextRef ref="jmsUseCaseRoutes" />
+    <routeContextRef ref="soapUseCaseRoutes" />
+
     <dataFormats>
       <json id="queryRequest" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.jms.OrganizationQueryRequest"/>
       <json id="organization" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.rest.Organization"/>
+      <json id="organizationResponse" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.soap.OrganizationQueryResponse" useList="true"/>
     </dataFormats>
 
     <!-- configure rest to use the camel-servlet component, and use json binding mode -->
