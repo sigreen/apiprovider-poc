@@ -49,6 +49,7 @@
     <module>ratingAPI</module>
     <module>financialStatementAPI</module>
     <module>getOrgInfo</module>
+    <module>countryAPI</module>
   </modules>
 
   <repositories>

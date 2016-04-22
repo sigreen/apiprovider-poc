@@ -15,11 +15,14 @@
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:camel-cxf="http://camel.apache.org/schema/cxf"
        xmlns:osgi="http://www.springframework.org/schema/osgi"
        xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
        xsi:schemaLocation="
           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		  http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
           http://www.springframework.org/schema/osgi
   		  http://www.springframework.org/schema/osgi/spring-osgi.xsd
   		  http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
@@ -29,6 +32,7 @@
   <osgix:cm-properties id="properties" persistent-id="org.jboss.fuse.examples.orgNameSearch">
     <prop key="http.port">8181</prop>
     <prop key="http.contextPath">/orgNameSearch/rest</prop>
+	<prop key="countryNameLookupService.uri">http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso</prop>
   </osgix:cm-properties>
   
   <bean id="bridgePropertyPlaceholder" class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer">
@@ -60,6 +64,10 @@
   <bean id="initDatabase" class="org.jboss.fuse.examples.jdbc.DatabaseBean" init-method="create" destroy-method="destroy">
     <property name="dataSource" ref="dataSource"/>
   </bean>
+  
+    <camel-cxf:cxfEndpoint id="countryLookupClient"
+                         address="${countryNameLookupService.uri}"
+                         serviceClass="org.oorsprong.websamples_countryinfo.CountryInfoServiceSoapType"/>
   		  
   <camelContext id="orgNameSearchContext" xmlns="http://camel.apache.org/schema/spring">
     <routeContextRef ref="jmsUseCaseRoutes" />
@@ -68,6 +76,7 @@
     <dataFormats>
       <json id="queryRequest" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.jms.OrganizationQueryRequest"/>
       <json id="organization" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.rest.Organization"/>
+      <json id="country" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.rest.Country"/>
       <json id="organizationResponse" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.soap.OrganizationQueryResponse" useList="true"/>
     </dataFormats>
 
@@ -112,6 +121,18 @@
         <description>Find all organizations</description>
 	  	<to uri="direct:findAll"/>
       </get>
+    </rest>
+    
+    <!-- defines the rest service wrapper for a simple rest to soap proxy -->
+    <rest path="/mapCountryName" consumes="application/json" produces="application/json">
+      <description>Maps a country code to a country Name rest service</description>
+
+      <!-- this is a rest GET to view an organization by the given id -->
+      <get uri="/{countryCode}" outType="org.jboss.fuse.examples.rest.Country">
+        <description>Find country name by country code</description>
+		<to uri="direct:countryByCode"/>
+      </get>
+      
     </rest>
     
     <!-- defines the JMS rest services using the context-path /jms/organization -->
@@ -205,5 +226,20 @@
 	        	<constant>1</constant>
 	        </setHeader>   
 	  </route>
+	  
+		<route id="countryByCode">
+	  		<from uri="direct:countryByCode"/>
+	      <setHeader headerName="operationNamespace">
+	        <constant>http://www.oorsprong.org/websamples.countryinfo</constant>
+	      </setHeader>
+	      <setHeader headerName="operationName">
+	        <constant>CountryName</constant>
+	      </setHeader>
+	      <to uri="cxf:bean:countryLookupClient"/>
+	      <setBody>
+	        <simple>${body[0]}</simple>
+	      </setBody>  
+	  </route>
+	  
   </camelContext>
 </beans>

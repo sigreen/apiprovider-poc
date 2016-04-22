@@ -139,6 +139,7 @@
             <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
             <Export-Package>org.jboss.fuse.examples.rest*</Export-Package>
             <Import-Package>
+			  org.oorsprong.websamples_countryinfo
               *
             </Import-Package>
             <DynamicImport-Package>${camel.osgi.dynamic}</DynamicImport-Package>
