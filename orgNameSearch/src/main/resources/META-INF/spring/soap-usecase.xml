@@ -28,27 +28,31 @@
 	<cxf:cxfEndpoint id="routerEndpoint" address="http://localhost:9003/CamelContext/RouterPort"
             serviceClass="org.jboss.fuse.examples.soap.OrganizationService"/>
             
+    <bean id="organizationRequestProcessor" class="org.jboss.fuse.examples.soap.OrganizationRequestProcessor" />
+            
+            
   <routeContext id="soapUseCaseRoutes" xmlns="http://camel.apache.org/schema/spring">
     <route id="apiprovider.soap.route">
 			<!-- route starts from the cxf webservice in POJO mode -->
 			<from uri="cxf:bean:routerEndpoint" />
-		      <choice>
-		        <when>
-		          <simple>${in.header.operationName} == 'queryOrganizationById'</simple>
-		          <to uri="direct:queryOrganizationById"/>
-		        </when>
-		        <when>
-		          <simple>${in.header.operationName} == 'queryOrganizationSearchAll'</simple>
-		          <to uri="direct:queryOrganizationSearchAll"/>
-		        </when>
-		        <when>
-		          <simple>${in.header.operationName} == 'insertNewOrg'</simple>
-		          <to uri="direct:insertNewOrg"/>
-		        </when>
-		        <otherwise>
-		          <log message="Not sure how to route this message: ${body}" />
-		        </otherwise>
-		      </choice>
+				<process ref="organizationRequestProcessor"/>
+				<choice>
+				  <when>
+				    <simple>${in.header.operationName} == 'queryOrganizationById'</simple>
+				    <to uri="direct:queryOrganizationById"/>
+				  </when>
+				  <when>
+				    <simple>${in.header.operationName} == 'queryOrganizationSearchAll'</simple>
+				    <to uri="direct:queryOrganizationSearchAll"/>
+				  </when>
+				  <when>
+				    <simple>${in.header.operationName} == 'insertNewOrg'</simple>
+				    <to uri="direct:insertNewOrg"/>
+				  </when>
+				  <otherwise>
+				    <log message="Not sure how to route this message: ${body}" />
+				  </otherwise>
+				</choice>
     </route>
 
     <route id="apiprovider.soap.searchById">
@@ -56,6 +60,7 @@
       <setBody>
       	<simple>${header.orgId}</simple>
       </setBody>
+      <log message="${headers}" />
       <removeHeaders pattern="*"/>
       <setHeader headerName="CamelHttpPath">
         <simple>/apiprovider/rest/orgNameSearch/${body}</simple>
