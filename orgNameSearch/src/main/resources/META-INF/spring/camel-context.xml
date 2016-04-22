@@ -26,19 +26,19 @@
           http://www.springframework.org/schema/osgi
   		  http://www.springframework.org/schema/osgi/spring-osgi.xsd
   		  http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
-  		  
-  <import resource="classpath*:/META-INF/spring/common.xml" /> 
-  
+
+  <import resource="classpath*:/META-INF/spring/common.xml" />
+
   <osgix:cm-properties id="properties" persistent-id="org.jboss.fuse.examples.orgNameSearch">
     <prop key="http.port">8181</prop>
     <prop key="http.contextPath">/orgNameSearch/rest</prop>
 	<prop key="countryNameLookupService.uri">http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso</prop>
   </osgix:cm-properties>
-  
+
   <bean id="bridgePropertyPlaceholder" class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer">
     <property name="properties" ref="properties"/>
   </bean>
-  
+
 <!-- Swap-in Oracle instead of Derby during onsite workshop -->
 <!-- 	        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> -->
 <!-- 	            <property name="driverClassName" value="oracle.jdbc.OracleDriver"/> -->
@@ -48,27 +48,27 @@
 <!-- 	            <property name="maxIdle" value="3"/> -->
 <!-- 	            <property name="maxActive" value="6"/> -->
 <!-- 	        </bean> -->
-  
+
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
   		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
   		<property name="url" value="jdbc:derby:memory:orders;create=true"/>
   		<property name="username" value=""/>
   		<property name="password" value=""/>
 	</bean>
-  
+
 	<bean id="sql" class="org.apache.camel.component.sql.SqlComponent">
- 		<property name="dataSource" ref="dataSource"/>	    		
+ 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
+
   <!-- bean which creates/destroys the database table for this example -->
   <bean id="initDatabase" class="org.jboss.fuse.examples.jdbc.DatabaseBean" init-method="create" destroy-method="destroy">
     <property name="dataSource" ref="dataSource"/>
   </bean>
-  
+
     <camel-cxf:cxfEndpoint id="countryLookupClient"
                          address="${countryNameLookupService.uri}"
                          serviceClass="org.oorsprong.websamples_countryinfo.CountryInfoServiceSoapType"/>
-  		  
+
   <camelContext id="orgNameSearchContext" xmlns="http://camel.apache.org/schema/spring">
     <routeContextRef ref="jmsUseCaseRoutes" />
     <routeContextRef ref="soapUseCaseRoutes" />
@@ -87,7 +87,7 @@
          knows the url to the REST services.
          Notice: This is optional, but needed if the RestRegistry should enlist accurate information.
          You can access the RestRegistry from JMX at runtime -->
-   
+
         <restConfiguration component="servlet" bindingMode="json">
       		<componentProperty key="contextPath" value="${http.contextPath}"/>
       		<componentProperty key="port" value="${http.port}"/>
@@ -103,13 +103,13 @@
         <description>Find organization by ord_id</description>
 		<to uri="direct:orgById"/>
       </get>
-      
+
 	<!-- this is a rest GET to view paginated results using a partial organization name -->
 	<get uri="/{partialOrgName}/{pageNumber}/{pageSize}" outType="org.jboss.fuse.examples.rest.Organization">
 		<description>Find organization by partial organization name and then return paginated results</description>
 		<to uri="direct:paginate" />
 	</get>
-      
+
       <!-- this is a rest PUT to create/update an Organization -->
       <put type="org.jboss.fuse.examples.rest.Organization">
         <description>Updates or create an organization</description>
@@ -122,7 +122,7 @@
 	  	<to uri="direct:findAll"/>
       </get>
     </rest>
-    
+
     <!-- defines the rest service wrapper for a simple rest to soap proxy -->
     <rest path="/mapCountryName" consumes="application/json" produces="application/json">
       <description>Maps a country code to a country Name rest service</description>
@@ -132,9 +132,9 @@
         <description>Find country name by country code</description>
 		<to uri="direct:countryByCode"/>
       </get>
-      
+
     </rest>
-    
+
     <!-- defines the JMS rest services using the context-path /jms/organization -->
     <rest path="/jms/orgNameSearch" consumes="application/json" produces="application/json">
       <description>Organization JMS rest service</description>
@@ -144,7 +144,7 @@
         <description>Find organization by ord_id</description>
 		<to uri="direct:orgById"/>
       </get>
-      
+
       	<!-- this is a rest GET to view paginated results using a partial organization name -->
 		<get uri="/{partialOrgName}/{pageNumber}/{pageSize}" outType="org.jboss.fuse.examples.rest.Organization">
 			<description>Find organization by partial organization name and then return paginated results</description>
@@ -163,7 +163,7 @@
 		<to uri="direct:findAll"/>
       </get>
     </rest>
-    
+
     <route id="populateDB" startupOrder="1">
       	<from uri="file:src/data?noop=true"/>
       	<unmarshal>
@@ -175,7 +175,7 @@
 		</split>
 		<log message="Updated organization database."/>
     </route>
-    
+
 	<route id="putOrganization">
 		<from uri="direct:putOrganization"/>
             <setHeader headerName="org_id">
@@ -184,7 +184,7 @@
             <setHeader headerName="org_name">
                 <simple>${body.org_name}</simple>
             </setHeader>
-	        <to uri="sql:select org_id, org_name from organization where org_id=:#org_id"/>   
+	        <to uri="sql:select org_id, org_name from organization where org_id=:#org_id"/>
 	        <choice>
 	        	<when>
 	        		<simple>${header.CamelSqlRowCount} > 0</simple>
@@ -197,9 +197,9 @@
 	        <to uri="sql:select org_id, org_name from organization where org_id=:#org_id"/>
 		   	<setHeader headerName="node">
 		    	<constant>1</constant>
-		    </setHeader>   
+		    </setHeader>
 	</route>
-	
+
 	<route id="paginate">
 		<from uri="direct:paginate"/>
 		<setHeader headerName="partialOrgNameWildcard">
@@ -208,7 +208,7 @@
 		<to uri="sql:select org_id, org_name from organization where org_name like :#partialOrgNameWildcard offset :#pageNumber rows fetch first :#pageSize rows only" />
         <setHeader headerName="node">
         	<constant>1</constant>
-        </setHeader>   
+        </setHeader>
 	</route>
 
 	  <route id="orgById">
@@ -216,19 +216,22 @@
 	        <to uri="sql:select org_id, org_name from organization where org_id=:#id"/>
 	        <setHeader headerName="node">
 	        	<constant>1</constant>
-	        </setHeader>   
+	        </setHeader>
 	  </route>
-	  
+
 	  <route id="findAll">
 	  		<from uri="direct:findAll"/>
-        	<to uri="sql:select org_id, org_name from organization"/>   
+        	<to uri="sql:select org_id, org_name from organization"/>
 	        <setHeader headerName="node">
 	        	<constant>1</constant>
-	        </setHeader>   
+	        </setHeader>
 	  </route>
-	  
+
 		<route id="countryByCode">
 	  		<from uri="direct:countryByCode"/>
+        <setBody>
+          <header>countryCode</header>
+        </setBody>
 	      <setHeader headerName="operationNamespace">
 	        <constant>http://www.oorsprong.org/websamples.countryinfo</constant>
 	      </setHeader>
@@ -238,8 +241,8 @@
 	      <to uri="cxf:bean:countryLookupClient"/>
 	      <setBody>
 	        <simple>${body[0]}</simple>
-	      </setBody>  
+	      </setBody>
 	  </route>
-	  
+
   </camelContext>
 </beans>
