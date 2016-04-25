@@ -64,10 +64,22 @@
   <bean id="initDatabase" class="org.jboss.fuse.examples.jdbc.DatabaseBean" init-method="create" destroy-method="destroy">
     <property name="dataSource" ref="dataSource"/>
   </bean>
+  
+	<bean id="countryResponseProcessor" class="org.jboss.fuse.examples.rest.CountryProcessor" />
+  
+<bean id="gZipInInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor" />
+<bean id="gZipOutInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPOutInterceptor" />
 
     <camel-cxf:cxfEndpoint id="countryLookupClient"
                          address="${countryNameLookupService.uri}"
-                         serviceClass="org.oorsprong.websamples_countryinfo.CountryInfoServiceSoapType"/>
+                         serviceClass="org.oorsprong.websamples_countryinfo.CountryInfoServiceSoapType">
+		<camel-cxf:inInterceptors>
+			<ref bean="gZipInInterceptor" />
+		</camel-cxf:inInterceptors>
+		<camel-cxf:outInterceptors>
+			<ref bean="gZipOutInterceptor" />
+		</camel-cxf:outInterceptors>
+	</camel-cxf:cxfEndpoint>
 
   <camelContext id="orgNameSearchContext" xmlns="http://camel.apache.org/schema/spring">
     <routeContextRef ref="jmsUseCaseRoutes" />
@@ -76,7 +88,6 @@
     <dataFormats>
       <json id="queryRequest" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.jms.OrganizationQueryRequest"/>
       <json id="organization" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.rest.Organization"/>
-      <json id="country" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.rest.Country"/>
       <json id="organizationResponse" library="Jackson" unmarshalTypeName="org.jboss.fuse.examples.soap.OrganizationQueryResponse" useList="true"/>
     </dataFormats>
 
@@ -93,6 +104,7 @@
       		<componentProperty key="port" value="${http.port}"/>
       		<dataFormatProperty key="prettyPrint" value="true"/>
     	</restConfiguration>
+
 
     <!-- defines the rest services using the context-path /organization -->
     <rest path="/orgNameSearch" consumes="application/json" produces="application/json">
@@ -239,9 +251,12 @@
 	        <constant>CountryName</constant>
 	      </setHeader>
 	      <to uri="cxf:bean:countryLookupClient"/>
+	      <log message="${body}"/>
 	      <setBody>
 	        <simple>${body[0]}</simple>
 	      </setBody>
+      	  <process ref="countryResponseProcessor"/>
+      	  <removeHeaders pattern="*"/>
 	  </route>
 
   </camelContext>

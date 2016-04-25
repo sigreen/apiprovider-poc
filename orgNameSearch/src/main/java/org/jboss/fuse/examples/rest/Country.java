@@ -16,31 +16,37 @@
  */
 package org.jboss.fuse.examples.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Country {
 
-	private int countryCode;
-    private String countryName;
+	private String countryCode;
+	private String countryName;
 
-    public Country() {
-    }
+	public Country() {
+	}
 
-    public Country(int countryCode, String countryName) {
-        this.countryCode = countryCode;
-        this.countryName = countryName;
-    }
+	public Country(String countryCode, String countryName) {
+		this.countryCode = countryCode;
+		this.countryName = countryName;
+	}
 
-    public int getCountryCode() {
+	@JsonProperty("COUNTRY_CODE")
+	public String getCountryCode() {
 		return countryCode;
 	}
 
-	public void setCountryCode(int countryCode) {
+	@JsonProperty("COUNTRY_CODE")
+	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
 
+	@JsonProperty("COUNTRY_NAME")
 	public String getCountryName() {
 		return countryName;
 	}
 
+	@JsonProperty("COUNTRY_NAME")
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
