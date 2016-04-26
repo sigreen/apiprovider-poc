@@ -26,6 +26,8 @@
     <feature version="${camel.version}">camel-servlet</feature>
     <feature version="${camel.version}">camel-jackson</feature>
     <feature version="${camel.version}">camel-http4</feature>
+    <feature version="${camel.version}">camel-groovy</feature>
+    <feature version="${camel.version}">camel-script</feature>
     <feature version="${camel.version}">camel-spring</feature>
     <feature version="${camel.version}">camel-sql</feature>
     <feature version="${camel.version}">camel-cxf</feature>

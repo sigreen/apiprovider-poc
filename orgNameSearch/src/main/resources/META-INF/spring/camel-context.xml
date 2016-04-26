@@ -64,9 +64,7 @@
   <bean id="initDatabase" class="org.jboss.fuse.examples.jdbc.DatabaseBean" init-method="create" destroy-method="destroy">
     <property name="dataSource" ref="dataSource"/>
   </bean>
-  
-	<bean id="countryResponseProcessor" class="org.jboss.fuse.examples.rest.CountryProcessor" />
-  
+    
 <bean id="gZipInInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor" />
 <bean id="gZipOutInterceptor" class="org.apache.cxf.transport.common.gzip.GZIPOutInterceptor" />
 
@@ -239,25 +237,26 @@
 	        </setHeader>
 	  </route>
 
-		<route id="countryByCode">
-	  		<from uri="direct:countryByCode"/>
+	<route id="countryByCode">
+		<from uri="direct:countryByCode"/>
         <setBody>
           <header>countryCode</header>
         </setBody>
-	      <setHeader headerName="operationNamespace">
-	        <constant>http://www.oorsprong.org/websamples.countryinfo</constant>
-	      </setHeader>
-	      <setHeader headerName="operationName">
-	        <constant>CountryName</constant>
-	      </setHeader>
-	      <to uri="cxf:bean:countryLookupClient"/>
-	      <log message="${body}"/>
-	      <setBody>
-	        <simple>${body[0]}</simple>
-	      </setBody>
-      	  <process ref="countryResponseProcessor"/>
-      	  <removeHeaders pattern="*"/>
-	  </route>
+		<setHeader headerName="operationNamespace">
+		  <constant>http://www.oorsprong.org/websamples.countryinfo</constant>
+		</setHeader>
+		<setHeader headerName="operationName">
+		  <constant>CountryName</constant>
+		</setHeader>
+		<to uri="cxf:bean:countryLookupClient"/>
+	    <setBody>
+	      <simple>${body[0]}</simple>
+	    </setBody>
+		<transform>
+			<groovy>new org.jboss.fuse.examples.rest.Country(request.headers["countryCode"], request.body)</groovy>
+		</transform>
+		<removeHeaders pattern="*"/>
+	</route>
 
   </camelContext>
 </beans>
